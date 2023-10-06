@@ -1,16 +1,29 @@
+import { useState } from "react";
 import "./BurgerMenu.css";
-// import { useState } from "react";
+import Navigation from "../Navigation/Navigation";
 
 export default function BurgerMenu() {
-  // const [isBurgerActiv, setIsBurgerActiv] = useState(false);
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
 
+  function openBurgerMenu() {
+    setIsBurgerActive(true);
+  }
+
+  function closeBurgerMenu() {
+    setIsBurgerActive(false);
+  }
   return (
-    <button
-    className="burgerButton"
-    type="button"
-    // onClick={openBurgerMenu}
-    // onClick={() => setIsBurgerActiv(!isBurgerActiv)}
-    // isOpen={openBurgerMenu}
-  ></button>
+    <>
+      <button
+        className="burgerMenu"
+        type="button"
+        onClick={openBurgerMenu}
+      ></button>
+      {isBurgerActive ? (
+        <Navigation handleClose={closeBurgerMenu} isOpen={isBurgerActive} />
+      ) : (
+        " "
+      )}
+    </>
   );
 }

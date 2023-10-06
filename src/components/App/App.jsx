@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.jsx";
 import Main from "../Main/Main.jsx";
@@ -11,8 +10,6 @@ import Movies from "../Movies/Movies";
 import SavedFilms from "../SavedFilms/SavedFilms.jsx";
 
 function App() {
-
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="page">

@@ -1,21 +1,32 @@
-.burgerButton {
-  padding: 0;
-  background: #202020;
+.burgerMenu {
   width: 44px;
   height: 44px;
-  display: none;
-  background-image: url("../../../src/images/burger.svg");
-  background-size: 44px;
-  background-color: #073042;
-  background-position: center;
   border: none;
+  background: #202020;
   margin: 0 30px 0 0;
-  /* display: none; */
+  background-color: transparent;
+  background-image: url("../../../src/images/burger.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+  padding: 0;
+  display: none;
 }
 
-/* .navigation__burger-button-open {
-  display: block;
-} */
+@media screen and (max-width: 780px) {
+  .burgerMenu {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .burgerMenu {
+    margin: 0 14px 0 0;
+    width: 40px;
+    height: 43px;
+  }
+}
 
 .burgerButton:hover {
   opacity: 0.7;
@@ -23,19 +34,8 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 780px) {
-  .burgerButton {
-    visibility: visible;
-    display: block;
-    margin-left: auto;
-  }
-}
-
 @media screen and (max-width: 520px) {
   .burgerButton {
-    /* padding-right: 14px; */
-    width: 40px;
-    height: 43px;
     margin: 0 14px 0 0;
   }
 }

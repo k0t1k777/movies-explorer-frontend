@@ -30,7 +30,6 @@ export default function SearchForm() {
             <span className="findFilms__checkbox-text">Короткометражки</span>
           </label>
         </div>
-        
       </form>
     </section>
   );

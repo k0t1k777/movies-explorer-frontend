@@ -7,13 +7,10 @@ import Techs from "./Tech/Techs";
 import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer.jsx";
 
-export default function Main({A, B}) {
+export default function Main({ A, B }) {
   return (
     <>
-      <Header 
-        // isBurgerActiv={A}
-        // closeBurgerMenu={B}
-      />
+      <Header />
       <main className="container">
         <Promo />
         <NavTab />

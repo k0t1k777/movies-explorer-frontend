@@ -67,7 +67,6 @@
 .savedFilms__save {
   background: url("../../../src/images/x.svg") no-repeat center/ 30px 30px;
   border: 0;
-  padding-top: 9px;
   padding-right: 16px;
   margin-top: -5px;
   margin-right: 20px;
@@ -75,10 +74,11 @@
   cursor: pointer;
 }
 
-/* .savedFilms__save:hover {
-  opacity: 1;
-  transition: opacity 0.3s linear;
-} */
+.savedFilms__films:hover {
+  filter: contrast(150%);
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
 
 @media screen and (max-width: 520px) {
   .savedFilms__save {

@@ -7,8 +7,8 @@ export default function Register() {
     <section className="register">
       <div className="register__wrapper">
         <Link to={"/"} className="register__logo">
-        <img src={Logo} alt="Логотип главной страницы" />
-      </Link>
+          <img src={Logo} alt="Логотип главной страницы" />
+        </Link>
         <h2 className="register__name">Добро пожаловать!</h2>
 
         <form className="register__form" validate>
@@ -44,10 +44,14 @@ export default function Register() {
             />
             <span className="register__error">Что-то пошло не так...</span>
           </label>
-          <button className="register__button" type="submit">Зарегистрироваться</button>
+          <button className="register__button" type="submit">
+            Зарегистрироваться
+          </button>
           <div className="register__container-enter">
             <p className="register__already">Уже зарегистрированы?</p>
-            <a href="signin" className="register__enter">Войти</a>
+            <a href="signin" className="register__enter">
+              Войти
+            </a>
           </div>
         </form>
       </div>

@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #202020;;
+  background-color: #202020;
 }
 
 @media screen and (max-width: 780px) {
@@ -25,7 +25,7 @@
   width: 100%;
   min-height: 36px;
   border-radius: 6px;
-  background-color: #2F2F2F;
+  background-color: #2f2f2f;
   color: #fff;
   display: flex;
   align-items: center;

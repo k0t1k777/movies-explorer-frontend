@@ -23,21 +23,22 @@ export default function SavedFilms() {
         <div className="savedFilms__container">
           <img src={Movies2} className="savedFilms__films" alt="Фильм" />
           <div className="savedFilms__wrapper">
-            <h3 className="savedFilms__title">33 слова о дизайне</h3>
+            <h3 className="savedFilms__title">
+              Киноальманах «100 лет дизайна»
+            </h3>
             <button className="savedFilms__save" type="button" />
           </div>
           <p className="savedFilms__time">1ч 47м</p>
         </div>
 
         <div className="savedFilms__container">
-          <img src={Movies2} className="savedFilms__films" alt="Фильм" />
+          <img src={Movies} className="savedFilms__films" alt="Фильм" />
           <div className="savedFilms__wrapper">
             <h3 className="savedFilms__title">33 слова о дизайне</h3>
             <button className="savedFilms__save" type="button" />
           </div>
           <p className="savedFilms__time">1ч 47м</p>
         </div>
-
       </section>
       <Footer />
     </>

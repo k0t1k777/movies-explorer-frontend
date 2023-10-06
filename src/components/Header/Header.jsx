@@ -1,27 +1,17 @@
-import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 import "./Header.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import LogoProfile from "../../images/profile.svg";
 
-
-export default function Header(
-  isLoggedIn
-  // {
-  //   isBurgerActiv,
-  //   closeBurgerMenu
-  // }
-  ) {
+export default function Header({ isLoggedIn }) {
   const { pathname } = useLocation();
-  // const [isBurgerActiv, setIsBurgerActiv] = useState(false);
-
 
   return !isLoggedIn ? (
-        <header className={
-          pathname === "/" ? "header" : "header header_theme_dark"
-        }>
-         <Link to={"/"} className="header__logo">
+    <header
+      className={pathname === "/" ? "header" : "header header_theme_dark"}
+    >
+      <Link to={"/"} className="header__logo">
         <img src={Logo} alt="Логотип на главной странице" />
       </Link>
       <nav className="header__container">
@@ -35,10 +25,7 @@ export default function Header(
     </header>
   ) : (
     <header
-    
-      className={
-        pathname === "/" ? "header" : "header header_theme_dark"
-      }
+      className={pathname === "/" ? "header" : "header header_theme_dark"}
     >
       <Link to={"/"} className="header__logo">
         <img src={Logo} alt="Логотип на главной странице" />
@@ -66,10 +53,7 @@ export default function Header(
         </Link>
       </nav>
 
-      <Link
-        to={"/profile"}
-        className="header__profile"
-      >
+      <Link to={"/profile"} className="header__profile">
         Аккаунт
         <img
           className={
@@ -81,47 +65,7 @@ export default function Header(
           alt="Логотип профиля"
         />
       </Link>
-      <BurgerMenu 
-//         isOpen={isBurgerActiv}
-//         handleClose={closeBurgerMenu}
-      />
+      <BurgerMenu />
     </header>
   );
-
-     
 }
-
-
-
-// export default function Header(
-//   {
-//     isBurgerActiv,
-//     closeBurgerMenu
-//   }
-//   ) {
-//   const { pathname } = useLocation();
-//   const [isBurgerActiv, setIsBurgerActiv] = useState(false);
-
-//   return (
-//     <header
-//       className={pathname === "/" ? "header" : "header  header_theme_dark"}
-//     >
-//       <Link to={"/"} className="header__logo">
-//         <img src={Logo} alt="Логотип на главной странице" />
-//       </Link>
-//       <Navigation 
-//         isOpen={isBurgerActiv}
-//       />
-//       <BurgerMenu 
-//         isOpen={isBurgerActiv}
-//         handleClose={closeBurgerMenu}
-//       />
-//       {
-//         isBurgerActiv
-//           ? <BurgerMenu handleClose={ closeBurgerMenu } isOpen={ isBurgerActiv }/>
-//           : ''
-//       }
-
-//     </header>
-//   );
-// }

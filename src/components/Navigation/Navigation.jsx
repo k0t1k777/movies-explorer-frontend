@@ -1,46 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
-// import { useState } from "react";
 import LogoProfile from "../../images/profile.svg";
 
-
-export default function Navigation() {
-  // const [isBurgerActiv, setIsBurgerActiv] = useState(false);
-
-  // function openBurgerMenu() {
-  //   setIsBurgerActiv(true);
-  // }
-
-  // function closeBurgerMenu() {
-  //   setIsBurgerActiv(false);
-  // }
+export default function Navigation({ handleClose }) {
+  function handleCloseOverlay(evt) {
+    if (evt.target.classList.contains("navigation")) {
+      return handleClose();
+    }
+  }
 
   return (
-    // <section className="navigation">
-    <section className="navigation">
-    <button className="navigation__close" type="button" />
-    <ul className="navigation__list">
-      <li>
-        <Link className="navigation__link" to="/">
-          Главная
-        </Link>
-      </li>
-      <li>
-        <Link className="navigation__link" to="/movies">
-          Фильмы
-        </Link>
-      </li>
-      <li>
-        <Link className="navigation__link" to="/saved-movies">
-          Сохранённые фильмы
-        </Link>
-      </li>
-    </ul>
-    <Link to={"/profile"} className="navigation__profile">
-    Аккаунт
-      <img src={LogoProfile} className="navigation__profileButton" alt="Логотип профиля" />
-    </Link>
-  </section>
+    <section className="navigation" onClick={handleCloseOverlay}>
+      <button
+        className="navigation__close"
+        type="button"
+        onClick={handleClose}
+      />
+      <ul className="navigation__list">
+        <li>
+          <Link className="navigation__link" to="/" onClick={handleClose}>
+            Главная
+          </Link>
+        </li>
+        <li>
+          <Link className="navigation__link" to="/movies" onClick={handleClose}>
+            Фильмы
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="navigation__link"
+            to="/saved-movies"
+            onClick={handleClose}
+          >
+            Сохранённые фильмы
+          </Link>
+        </li>
+      </ul>
+      <Link
+        to={"/profile"}
+        className="navigation__profile"
+        onClick={handleClose}
+      >
+        Аккаунт
+        <img
+          src={LogoProfile}
+          className="navigation__profileButton"
+          alt="Логотип профиля"
+        />
+      </Link>
+    </section>
   );
 }

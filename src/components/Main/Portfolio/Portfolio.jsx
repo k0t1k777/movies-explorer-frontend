@@ -17,24 +17,46 @@ export default function Portfolio() {
         по&nbsp;веб-разработке, начал заниматься фриланс-заказами и ушёл
         с&nbsp;постоянной работы.
       </p>
-      <a className="portfolio__github" href="https://github.com/k0t1k777" target="_blank" rel="noreferrer">Github</a>
+      <a
+        className="portfolio__github"
+        href="https://github.com/k0t1k777"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Github
+      </a>
       <p className="portfolio__portfolio">Портфолио</p>
 
       <ul className="portfolio__list">
         <li className="portfolio__item">
-          <Link to="https://github.com/k0t1k777/how-to-learn.git" className="portfolio__link" target="_blank" rel="noreferrer">
+          <Link
+            to="https://github.com/k0t1k777/how-to-learn.git"
+            className="portfolio__link"
+            target="_blank"
+            rel="noreferrer"
+          >
             Статичный сайт
             <button className="portfolio__arrow">↗</button>
           </Link>
         </li>
         <li className="portfolio__item">
-          <Link to="https://github.com/k0t1k777/russian-travel.git" className="portfolio__link" target="_blank" rel="noreferrer">
+          <Link
+            to="https://github.com/k0t1k777/russian-travel.git"
+            className="portfolio__link"
+            target="_blank"
+            rel="noreferrer"
+          >
             Адаптивный сайт
             <button className="portfolio__arrow">↗</button>
           </Link>
         </li>
         <li className="portfolio__item">
-          <Link to="https://github.com/k0t1k777/react-mesto-api-full-gha.git" className="portfolio__link" target="_blank" rel="noreferrer">
+          <Link
+            to="https://github.com/k0t1k777/react-mesto-api-full-gha.git"
+            className="portfolio__link"
+            target="_blank"
+            rel="noreferrer"
+          >
             Одностраничное приложение
             <button className="portfolio__arrow">↗</button>
           </Link>

@@ -62,7 +62,6 @@
 @media screen and (max-width: 780px) {
   .header__container {
     padding-right: 30px;
-    /* display: none; */
   }
 }
 
@@ -140,10 +139,6 @@
   cursor: pointer;
 }
 
-/* .navigation__nav_display_none {
-  display: none;
-} */
-
 @media screen and (max-width: 780px) {
   .header__nav {
     display: none;
@@ -168,10 +163,6 @@
     display: none;
   }
 }
-
-/* .navigation__link-profile_display_none {
-  display: none; 
-} */
 
 .header__profile:hover {
   opacity: 0.7;
