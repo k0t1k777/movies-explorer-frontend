@@ -1,0 +1,94 @@
+.error404 {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  max-width: 1280px;
+  background-color: #202020;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 700px;
+}
+
+@media screen and (max-width: 780px) {
+  .error404 {
+    min-height: 1024px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .error404 {
+    min-height: 780px;
+  }
+}
+
+.error404__tittle {
+  color: #fff;
+  font-size: 140px;
+  font-weight: 400;
+  line-height: 169px;
+  margin: 246px auto 5px;
+}
+
+@media screen and (max-width: 780px) {
+  .error404__tittle {
+    margin: 408px auto 5px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .error404__tittle {
+    margin: 329px auto 10px;
+    font-size: 80px;
+    line-height: 97px;
+  }
+}
+
+.error404__subtittle {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  margin: 0;
+}
+
+@media screen and (max-width: 520px) {
+  .error404__subtittle {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.error404__button {
+  display: block;
+  border: none;
+  color: #4285f4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  border: 0;
+  background-color: #202020;
+  margin: 184px auto 60px;
+}
+
+.error404__button:hover {
+  opacity: 0.8;
+  transition: opacity 0.7s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+  .error404__button {
+    margin: 184px auto 222px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .error404__button {
+    margin: 284px auto 30px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

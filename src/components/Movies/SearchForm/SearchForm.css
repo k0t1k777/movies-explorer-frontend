@@ -1,0 +1,135 @@
+.findFilms {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 60px 70px 10px;
+  max-width: 1280px;
+  background-color: #202020;;
+}
+
+@media screen and (max-width: 780px) {
+  .findFilms {
+    padding: 80px 30px 10px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .findFilms {
+    padding: 80px 14px 10px;
+  }
+}
+
+.findFilms__search {
+  border-bottom: #424242 solid 1px;
+  display: block;
+}
+
+.findFilms__search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.findFilms__input {
+  width: 100%;
+  width: 1140px;
+  box-sizing: border-box;
+  min-height: 46px;
+  border-radius: 40px;
+  border: none;
+  padding: 14px 0 14px 18px;
+  background-color: #2f2f2f;
+  color: #8b8b8b;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.findFilms__button {
+  margin-left: -42px;
+  display: block;
+  border: none;
+  }
+
+  .findFilms__button:hover {
+    opacity: 0.8;
+    transition: opacity 0.7s;
+    cursor: pointer;
+  }
+
+.findFilms__checkbox-container {
+  width: 100%;
+  max-width: 174px;
+  position: relative;
+  margin: 41px auto 69px;
+}
+
+@media screen and (max-width: 780px) {
+  .findFilms__checkbox-container {
+    margin: 42px auto 49px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .findFilms__checkbox-container {
+    max-width: 148px;
+  }
+}
+
+.findFilms__checkbox-label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.findFilms__checkbox {
+  position: absolute;
+  appearance: none;
+}
+
+.findFilms__checkbox-span {
+  width: 36px;
+  min-height: 20px;
+  position: relative;
+  background-color: #ebebeb;
+  border-radius: 20px;
+}
+
+.findFilms__checkbox-span::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: #ffffff solid 1px;
+  transition: 0.5s;
+  box-sizing: border-box;
+}
+
+.findFilms__checkbox:checked + .findFilms__checkbox-span {
+  background-color: #2be080;
+}
+
+.findFilms__checkbox:checked + .findFilms__checkbox-span::before {
+  background-color: #ebebeb;
+  left: calc(36px - 20px + 2px);
+  transition: 0.5s;
+}
+
+.findFilms__checkbox-text {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 520px) {
+  .findFilms__checkbox-text {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+}

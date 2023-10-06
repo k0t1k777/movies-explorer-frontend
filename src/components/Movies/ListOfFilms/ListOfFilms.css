@@ -1,0 +1,153 @@
+.listOfFilms {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 70px 70px 10px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  gap: 37px 24px;
+  justify-items: stretch;
+  background-color: #202020;
+}
+
+@media screen and (max-width: 780px) {
+  .listOfFilms {
+    padding: 70px 30px 30px;
+    gap: 30px;
+    max-height: 1238px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms {
+    padding: 40px 10px 26px;
+    gap: 14px;
+    max-height: 1307px;
+  }
+}
+
+.listOfFilms__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1051px) {
+  .listOfFilms__wrapper {
+    max-width: 364px;
+  }
+}
+
+.listOfFilms__container {
+  box-sizing: border-box;
+  max-height: 281px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 780px) {
+  .listOfFilms__container {
+    max-height: 262px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms__container {
+    max-height: 237px;
+  }
+}
+
+.listOfFilms__save {
+  background: url("../../../images/save.svg") no-repeat center/ 30px 30px;
+  border: 0;
+  padding-top: 9px;
+  padding-right: 16px;
+  margin-top: -5px;
+  margin-right: 20px;
+  display: block;
+}
+
+.listOfFilms__save:hover {
+  opacity: 0.8;
+  transition: opacity 0.4s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms__save {
+    margin-top: -2px;
+    margin-right: 14px;
+  }
+}
+
+.listOfFilms__films {
+  max-width: 364px;
+  height: 203px;
+  object-fit: contain;
+  width: 100%;
+}
+
+.listOfFilms__films:hover {
+  opacity: 0.8;
+  transition: opacity 0.4s;
+  cursor: pointer;
+  filter: contrast(150%);
+}
+
+@media screen and (max-width: 780px) {
+  .listOfFilms__films {
+    max-width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms__films {
+    max-width: 300px;
+    height: 168px;
+  }
+}
+
+.listOfFilms__title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 13px 0 17px 16px;
+}
+
+@media screen and (max-width: 780px) {
+  .listOfFilms__title {
+    margin: 14px 0 15px 14px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms__title {
+    margin: 11px 0 14px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+  }
+}
+
+.listOfFilms__time {
+  color: #8b8b8b;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  margin: 0 0 16px 16px;
+}
+
+@media screen and (max-width: 780px) {
+  .listOfFilms__time {
+    margin: 0 0 14px 14px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .listOfFilms__time {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+  }
+}

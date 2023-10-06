@@ -1,0 +1,41 @@
+.header {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 74px;
+  background-color: #073042;
+  color: #fff;
+}
+
+.header_theme_dark {
+  background: #202020;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  padding: 18px 45px 18px 70px;
+}
+
+.header__logo:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+  .header__logo {
+    padding-left: 30px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__logo {
+    padding-left: 14px;
+  }
+}
+

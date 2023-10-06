@@ -1,0 +1,10 @@
+.findFilms {
+  margin: 0 auto;
+  padding: 0;
+  min-width: 320px;
+  max-width: 1280px;
+  background-color: #202020;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+}
