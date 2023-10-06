@@ -39,3 +39,156 @@
   }
 }
 
+.header__container {
+  display: flex;
+  min-height: 100%;
+  padding: 21px 70px 21px 0;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header__container_side_left {
+  margin: 0 auto 0 0;
+}
+
+.header__container:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+  .header__container {
+    padding-right: 30px;
+    /* display: none; */
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__container {
+    padding-right: 14px;
+  }
+}
+
+.header__registration {
+  padding-right: 30px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header__registration:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .header__registration {
+    font-size: 10px;
+    padding-right: 14px;
+  }
+}
+
+.header__enter {
+  width: 76px;
+  height: 32px;
+  color: #000;
+  background-color: #3ddc84;
+  border-radius: 3px;
+  border: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__enter:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .header__enter {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+  }
+}
+
+.header__nav {
+  color: #ffffff;
+  margin-right: 16px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.header__nav:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+/* .navigation__nav_display_none {
+  display: none;
+} */
+
+@media screen and (max-width: 780px) {
+  .header__nav {
+    display: none;
+  }
+}
+
+.header__profile {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 13px;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 16px;
+  text-decoration: none;
+  height: 32px;
+  color: #fff;
+}
+
+@media screen and (max-width: 780px) {
+  .header__profile {
+    display: none;
+  }
+}
+
+/* .navigation__link-profile_display_none {
+  display: none; 
+} */
+
+.header__profile:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.header__logoProfile {
+  width: 10px;
+  height: 10px;
+  margin-left: 8px;
+  padding: 8px;
+  margin-right: 73px;
+  border-radius: 50px;
+  background: #0f4157;
+}
+
+.header__logoProfile_theme_dark {
+  background: #313131;
+}

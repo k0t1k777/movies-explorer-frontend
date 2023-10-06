@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navigation.css";
 // import { useState } from "react";
 import LogoProfile from "../../images/profile.svg";
 
-export default function Navigation({ isLoggedIn }) {
+
+export default function Navigation() {
   // const [isBurgerActiv, setIsBurgerActiv] = useState(false);
 
   // function openBurgerMenu() {
@@ -15,75 +16,31 @@ export default function Navigation({ isLoggedIn }) {
   //   setIsBurgerActiv(false);
   // }
 
-  const { pathname } = useLocation();
-
-  return !isLoggedIn ? (
+  return (
     // <section className="navigation">
-        <section className={
-          pathname === "/" ? "navigation" : "navigation navigation_theme_dark"
-        }>
-
-      <nav className="navigation__container">
-        <Link to={"/signup"} className="navigation__registration">
-          Регистрация
+    <section className="navigation">
+    <button className="navigation__close" type="button" />
+    <ul className="navigation__list">
+      <li>
+        <Link className="navigation__link" to="/">
+          Главная
         </Link>
-        <Link to={"/signin"} className="navigation__enter">
-          Войти
-        </Link>
-      </nav>
-    </section>
-  ) : (
-    <nav
-      className={
-        pathname === "/" ? "navigation" : "navigation navigation_theme_dark"
-      }
-    >
-      <nav className="navigation__container navigation__container_side_left">
-        <Link
-          to={"/movies"}
-          className={
-            pathname === "/movies"
-              ? "navigation__nav navigation__nav_display_none"
-              : "navigation__nav"
-          }
-        >
+      </li>
+      <li>
+        <Link className="navigation__link" to="/movies">
           Фильмы
         </Link>
-        <Link
-          to={"/saved-movies"}
-          className={
-            pathname === "/saved-movies"
-              ? "navigation__nav navigation__nav_display-none"
-              : "navigation__nav"
-          }
-        >
+      </li>
+      <li>
+        <Link className="navigation__link" to="/saved-movies">
           Сохранённые фильмы
         </Link>
-      </nav>
-
-      <Link
-        to={"/profile"}
-        className="navigation__link-profile"
-      >
-        Аккаунт
-        <img
-          className={
-            pathname === "/"
-              ? "navigation__logoProfile"
-              : "navigation__logoProfile navigation__logoProfile_theme_dark"
-          }
-          src={LogoProfile}
-          alt="Логотип профиля"
-        />
-      </Link>
-
-      <button
-        className="navigation__burger-button"
-        type="button"
-        // onClick={openBurgerMenu}
-        // onClick={() => setIsBurgerActiv(!isBurgerActiv)}
-        // isOpen={openBurgerMenu}
-      ></button>
-    </nav>
+      </li>
+    </ul>
+    <Link to={"/profile"} className="navigation__profile">
+    Аккаунт
+      <img src={LogoProfile} className="navigation__profileButton" alt="Логотип профиля" />
+    </Link>
+  </section>
   );
 }
