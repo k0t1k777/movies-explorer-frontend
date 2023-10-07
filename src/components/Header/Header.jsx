@@ -5,8 +5,7 @@ import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import LogoProfile from "../../images/profile.svg";
 
 export default function Header({ isLoggedIn }) {
-  
-  const { pathname } = useLocation();
+    const { pathname } = useLocation();
 
   return !isLoggedIn ? (
     <header
