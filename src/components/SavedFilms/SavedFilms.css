@@ -1,3 +1,7 @@
+@import url(../Movies/ListOfFilms/ListOfFilms.css);
+
+/* 
+
 .savedFilms {
   margin: 0 auto;
   box-sizing: border-box;
@@ -53,6 +57,7 @@
 .savedFilms__container:hover .savedFilms__save {
   opacity: 1;
   transition: opacity 0.3s linear;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 780px) {
@@ -92,6 +97,7 @@
   filter: contrast(150%);
   opacity: 0.8;
   transition: opacity 0.3s;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 520px) {
@@ -165,4 +171,4 @@
     font-weight: 400;
     line-height: 12px;
   }
-}
+} */

@@ -35,6 +35,7 @@
   margin: 70px auto 40px 0;
   display: flex;
   justify-items: left;
+  cursor: pointer;
 }
 
 .register__logo:hover {
@@ -106,6 +107,17 @@
   box-sizing: border-box;
 }
 
+.register__input-name:focus {
+  outline-offset: 3px;
+  outline: 1px solid aqua;
+}
+
+.register__input-name::placeholder {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+}
+
 .register__input-email {
   font-size: 13px;
   font-weight: 500;
@@ -119,6 +131,17 @@
   padding-left: 15px;
   margin-bottom: 20px;
   box-sizing: border-box;
+}
+
+.register__input-email:focus {
+  outline-offset: 3px;
+  outline: 1px solid aqua;
+}
+
+.register__input-email::placeholder {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
 }
 
 .register__input-password {
@@ -136,6 +159,17 @@
   box-sizing: border-box;
 }
 
+.register__input-password:focus {
+  outline-offset: 3px;
+  outline: 1px solid aqua;
+}
+
+.register__input-password::placeholder {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+}
+
 .register__button {
   text-align: center;
   font-size: 14px;
@@ -148,11 +182,12 @@
   color: #fff;
   border: 0;
   margin-top: 69px;
+  cursor: pointer;
 }
 
 .register__button:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 
@@ -201,11 +236,12 @@
   margin-top: 16px;
   padding: 0 0 0 6px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .register__enter:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 

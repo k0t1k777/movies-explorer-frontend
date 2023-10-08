@@ -77,8 +77,8 @@
 }
 
 .error404__button:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 

@@ -3,9 +3,10 @@
   box-sizing: border-box;
   width: 100%;
   padding: 70px 70px 10px;
-  /* min-height: 100%; */
+  flex: 1 0 auto;
   min-height: 598px;
   background-color: #202020;
+  flex: 1;
 }
 
 @media screen and (max-width: 780px) {
@@ -80,7 +81,23 @@
   padding-right: 16px;
   margin-top: -5px;
   margin-right: 20px;
-  display: block;
+  cursor: pointer;
+}
+
+.listOfFilms__save_pic_x {
+  background: url("../../../images/x.svg") no-repeat center/ 30px 30px;
+  padding-right: 16px;
+  margin-top: -5px;
+  margin-right: 20px;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.listOfFilms__container:hover .listOfFilms__save_pic_x {
+  opacity: 1;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
 }
 
 .listOfFilms__save:hover {
@@ -101,6 +118,7 @@
   height: 203px;
   object-fit: contain;
   width: 100%;
+  cursor: pointer;
 }
 
 .listOfFilms__films:hover {

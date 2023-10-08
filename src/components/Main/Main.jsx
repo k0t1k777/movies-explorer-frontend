@@ -7,7 +7,7 @@ import Techs from "./Tech/Techs";
 import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer.jsx";
 
-export default function Main({ A, B }) {
+export default function Main() {
   return (
     <>
       <Header />

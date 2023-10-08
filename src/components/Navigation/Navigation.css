@@ -37,6 +37,7 @@
   position: absolute;
   right: 27px;
   top: 27px;
+  cursor: pointer;
 }
 
 .navigation__close:hover {
@@ -77,6 +78,7 @@
   line-height: 22px;
   text-decoration: none;
   display: flex;
+  cursor: pointer;
 }
 
 .navigation__link:hover {
@@ -96,6 +98,7 @@
   color: #fff;
   display: flex;
   margin: 621px auto 93px;
+  cursor: pointer;
 }
 
 .burgerMenu__profile:hover {

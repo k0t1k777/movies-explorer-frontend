@@ -19,6 +19,7 @@
   width: 38px;
   height: 38px;
   padding: 18px 45px 18px 70px;
+  cursor: pointer;
 }
 
 .header__logo:hover {
@@ -79,6 +80,7 @@
   line-height: 16px;
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .header__registration:hover {
@@ -108,6 +110,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .header__enter:hover {
@@ -156,6 +159,7 @@
   text-decoration: none;
   height: 32px;
   color: #fff;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 780px) {

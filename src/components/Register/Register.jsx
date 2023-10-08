@@ -40,6 +40,8 @@ export default function Register() {
               className="register__input-password"
               type="password"
               placeholder="••••••••••••••"
+              minLength="8"
+              maxLength="30"
               required
             />
             <span className="register__error">Что-то пошло не так...</span>

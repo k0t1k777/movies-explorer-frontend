@@ -6,7 +6,7 @@ export default function Portfolio() {
   return (
     <section className="portfolio" id="portfolio">
       <h3 className="portfolio__name">Студент</h3>
-      <img src={Photo} className="portfolio__photo" alt="Мое фото" />
+      <img src={Photo} className="portfolio__photo" alt="Фотография с моим портретом" />
       <h2 className="portfolio__title">Виталий</h2>
       <p className="portfolio__subtitle">Фронтенд-разработчик, 30 лет</p>
       <p className="portfolio__biography">

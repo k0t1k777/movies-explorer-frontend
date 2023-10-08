@@ -26,7 +26,9 @@ export default function Login() {
             <input
               className="login__input-password"
               type="password"
-              placeholder=""
+              placeholder="••••••••••••••"
+              minLength="8"
+              maxLength="30"
               required
             />
             <span className="login__error"></span>

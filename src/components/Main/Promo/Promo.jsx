@@ -1,5 +1,5 @@
 import "./Promo.css";
-import LogoPromo from "../../../images/pic__COLOR_landing-logo.png";
+import LogoPromo from "../../../images/promo.svg";
 
 export default function Promo() {
   return (

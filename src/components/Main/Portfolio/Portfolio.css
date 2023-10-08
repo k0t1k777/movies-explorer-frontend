@@ -147,6 +147,7 @@
   margin: 0;
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .portfolio__github:hover {
@@ -208,8 +209,6 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
-
-
   }
 }
 
@@ -229,6 +228,7 @@
   color: #fff;
   padding: 0 2px 9px 0;
   margin: 0;
+  cursor: pointer;
 }
 
 .portfolio__arrow:hover {
@@ -258,7 +258,7 @@
   text-decoration: none;
   display: flex;
   justify-content: space-between;
-
+  cursor: pointer;
 }
 
 .portfolio__link:hover {
