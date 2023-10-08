@@ -4,27 +4,41 @@
   width: 100%;
   padding: 70px 70px 10px;
   min-height: 598px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
-  gap: 37px 24px;
-  justify-items: stretch;
   background-color: #202020;
 }
 
 @media screen and (max-width: 780px) {
   .savedFilms {
     padding: 70px 30px 30px;
-    gap: 30px;
-    max-height: 1238px;
+    min-height: 814px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .savedFilms {
     padding: 40px 10px 26px;
+  }
+}
+
+.savedFilms__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  gap: 37px 24px;
+  justify-items: stretch;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 780px) {
+  .savedFilms__list {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .savedFilms__list {
     gap: 14px;
-    max-height: 1307px;
-    min-height: 552px;
   }
 }
 

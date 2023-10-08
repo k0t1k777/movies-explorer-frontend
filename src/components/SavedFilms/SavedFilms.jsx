@@ -10,36 +10,36 @@ export default function SavedFilms() {
     <>
       <Header />
       <SearchForm />
-      <section className="savedFilms">
-        <div className="savedFilms__container">
-          <img src={Movies} className="savedFilms__films" alt="Фильм" />
-          <div className="savedFilms__wrapper">
-            <h3 className="savedFilms__title">33 слова о дизайне</h3>
-            <button className="savedFilms__save" type="button" />
-          </div>
-          <p className="savedFilms__time">1ч 47м</p>
-        </div>
-
-        <div className="savedFilms__container">
-          <img src={Movies2} className="savedFilms__films" alt="Фильм" />
-          <div className="savedFilms__wrapper">
-            <h3 className="savedFilms__title">
-              Киноальманах «100 лет дизайна»
-            </h3>
-            <button className="savedFilms__save" type="button" />
-          </div>
-          <p className="savedFilms__time">1ч 47м</p>
-        </div>
-
-        <div className="savedFilms__container">
-          <img src={Movies} className="savedFilms__films" alt="Фильм" />
-          <div className="savedFilms__wrapper">
-            <h3 className="savedFilms__title">33 слова о дизайне</h3>
-            <button className="savedFilms__save" type="button" />
-          </div>
-          <p className="savedFilms__time">1ч 47м</p>
-        </div>
-      </section>
+      <main className="savedFilms">
+        <ul className="savedFilms__list">
+          <li className="savedFilms__container">
+              <img src={Movies} className="savedFilms__films" alt="Фильм" />
+              <div className="savedFilms__wrapper">
+                <h2 className="savedFilms__title">33 слова о дизайне</h2>
+                <button className="savedFilms__save" type="button" />
+              </div>
+              <p className="savedFilms__time">1ч 47м</p>
+          </li>
+          <li className="savedFilms__container">
+              <img src={Movies2} className="savedFilms__films" alt="Фильм" />
+              <div className="savedFilms__wrapper">
+                <h2 className="savedFilms__title">
+                  Киноальманах «100 лет дизайна»
+                </h2>
+                <button className="savedFilms__save" type="button" />
+              </div>
+              <p className="savedFilms__time">1ч 47м</p>
+          </li>
+          <li className="savedFilms__container">
+              <img src={Movies} className="savedFilms__films" alt="Фильм" />
+              <div className="savedFilms__wrapper">
+                <h2 className="savedFilms__title">33 слова о дизайне</h2>
+                <button className="savedFilms__save" type="button" />
+              </div>
+              <p className="savedFilms__time">1ч 47м</p>
+          </li>
+        </ul>
+      </main>
       <Footer />
     </>
   );

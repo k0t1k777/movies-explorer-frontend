@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
-    <section className="login">
-      <div className="login__wrapper">
+    <main className="login">
+      <section className="login__wrapper">
         <Link to={"/"} className="login__logo">
           <img src={Logo} alt="Логотип главной страницы" />
         </Link>
-        <h2 className="login__name">Рады видеть!</h2>
+        <h1 className="login__name">Рады видеть!</h1>
         <form className="login__form">
           <label>
             <span className="login__span-name">E-mail</span>
@@ -41,7 +41,7 @@ export default function Login() {
             </a>
           </div>
         </form>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

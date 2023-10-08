@@ -61,6 +61,7 @@
     line-height: 36px;
     letter-spacing: -1.2px;
     margin-bottom: 20px;
+    margin-top: 0;
   }
 }
 
@@ -129,11 +130,13 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 600px) {
   .portfolio__photo {
     width: 292px;
     height: 352px;
     margin: 60px auto 40px;
+    float: none;
+    display: flex;
   }
 }
 
@@ -147,8 +150,8 @@
 }
 
 .portfolio__github:hover {
-  opacity: .7;
-  transition: opacity .3s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 
@@ -205,6 +208,8 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
+
+
   }
 }
 
@@ -221,15 +226,14 @@
   font-weight: 400;
   line-height: 60px;
   letter-spacing: -1.2px;
-  background-color: rgba(0, 0, 0, 0);
-  border: 0;
   color: #fff;
   padding: 0 2px 9px 0;
+  margin: 0;
 }
 
 .portfolio__arrow:hover {
-  opacity: .7;
-  transition: opacity .3s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 
@@ -254,10 +258,11 @@
   text-decoration: none;
   display: flex;
   justify-content: space-between;
+
 }
 
 .portfolio__link:hover {
-  opacity: .7;
-  transition: opacity .3s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }

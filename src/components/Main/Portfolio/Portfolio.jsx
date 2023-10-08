@@ -36,7 +36,7 @@ export default function Portfolio() {
             rel="noreferrer"
           >
             Статичный сайт
-            <button className="portfolio__arrow">↗</button>
+            <p className="portfolio__arrow">↗</p>
           </Link>
         </li>
         <li className="portfolio__item">
@@ -47,7 +47,7 @@ export default function Portfolio() {
             rel="noreferrer"
           >
             Адаптивный сайт
-            <button className="portfolio__arrow">↗</button>
+            <p className="portfolio__arrow">↗</p>
           </Link>
         </li>
         <li className="portfolio__item">
@@ -58,7 +58,7 @@ export default function Portfolio() {
             rel="noreferrer"
           >
             Одностраничное приложение
-            <button className="portfolio__arrow">↗</button>
+            <p className="portfolio__arrow">↗</p>
           </Link>
         </li>
       </ul>

@@ -5,9 +5,6 @@
   padding: 0;
   max-width: 1280px;
   background-color: #202020;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   min-height: 700px;
 }
 
@@ -21,6 +18,12 @@
   .error404 {
     min-height: 780px;
   }
+}
+
+.error404__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .error404__tittle {
