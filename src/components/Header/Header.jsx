@@ -7,7 +7,7 @@ import LogoProfile from "../../images/profile.svg";
 export default function Header({ isLoggedIn }) {
       const { pathname } = useLocation();
 
-  return isLoggedIn ? (
+  return !isLoggedIn ? (
     <header
       className={pathname === "/" ? "header" : "header header_theme_dark"}
     >

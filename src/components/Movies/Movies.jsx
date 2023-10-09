@@ -9,11 +9,11 @@ export default function Main() {
   return (
     <>
     <Header />
-    <main className="movies">
+    <section className="movies">
       <SearchForm />
       <ListOfFilms />
       <OtherFilms />
-    </main>
+    </section>
     <Footer />
     </>
   );

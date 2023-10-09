@@ -11,6 +11,7 @@ export default function Main() {
   return (
     <>
       <Header />
+      {/* <Header email={email} loggedIn={loggedIn} /> */}
       <main className="container">
         <Promo />
         <NavTab />

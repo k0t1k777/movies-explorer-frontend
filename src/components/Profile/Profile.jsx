@@ -9,7 +9,7 @@ export default function Profile() {
       <main className="profile" id="profile">
         <section className="profile__wrapper">
           <h1 className="profile__name">Привет, Виталий!</h1>
-          <form className="profile__form" validate>
+          <form className="profile__form" validate="true">
             <label className="profile__container">
               <span className="profile__span-name">Имя</span>
               <input

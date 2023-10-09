@@ -1,8 +1,29 @@
+import React from "react";
 import "./Login.css";
 import Logo from "../../../src/images/logo.svg";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Login( { onLogin }) {
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!email || !password) {
+      return;
+    }
+    onLogin(password, email);
+  }
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
+  }
+
   return (
     <main className="login">
       <section className="login__wrapper">
@@ -10,14 +31,16 @@ export default function Login() {
           <img src={Logo} alt="Логотип главной страницы" />
         </Link>
         <h1 className="login__name">Рады видеть!</h1>
-        <form className="login__form">
+        <form className="login__form" validate="true" onSubmit={handleSubmit}>
           <label>
             <span className="login__span-name">E-mail</span>
             <input
               className="login__input-email"
               type="email"
               placeholder="pochta@yandex.ru"
-              required
+              value={email}
+              required={true}
+              onChange={handleChangeEmail}
             />
             <span className="login__error"></span>
           </label>
@@ -29,7 +52,9 @@ export default function Login() {
               placeholder="••••••••••••••"
               minLength="8"
               maxLength="30"
-              required
+              value={password}
+              required={true}
+              onChange={handleChangePassword}
             />
             <span className="login__error"></span>
           </label>
