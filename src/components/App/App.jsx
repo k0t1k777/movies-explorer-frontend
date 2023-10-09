@@ -12,7 +12,7 @@ import SavedFilms from "../SavedFilms/SavedFilms.jsx";
 function App() {
 
   return (
-    <div className="page">
+    <main className="page">
       <Routes>
         <Route path="/" element={<Main A={''} B={''}/>}/>
         <Route path="/signin" element={<Login />} />
@@ -22,7 +22,7 @@ function App() {
         <Route path="/saved-movies" element={<SavedFilms />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
-    </div>
+    </main>
   );
 }
 

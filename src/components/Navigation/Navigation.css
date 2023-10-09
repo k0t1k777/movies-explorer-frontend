@@ -1,24 +1,28 @@
 .navigation {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.navigation__container {
   margin: 0 auto;
   box-sizing: border-box;
   width: 100%;
   max-width: 520px;
-  min-height: 1024px;
+  min-height: 100vh;
   background-color: #202020;
   color: #fff;
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   z-index: 5;
-}
-
-@media screen and (max-width: 520px) {
-  .navigation {
-    min-height: 780px;
-  }
 }
 
 .navigation__close {
@@ -33,6 +37,7 @@
   position: absolute;
   right: 27px;
   top: 27px;
+  cursor: pointer;
 }
 
 .navigation__close:hover {
@@ -73,6 +78,7 @@
   line-height: 22px;
   text-decoration: none;
   display: flex;
+  cursor: pointer;
 }
 
 .navigation__link:hover {
@@ -92,6 +98,7 @@
   color: #fff;
   display: flex;
   margin: 621px auto 93px;
+  cursor: pointer;
 }
 
 .burgerMenu__profile:hover {

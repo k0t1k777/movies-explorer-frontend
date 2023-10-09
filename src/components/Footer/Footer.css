@@ -3,6 +3,7 @@
   margin: 0;
   color: #fff;
   background: #202020;
+  flex: 0 0 auto;
 }
 
 @media screen and (max-width: 780px) {
@@ -102,6 +103,7 @@
 .footer__link {
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .footer__link:hover {

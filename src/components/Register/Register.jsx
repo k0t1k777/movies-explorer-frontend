@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function Register() {
   return (
-    <section className="register">
-      <div className="register__wrapper">
+    <main className="register">
+      <section className="register__wrapper">
         <Link to={"/"} className="register__logo">
           <img src={Logo} alt="Логотип главной страницы" />
         </Link>
-        <h2 className="register__name">Добро пожаловать!</h2>
+        <h1 className="register__name">Добро пожаловать!</h1>
 
         <form className="register__form" validate>
           <label className="register__container">
@@ -40,6 +40,8 @@ export default function Register() {
               className="register__input-password"
               type="password"
               placeholder="••••••••••••••"
+              minLength="8"
+              maxLength="30"
               required
             />
             <span className="register__error">Что-то пошло не так...</span>
@@ -54,7 +56,7 @@ export default function Register() {
             </a>
           </div>
         </form>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

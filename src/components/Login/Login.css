@@ -35,11 +35,12 @@
   margin: 70px auto 40px 0;
   display: flex;
   justify-items: left;
+  cursor: pointer;
 }
 
 .login__logo:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 
@@ -102,6 +103,17 @@
   box-sizing: border-box;
 }
 
+.login__input-email:focus {
+  outline-offset: 3px;
+  outline: 1px solid aqua;
+}
+
+.login__input-email::placeholder {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+}
+
 .login__input-password {
   font-size: 13px;
   font-weight: 400;
@@ -117,6 +129,17 @@
   box-sizing: border-box;
 }
 
+.login__input-password:focus {
+  outline-offset: 3px;
+  outline: 1px solid aqua;
+}
+
+.login__input-password::placeholder {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+}
+
 .login__button {
   text-align: center;
   font-size: 14px;
@@ -129,11 +152,12 @@
   color: #fff;
   border: 0;
   margin-top: 169px;
+  cursor: pointer;
 }
 
 .login__button:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 
@@ -179,8 +203,8 @@
 }
 
 .login__registration:hover {
-  opacity: 0.8;
-  transition: opacity 0.7s;
+  opacity: 0.7;
+  transition: opacity 0.3s;
   cursor: pointer;
 }
 

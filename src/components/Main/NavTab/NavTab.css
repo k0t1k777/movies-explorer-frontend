@@ -5,6 +5,7 @@
   justify-content: center;
   width: 100%;
   min-height: 66px;
+  background: #272727;
 }
 
 .navTab__items {
@@ -26,6 +27,7 @@
   font-size: 13px;
   font-weight: 500;
   line-height: 16px;
+  cursor: pointer;
 }
 
 .navTab__list:hover {

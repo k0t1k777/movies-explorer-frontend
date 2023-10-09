@@ -2,12 +2,12 @@ import "./Footer.css";
 
 export default function Footer() {
   return (
-    <section className="footer">
+    <footer className="footer">
       <h3 className="footer__name">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h3>
       <div className="footer__down">
-        <p className="footer__date">© 2023</p>
+        <p className="footer__date">©2023</p>
         <nav>
           <ul className="footer__links">
             <li className="footer__links-item">
@@ -33,6 +33,6 @@ export default function Footer() {
           </ul>
         </nav>
       </div>
-    </section>
+    </footer>
   );
 }

@@ -12,6 +12,7 @@ export default function Navigation({ handleClose }) {
 
   return (
     <section className="navigation" onClick={handleCloseOverlay}>
+      <div className="navigation__container">
       <button
         className="navigation__close"
         type="button"
@@ -50,6 +51,7 @@ export default function Navigation({ handleClose }) {
           alt="Логотип профиля"
         />
       </Link>
+      </div>
     </section>
   );
 }
