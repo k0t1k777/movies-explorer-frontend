@@ -254,6 +254,7 @@
 }
 
 .register__error {
+  margin-bottom: 15px;
   color: #ee3465;
   font-size: 10px;
   font-weight: 400;

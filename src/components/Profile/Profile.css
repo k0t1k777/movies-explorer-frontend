@@ -53,6 +53,7 @@
 .profile__container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-top: 17px;
 }
 
@@ -77,8 +78,8 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
-  width: 100%;
   display: block;
+  white-space: nowrap
 }
 
 .profile__input-name {
@@ -109,7 +110,7 @@
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
-  margin-bottom: 220px;
+  margin-bottom: 203px;
   width: 100%;
   background-color: #202020;
   border: none;
@@ -131,13 +132,13 @@
 
 @media screen and (max-width: 780px) {
   .profile__input-email {
-    margin-bottom: 210px;
+    margin-bottom: 192px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .profile__input-email {
-    margin-bottom: 379px;
+    margin-bottom: 360px;
   }
 }
 
@@ -193,4 +194,15 @@
     font-size: 12px;
     line-height: 15px;
   }
+}
+
+.profile__error {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #ee3465;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  display: block;
+  text-align: center;
 }

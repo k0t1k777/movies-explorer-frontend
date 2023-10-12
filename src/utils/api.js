@@ -7,7 +7,7 @@ class Api {
   getInfoUser(token) {
     return fetch(`${this._url}/users/me`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     }).then(this._checkResponse);
   }
@@ -73,18 +73,6 @@ class Api {
   //   return this.removeLikes(cardId, token);
   // }
 
-  // changeAvatar(pic, token) {
-  //   return fetch(`${this._url}/users/me/avatar`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`
-  //     },
-  //       body: JSON.stringify({
-  //       avatar: pic.avatar,
-  //     }),
-  //   }).then(this._checkResponse);
-  // }
 
   // removeCard(cardId, token) {
   //   return fetch(`${this._url}/cards/${cardId}`, {
@@ -97,6 +85,7 @@ class Api {
 }
 
 const api = new Api({
+  // baseUrl: "BigBaseMoviesBack.nomoredomainsicu.ru",
   baseUrl: "http://localhost:3000",
 });
 export default api;

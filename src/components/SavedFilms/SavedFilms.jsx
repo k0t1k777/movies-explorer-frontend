@@ -6,9 +6,13 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
 
 export default function SavedFilms() {
+
+  const loggedIn = localStorage.getItem('isLoggedIn')
+  console.log('SavedFilms прочитал состояние', loggedIn)
+
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn}/>
       <SearchForm />
       <main className="listOfFilms">
         <ul className="listOfFilms__list">

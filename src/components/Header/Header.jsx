@@ -4,10 +4,10 @@ import "./Header.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import LogoProfile from "../../images/profile.svg";
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ loggedIn }) {
       const { pathname } = useLocation();
 
-  return !isLoggedIn ? (
+  return !loggedIn ? (
     <header
       className={pathname === "/" ? "header" : "header header_theme_dark"}
     >
