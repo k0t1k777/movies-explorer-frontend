@@ -4,12 +4,14 @@ import Header from "../Header/Header";
 import "./Profile.css";
 // import CurrentUserContext from "../../contexts/contexts";
 
-export default function Profile({ exit, handleChangeProfile }) {
+export default function Profile({ exit, handleChangeProfile, onClick }) {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [isVisibleSubmit, setIsVisibleSubmit] = useState(false);
+
   // const user = useContext(CurrentUserContext);
   // const { name, email } = user;
 
@@ -103,7 +105,7 @@ export default function Profile({ exit, handleChangeProfile }) {
               {nameError} {emailError}
             </span>
 
-            <button className="profile__edit" type="submit">
+            <button className="profile__edit" type="submit" onClick={ onClick }>
               Редактировать
             </button>
           </form>

@@ -12,13 +12,14 @@ import Error404 from "../Error404/Error404.jsx";
 import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import SavedFilms from "../SavedFilms/SavedFilms.jsx";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [currentUser, setCurrentUser] = useState({});
-  // const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // управление сохраненным состоянием авторизации
   function getStoredLoggedIn() {
@@ -50,12 +51,10 @@ function App() {
       console.log("Токен null или undefinded, уходим отсюда");
       return;
     }
-
     console.log("токен есть, запоминаем сотояние пользоветля");
     storeLoggedIn(true);
     const storedLoggedIn = getStoredLoggedIn();
     console.log("и оно ", storedLoggedIn);
-
     // вот тут меняется состояние loggenIn на true - и мы запускаем useEffect ниже!
     setLoggedIn(true);
   }, []);
@@ -98,36 +97,35 @@ function App() {
       });
   }
 
+  function handleLogin(email, password) {
+    setIsLoading(true);
+    MainApi.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          setEmail(email);
+          console.log("токен есть, запоминаем сотояние пользоветля");
+          storeLoggedIn(true);
+          const storedLoggedIn = getStoredLoggedIn();
+          console.log("и оно ", storedLoggedIn);
+          setLoggedIn(true);
+          console.log("а еще мы запомнили значение токена");
+          storeToken(data.token);
+          setIsLoading(false);
+          navigate("/movies");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  }
+
   function handleExit() {
     // очищаем локальную базу
     localStorage.clear();
     setLoggedIn(false);
     setEmail("");
     navigate("/signup");
-  }
-
-  function handleLogin(email, password) {
-    MainApi.login(email, password)
-      .then((data) => {
-        if (data.token) {
-          setEmail(email);
-          console.log("мы вошли! и у нас есть токен", data.token);
-
-          console.log("токен есть, запоминаем сотояние пользоветля");
-          storeLoggedIn(true);
-          const storedLoggedIn = getStoredLoggedIn();
-          console.log("и оно ", storedLoggedIn);
-
-          setLoggedIn(true);
-          console.log("а еще мы запомнили значение токена");
-          storeToken(data.token);
-
-          navigate("/movies");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   // Profile
@@ -142,36 +140,40 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <main className="page">
-        <Routes>
-          <Route path="/" element={<Main loggedIn={loggedIn} />} />
-          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-          <Route
-            path="/signup"
-            element={<Register email={email} onRegister={handleRegister} />}
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                component={Profile}
-                // handleChangeProfile={handleChangeProfile}
-                exit={handleExit}
-                loggedIn={loggedIn}
-              />
-            }
-          />
-          <Route
-            path="/movies"
-            element={<ProtectedRoute component={Movies} />}
-          />
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute component={SavedFilms} loggedIn={loggedIn} />
-            }
-          />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <Routes>
+            <Route path="/" element={<Main loggedIn={loggedIn} />} />
+            <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+            <Route
+              path="/signup"
+              element={<Register email={email} onRegister={handleRegister} />}
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  component={Profile}
+                  // handleChangeProfile={handleChangeProfile}
+                  exit={handleExit}
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+            <Route
+              path="/movies"
+              element={<ProtectedRoute component={Movies} />}
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute component={SavedFilms} loggedIn={loggedIn} />
+              }
+            />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        )}
       </main>
     </CurrentUserContext.Provider>
   );
