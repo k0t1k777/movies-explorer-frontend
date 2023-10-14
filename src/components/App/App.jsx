@@ -46,9 +46,7 @@ function App() {
   // и если таковой есть, ставим в память состояние loggedIn === true
   useEffect(() => {
     const token = getStoredToken();
-    console.log("получили сохраненный токен", token);
     if (!token) {
-      console.log("Токен null или undefinded, уходим отсюда");
       return;
     }
     console.log("токен есть, запоминаем сотояние пользоветля");
@@ -69,7 +67,7 @@ function App() {
     );
 
     if (!storedLoggedIn) {
-      console.log("пользователь не залогинен, увы, уходим отсюда");
+      console.log("пользователь вышел");
       return;
     }
 
@@ -77,7 +75,7 @@ function App() {
     console.log("токен перед запросом пользователя", token);
 
     if (storedLoggedIn) {
-      Promise.all([MainApi.getInfoUser(token)])
+      Promise.all([MainApi.getUserToken(token)])
         .then(([infoUser]) => {
           setCurrentUser(infoUser);
         })
@@ -130,12 +128,23 @@ function App() {
 
   // Profile
 
-  // const handleChangeProfile = (data) =>
-  //   MainApi.changeProfile(data)
-  //     .then(() => {
-  //       setCurrentUser({ ...currentUser, name: data.name, email: data.email });
-  //     })
-  //     .catch((error) => console.log(error));
+  function handleChangeProfile(name, email) {
+    setIsLoading(true);
+    const token = getStoredToken();
+    MainApi.changeProfile(name, email, token)
+      .then((data) => {
+        const updatedUser = {
+          name: data.name,
+          email: data.email,
+        };
+        setCurrentUser(updatedUser);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(`Ошибка обновления информации о пользователе: ${error}`);
+        setIsLoading(false);
+      });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -155,7 +164,7 @@ function App() {
               element={
                 <ProtectedRoute
                   component={Profile}
-                  // handleChangeProfile={handleChangeProfile}
+                  handleChangeProfile={handleChangeProfile}
                   exit={handleExit}
                   loggedIn={loggedIn}
                 />

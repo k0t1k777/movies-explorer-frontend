@@ -16,6 +16,14 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
+  // getInfoUser(token) {
+  //   return fetch(`${this._url}/users/me`, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }).then(this._checkResponse);
+  // }
+
   register = (name, email, password) => {
     return fetch(`${this._url}/signup`, {
       method: "POST",
@@ -45,27 +53,21 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  getInfoUser(token) {
+  changeProfile = (name, email, token) => {
     return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
       headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
     }).then(this._checkResponse);
-  }
+  };
 
-  // changeProfile(name, email, token) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`
-  //     },
-  //     body: JSON.stringify({
-  //       name,
-  //       email,
-  //     }),
-  //   }).then(this._checkResponse);
-  // }
 }
 
 const mainApi = new MainApi({
