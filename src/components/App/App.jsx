@@ -76,6 +76,7 @@ function App() {
 
     if (storedLoggedIn) {
       Promise.all([MainApi.getUserToken(token)])
+      // вот тут добавить get_all_movies и сохраняешь в память браузера - myMovies
         .then(([infoUser]) => {
           setCurrentUser(infoUser);
         })
@@ -129,7 +130,6 @@ function App() {
   // Profile
 
   function handleChangeProfile(name, email) {
-    setIsLoading(true);
     const token = getStoredToken();
     MainApi.changeProfile(name, email, token)
       .then((data) => {
@@ -138,11 +138,9 @@ function App() {
           email: data.email,
         };
         setCurrentUser(updatedUser);
-        setIsLoading(false);
       })
       .catch((error) => {
         console.log(`Ошибка обновления информации о пользователе: ${error}`);
-        setIsLoading(false);
       });
   }
 

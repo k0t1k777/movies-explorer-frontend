@@ -2,9 +2,14 @@ import "./SearchForm.css";
 import PicSearch from "../../../images/find.svg";
 
 export default function SearchForm() {
+
+// handleSearch ()
+// получишь список найденных фильмов - и сравншиь с likesMovies
+// вернешь список найденных и сохранишь
+
   return (
     <section className="findFilms">
-      <form className="findFilms__search">
+      <form className="findFilms__search" noValidate>
         <div className="findFilms__search-container">
           <input
             className="findFilms__input"

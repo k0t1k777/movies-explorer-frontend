@@ -157,11 +157,11 @@
   height: 45px;
 }
 
-/* .profile__edit_btn_disabled {
+.profile__edit_disabled {
   background: #F8F8F8;
   border-radius: 3px;
   color: #C2C2C2;
-} */
+}
 
 .profile__edit:hover {
   opacity: 0.7;

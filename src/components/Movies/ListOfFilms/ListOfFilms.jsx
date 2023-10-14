@@ -2,6 +2,9 @@ import "./ListOfFilms.css";
 import Movies from "../../../images/test.png";
 import Movies2 from "../../../images/test2.png";
 
+// вот тут надо как-то обработать список найденных (foundMoives) и сприсок лайканных (myMovies)
+// и в каждую карточку передать isLiked чтобы поставить галку лайка или снять
+
 export default function ListOfFilms() {
   return (
     <section className="listOfFilms">

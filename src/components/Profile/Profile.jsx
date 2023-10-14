@@ -7,30 +7,49 @@ import CurrentUserContext from "../../contexts/contexts";
 export default function Profile({ isLoading, exit, handleChangeProfile }) {
   const currentUser = useContext(CurrentUserContext);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState(currentUser.name);
+  const [email, setEmail] = React.useState(currentUser.email);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     const storedloggedIn = localStorage.getItem("isLoggedIn");
-    console.log("Profile прочитал состояние", storedloggedIn);
     if (!storedloggedIn) {
       return;
     }
     setLoggedIn(true);
   }, [currentUser, loggedIn]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (name === "") {
-      setNameError("Введите имя. ");
-    } else if (!isValidName(name)) {
-      setNameError("Имя должно содержать от 2 до 30 символов");
+  useEffect(() => {
+    let isNameValid = isValidName(name);
+    let isEmailValid = isValidEmail(email);
+
+    if (!isNameValid) {
+      setNameError("Имя должно содержать от 2 до 30 символов. ");
     } else {
       setNameError("");
     }
-    if (!isValidEmail(email)) {
+
+    if (!isEmailValid) {
+      setEmailError("Введите корректный email-адрес.");
+    } else {
+      setEmailError("");
+    }
+
+  }, [name, email])
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let isNameValid = isValidName(name);
+    let isEmailValid = isValidEmail(email);
+
+    if (!isNameValid) {
+      setNameError("Имя должно содержать от 2 до 30 символов.");
+    } else {
+      setNameError("");
+    }
+
+    if (!isEmailValid) {
       setEmailError("Введите корректный email-адрес.");
     } else {
       setEmailError("");
@@ -71,10 +90,9 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
                 className="profile__input-name"
                 name="name"
                 type="text"
-                placeholder="Введите Ваше имя"
                 minLength="2"
                 maxLength="30"
-                value={name}
+                value={name || currentUser.name}
                 required
                 onChange={handleChangeName}
               />
@@ -85,27 +103,25 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
                 className="profile__input-email"
                 name="email"
                 type="email"
-                placeholder="Введите Ваш e-mail"
-                value={email}
+                value={email || currentUser.email}
                 required
                 onChange={handleChangeEmail}
               />
             </label>
             <span className="profile__error">
-              {nameError} {emailError}
+              {nameError + emailError}
             </span>
-
-            {isLoading ? (
-              <button className="profile__edit" type="button" disabled>
-                Сохранение...
-              </button>
-            ) : (
-              <button className="profile__edit" type="submit">
-                Редактировать
-              </button>
-            )}
+            <button
+              className={`profile__edit ${
+                (!isValidName(name) || !isValidEmail(email)) &&
+                "profile__edit_disabled"
+              }`}
+              type={"submit"}
+              disabled={!isValidName(name) || !isValidEmail(email) || isLoading}
+            >
+              Редактировать
+            </button>
           </form>
-
           <Link to={"/"} className="profile__exit">
             <button className="profile__exitBtn" type="button" onClick={exit}>
               Выйти из аккаунта
