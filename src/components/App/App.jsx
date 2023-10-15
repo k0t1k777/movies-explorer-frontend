@@ -20,6 +20,7 @@ function App() {
   const [email, setEmail] = React.useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   // управление сохраненным состоянием авторизации
   function getStoredLoggedIn() {
@@ -75,14 +76,75 @@ function App() {
     console.log("токен перед запросом пользователя", token);
 
     if (storedLoggedIn) {
-      Promise.all([MainApi.getUserToken(token)])
-      // вот тут добавить get_all_movies и сохраняешь в память браузера - myMovies
-        .then(([infoUser]) => {
+      Promise.all([MainApi.getUserToken(token), MainApi.getMovies(token)])
+        .then(([infoUser, infoMovies]) => {
           setCurrentUser(infoUser);
+          setSavedMovies(infoMovies);
+
+          // if (infoMovies.length !== 0) {
+          //   setSavedMovies(infoMovies)
+          // } else {
+          //   setSavedMovies(infoMovies);
+          // }
         })
         .catch((error) => console.error(`Ошибка ${error}`));
     }
   }, [loggedIn]);
+
+  // Обработка лайков
+  function handleMovieLike(movie) {
+    const token = getStoredToken();
+    const savedMovie = savedMovies.find((item) => item.movieId === movie.id);
+
+    if (savedMovie) {
+      MainApi.deleteMovie(savedMovie._id, token)
+        .then(() => {
+          const updatedSavedMovies = savedMovies.filter(
+            (item) => item._id !== savedMovie._id
+          );
+          setSavedMovies(updatedSavedMovies);
+        })
+        .catch((error) => console.error(`Ошибка удаления фильма: ${error}`));
+    } else {
+      MainApi.saveMovie(
+        {
+          country: movie.country || "Неизвестно",
+          director: movie.director || "Неизвестно",
+          duration: movie.duration || 0,
+          year: movie.year || "Неизвестно",
+          description: movie.description || "Нет описания",
+          image: "https://api.nomoreparties.co${movie.image.url}",
+          trailer: movie.trailerLink || "https://www.youtube.com/",
+          thumbnail:
+            "https://api.nomoreparties.co${movie.image.formats.thumbnail.url}",
+          movieId: movie.id,
+          nameRU: movie.nameRU || "Неизвестно",
+          nameEN: movie.nameEN || "Неизвестно",
+        },
+        token
+      )
+        .then((data) => {
+          setSavedMovies([data, ...savedMovies]);
+        })
+        .catch((error) => console.error(`Ошибка сохранения фильма: ${error}`));
+    }
+  }
+
+  // Функция добавления и удаления фильма:
+
+  // function handleMovieDelete(movie) {
+  //   const token = getStoredToken();
+  //   const savedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
+  
+  //   MainApi.deleteMovie(savedMovie._id, token)
+  //     .then(() => {
+  //       const updatedSavedMovies = savedMovies.filter(
+  //         (item) => item._id !== savedMovie._id
+  //       );
+  //       setSavedMovies(updatedSavedMovies);
+  //     })
+  //     .catch((error) => console.error(`Ошибка удаления фильма: ${error}`));
+  // }
 
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
@@ -170,12 +232,21 @@ function App() {
             />
             <Route
               path="/movies"
-              element={<ProtectedRoute component={Movies} />}
+              element={
+                <ProtectedRoute
+                  component={Movies}
+                  handleMovieLike={handleMovieLike}
+                />
+              }
             />
             <Route
               path="/saved-movies"
               element={
-                <ProtectedRoute component={SavedFilms} loggedIn={loggedIn} />
+                <ProtectedRoute
+                  component={SavedFilms}
+                  loggedIn={loggedIn}
+                  handleMovieLike={handleMovieLike}
+                />
               }
             />
             <Route path="*" element={<Error404 />} />

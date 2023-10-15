@@ -16,14 +16,6 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  // getInfoUser(token) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   }).then(this._checkResponse);
-  // }
-
   register = (name, email, password) => {
     return fetch(`${this._url}/signup`, {
       method: "POST",
@@ -68,6 +60,36 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
+  getMovies(token) {
+    return fetch(`${this._url}/movies`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  }
+
+  createMovie(token, movieInfo) {
+    return fetch(`${this._url}/movies`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ movieInfo }),
+    }).then(this._checkResponse);
+  }
+
+  deleteMovie(token, id) {
+    return fetch(`${this._url}/movies/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  }
 }
 
 const mainApi = new MainApi({

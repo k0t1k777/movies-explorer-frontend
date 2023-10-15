@@ -1,40 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import Logo from "../../../src/images/logo.svg";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Register({ onRegister }) {
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [name, setName] = React.useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (name === "") {
-      setNameError("Введите имя");
-    } else if (!isValidName(name)) {
-      setNameError("Имя должно содержать от 2 до 30 символов");
+  useEffect(() => {
+    let isNameValid = isValidName(name);
+    let isEmailValid = isValidEmail(email);
+    let isPasswordValid = isValidPassword(email);
+
+    if (!isNameValid) {
+      setNameError("Имя должно содержать от 2 до 30 символов. ");
+    } else {
+      setNameError("");
     }
-    if (!isValidEmail(email)) {
-      setEmailError("Введите корректный email-адрес");
+
+    if (!isEmailValid) {
+      setEmailError("Введите корректный email-адрес.");
     } else {
       setEmailError("");
     }
-    if (password === "") {
-      setPasswordError("Введите пароль");
-    } else if (password.length < 8) {
-      setPasswordError("Пароль должен содержать не менее 8 символов");
-    // } else if (!isValidPassword(password)) {
-    //   setPasswordError(
-    //     "Пароль должен содержать как минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ"
-    //   );
+
+    if (!isPasswordValid) {
+      setPasswordError("Введите корректный пароль.");
     } else {
       setPasswordError("");
-      onRegister(name, email, password);
     }
+  }, [name, email, password]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let isNameValid = isValidName(name);
+    let isEmailValid = isValidEmail(email);
+    let isPasswordValid = isValidPassword(password);
+
+    if (!isNameValid) {
+      setNameError("Имя должно содержать от 2 до 30 символов.");
+    } else {
+      setNameError("");
+    }
+
+    if (!isEmailValid) {
+      setEmailError("Введите корректный email-адрес.");
+    } else {
+      setEmailError("");
+    }
+
+    if (!isPasswordValid) {
+      setPasswordError("Введите корректный пароль.");
+    } else {
+      setPasswordError("");
+    }
+    onRegister(name, email, password);
   }
 
   function isValidName(name) {
@@ -47,22 +72,21 @@ export default function Register({ onRegister }) {
     return pattern.test(email);
   }
 
-  // function isValidPassword(password) {
-  //   let pattern =
-  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  //   return pattern.test(password);
-  // }
+  function isValidPassword(password) {
+    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}/;
+    return pattern.test(password);
+  }
 
   function handleChangeName(event) {
     setName(event.target.value);
   }
 
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
-  }
-
   function handleChangeEmail(event) {
     setEmail(event.target.value);
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
   }
 
   return (
@@ -111,7 +135,15 @@ export default function Register({ onRegister }) {
             />
             <span className="register__error">{passwordError}</span>
           </label>
-          <button className="register__button" type="submit">
+          <button
+            className={`register__button ${
+              (!isValidName(name) ||
+                !isValidEmail(email) ||
+                !isValidPassword(password)) &&
+              "register__button_disabled"
+            }`}
+            type={"submit"}
+          >
             Зарегистрироваться
           </button>
           <div className="register__container-enter">

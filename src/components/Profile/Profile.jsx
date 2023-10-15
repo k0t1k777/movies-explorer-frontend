@@ -35,8 +35,7 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
     } else {
       setEmailError("");
     }
-
-  }, [name, email])
+  }, [name, email]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -53,8 +52,8 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
       setEmailError("Введите корректный email-адрес.");
     } else {
       setEmailError("");
-      handleChangeProfile(name, email);
     }
+    handleChangeProfile(name, email);
   }
 
   function isValidName(name) {
@@ -108,9 +107,7 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
                 onChange={handleChangeEmail}
               />
             </label>
-            <span className="profile__error">
-              {nameError + emailError}
-            </span>
+            <span className="profile__error">{nameError + emailError}</span>
             <button
               className={`profile__edit ${
                 (!isValidName(name) || !isValidEmail(email)) &&

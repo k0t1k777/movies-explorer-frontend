@@ -20,10 +20,10 @@ export default function Login({ onLogin }) {
       setPasswordError("Введите пароль");
     } else if (password.length < 8) {
       setPasswordError("Пароль должен содержать не менее 8 символов");
-    // } else if (!isValidPassword(password)) {
-    //   setPasswordError(
-    //     "Пароль должен содержать как минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ"
-    //   );
+    } else if (!isValidPassword(password)) {
+      setPasswordError(
+        "Пароль должен содержать как минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ"
+      );
     } else {
       setPasswordError("");
       onLogin(email, password);
@@ -35,11 +35,10 @@ export default function Login({ onLogin }) {
     return pattern.test(email);
   }
 
-  // function isValidPassword(password) {
-  //   let pattern =
-  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  //   return pattern.test(password);
-  // }
+  function isValidPassword(password) {
+    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}/;
+    return pattern.test(password);
+  }
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);

@@ -12,28 +12,6 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  // getInitialCards(token) {
-  //   return fetch(`${this._url}/cards`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     },
-  //   }).then(this._checkResponse);
-  // }
-
-  // changeProfile(data, token) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`
-  //     },
-  //     body: JSON.stringify({
-  //       name: data.userName,
-  //       about: data.userJob,
-  //     }),
-  //   }).then(this._checkResponse);
-  // }
-
   // addNewCard(cardData, token) {
   //   return fetch(`${this._url}/cards`, {
   //     method: "POST",

@@ -1,4 +1,4 @@
-.listOfFilms {
+.filmsCard {
   margin: 0 auto;
   box-sizing: border-box;
   width: 100%;
@@ -10,18 +10,18 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms {
+  .filmsCard {
     padding: 70px 30px 30px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms {
+  .filmsCard {
     padding: 40px 10px 26px;
   }
 }
 
-.listOfFilms__list {
+.filmsCard__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
   gap: 37px 24px;
@@ -32,29 +32,29 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms__list {
+  .filmsCard__list {
     gap: 30px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__list {
+  .filmsCard__list {
     gap: 14px;
   }
 }
 
-.listOfFilms__wrapper {
+.filmsCard__wrapper {
   display: flex;
   justify-content: space-between;
 }
 
 @media screen and (max-width: 1051px) {
-  .listOfFilms__wrapper {
+  .filmsCard__wrapper {
     max-width: 364px;
   }
 }
 
-.listOfFilms__container {
+.filmsCard__container {
   box-sizing: border-box;
   max-height: 281px;
   margin: 0 auto;
@@ -63,18 +63,18 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms__container {
+  .filmsCard__container {
     max-height: 262px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__container {
+  .filmsCard__container {
     max-height: 237px;
   }
 }
 
-.listOfFilms__save {
+.filmsCard__save {
   background: url("../../../images/save.svg") no-repeat center/ 30px 30px;
   border: 0;
   padding-top: 9px;
@@ -84,7 +84,7 @@
   cursor: pointer;
 }
 
-.listOfFilms__save_pic_x {
+.filmsCard__save_pic_x {
   background: url("../../../images/x.svg") no-repeat center/ 30px 30px;
   padding-right: 16px;
   margin-top: -5px;
@@ -94,26 +94,26 @@
   cursor: pointer;
 }
 
-.listOfFilms__container:hover .listOfFilms__save_pic_x {
+.filmsCard__container:hover .filmsCard__save_pic_x {
   opacity: 1;
   transition: opacity 0.3s linear;
   cursor: pointer;
 }
 
-.listOfFilms__save:hover {
+.filmsCard__save:hover {
   opacity: 0.8;
   transition: opacity 0.4s;
   cursor: pointer;
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__save {
+  .filmsCard__save {
     margin-top: -2px;
     margin-right: 14px;
   }
 }
 
-.listOfFilms__films {
+.filmsCard__films {
   max-width: 364px;
   height: 203px;
   object-fit: contain;
@@ -121,7 +121,7 @@
   cursor: pointer;
 }
 
-.listOfFilms__films:hover {
+.filmsCard__films:hover {
   opacity: 0.8;
   transition: opacity 0.4s;
   cursor: pointer;
@@ -129,20 +129,20 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms__films {
+  .filmsCard__films {
     max-width: 339px;
     height: 190px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__films {
+  .filmsCard__films {
     max-width: 300px;
     height: 168px;
   }
 }
 
-.listOfFilms__title {
+.filmsCard__title {
   color: #fff;
   font-size: 13px;
   font-weight: 500;
@@ -151,13 +151,13 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms__title {
+  .filmsCard__title {
     margin: 14px 0 15px 14px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__title {
+  .filmsCard__title {
     margin: 11px 0 14px 14px;
     font-size: 12px;
     font-weight: 500;
@@ -165,7 +165,7 @@
   }
 }
 
-.listOfFilms__time {
+.filmsCard__time {
   color: #8b8b8b;
   font-size: 11px;
   font-weight: 400;
@@ -174,13 +174,13 @@
 }
 
 @media screen and (max-width: 780px) {
-  .listOfFilms__time {
+  .filmsCard__time {
     margin: 0 0 14px 14px;
   }
 }
 
 @media screen and (max-width: 520px) {
-  .listOfFilms__time {
+  .filmsCard__time {
     font-size: 10px;
     font-weight: 400;
     line-height: 12px;
