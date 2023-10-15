@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import Logo from "../../../src/images/logo.svg";
-import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Register({ onRegister }) {
   const [name, setName] = React.useState("");
