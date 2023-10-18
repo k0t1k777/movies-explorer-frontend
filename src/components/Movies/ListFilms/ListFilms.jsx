@@ -9,9 +9,6 @@ const MAX_CARDS_MEDIUM_SCREEN = 8;
 const MAX_CARDS_SMALL_SCREEN = 5;
 const CARDS_TO_ADD = 3;
 
-// вот тут надо как-то обработать список найденных (foundMoives) и список лайканных (myMovies)
-// и в каждую карточку передать isLiked чтобы поставить галку лайка или снять
-
 export default function ListFilms({
   toggleAddMovie,
   onDeleteMovie,
@@ -31,9 +28,9 @@ export default function ListFilms({
       const screenWidth = window.innerWidth;
       if (screenWidth >= 1280) {
         setVisibleCards(MAX_CARDS_LARGE_SCREEN);
-      } else if (screenWidth >= 768) {
+      } else if (screenWidth >= 780) {
         setVisibleCards(MAX_CARDS_MEDIUM_SCREEN);
-      } else if (screenWidth >= 480) {
+      } else if (screenWidth >= 540) {
         setVisibleCards(MAX_CARDS_SMALL_SCREEN);
       } else {
         setVisibleCards(MAX_CARDS_SMALL_SCREEN);
@@ -52,9 +49,9 @@ export default function ListFilms({
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1280) {
       setVisibleCards(visibleCards + CARDS_TO_ADD);
-    } else if (screenWidth >= 768) {
+    } else if (screenWidth >= 780) {
       setVisibleCards(visibleCards + CARDS_TO_ADD - 1);
-    } else if (screenWidth >= 480) {
+    } else if (screenWidth >= 540) {
       setVisibleCards(visibleCards + CARDS_TO_ADD - 1);
     } else {
       setVisibleCards(visibleCards + CARDS_TO_ADD - 1);
@@ -66,9 +63,8 @@ export default function ListFilms({
       <ul className="listFilms__list">
         {isLoading ? (
           <Preloader />
-        ) : name === "movies" && cards.length !== 0 ? (
-          // cards.slice(0, visibleCards).map((movieData) => {
-            cards.map((movieData) => {
+          ) : name === "movies" && cards.length !== 0 ? (
+          cards.slice(0, visibleCards).map((movieData) => {
             return (
               <li className="movies-card" key={movieData.id}>
                 <FilmsCard
@@ -82,7 +78,6 @@ export default function ListFilms({
             );
           })
         ) : name === "saved-movies" && cards.length !== 0 ? (
-          // здесь пока отрисовывается весь массив, который НЕ фильтровался
           cards.map((movieData) => {
             return (
               <li className="movies-card" key={movieData.id}>
@@ -102,9 +97,7 @@ export default function ListFilms({
             Во время запроса произошла ошибка. Пожалуйста, попробуйте позже.
           </span>
         ) : !firstEntrance ? (
-          <span className="listFilms__serch-error">
-            Ничего не найдено
-          </span>
+          <span className="listFilms__serch-error">Ничего не найдено</span>
         ) : pathname === "/movies" ? (
           <span className="listFilms__serch-error">Выполните поиск</span>
         ) : (

@@ -14,6 +14,7 @@ export default function SearchForm({
   savedMovies,
   filter,
   setIsCheck,
+  // moviesData
 }) {
 
   const [search, setSearch] = useState(savedSearch);
@@ -30,6 +31,7 @@ export default function SearchForm({
   function handleCheckboxChange() {
     setIsCheck(!isCheck);
     filter(search, !isCheck, savedMovies);
+    console.log(search, !isCheck, savedMovies)
   }
 
   return (

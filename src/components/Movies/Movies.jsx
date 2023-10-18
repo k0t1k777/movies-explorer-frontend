@@ -20,29 +20,26 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   const [serverError, setServerError] = useState(false);
 
   const filter = useCallback((search, isCheck, movies) => {
-    // console.log(movies)
-    // функция берет поиск, который в неё пришел из формы поиска
-    // (фильм, который искали, и его длину), сохраняя в состояние
     setSavedSearch(search);
     localStorage.setItem("movie", JSON.stringify(search));
     localStorage.setItem("shorts", JSON.stringify(isCheck));
     localStorage.setItem("allmovies", JSON.stringify(movies));
 
-    setFilteredMovies(
-      movies.filter((movie) => {
-        const searchName =
-          movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(search.toLowerCase());
+    if (movies) {
+      setFilteredMovies(
+        movies.filter((movie) => {
+          const searchName =
+            movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+            movie.nameEN.toLowerCase().includes(search.toLowerCase());
 
-        // ищем короткометражки
-        return isCheck
-          ? searchName && movie.duration <= shortFilmDuration
-          : searchName;
-      })
-    );
-  }, []);
+          return isCheck
+            ? searchName && movie.duration <= shortFilmDuration
+            : searchName;
+        })
+      );
+    }
+  }, [shortFilmDuration]);
 
-  // getingFilms - запрашиваем с сервера данные и отрисовываем их
   const getingFilms = (search) => {
     if (allMoviesData.length === 0) {
       setIsLoading(true);
@@ -64,10 +61,14 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   };
 
   useEffect(() => {
-    if (localStorage.allmovies && localStorage.shorts && localStorage.movie) {
-      const movies = JSON.parse(localStorage.allmovies) || [];
-      const search = JSON.parse(localStorage.movie || " ");
-      const isCheck = JSON.parse(localStorage.shorts) || false;
+    if (
+      localStorage.allmovies &&
+      localStorage.shorts &&
+      localStorage.movie
+    ) {
+      const movies = JSON.parse(localStorage.getItem("allmovies"));
+      const search = JSON.parse(localStorage.getItem("movie")) || "";
+      const isCheck = JSON.parse(localStorage.getItem("shorts")) || false;
       setServerError(false);
       setFirstEntrance(false);
       setSavedSearch(search);
@@ -79,7 +80,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
 
   return (
     <>
-      <Header loggedIn={loggedIn} name="movies"/>
+      <Header loggedIn={loggedIn} name="movies" />
       <section className="movies">
         <SearchForm
           firstEntrance={firstEntrance}
@@ -99,7 +100,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
           toggleAddMovie={toggleAddMovie}
           cards={filteredMovies}
           serverError={serverError}
-       />
+        />
       </section>
       <Footer />
     </>

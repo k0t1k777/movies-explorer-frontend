@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import { useCallback, useEffect, useState } from "react";
 import ListFilms from "../Movies/ListFilms/ListFilms";
 
-export default function SavedFilms({ onDeleteMovie, savedMovies }) {
+export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   const shortFilmDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
@@ -40,6 +40,7 @@ export default function SavedFilms({ onDeleteMovie, savedMovies }) {
     filter(savedSearch, isCheck, savedMovies);
   }, [filter, savedMovies, isCheck, savedSearch]);
 
+  
   function getingFilms(search) {
     setFirstEntrance(false);
     setSavedSearch(search);

@@ -157,7 +157,6 @@ function App() {
         setIsLoading(false);
       });
   }
-
   // Profile
   function handleChangeProfile(name, email) {
     const token = getStoredToken();
