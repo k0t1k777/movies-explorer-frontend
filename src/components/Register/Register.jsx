@@ -21,13 +21,11 @@ export default function Register({ onRegister }) {
     } else {
       setNameError("");
     }
-
     if (!isEmailValid) {
       setEmailError("Введите корректный email-адрес.");
     } else {
       setEmailError("");
     }
-
     if (!isPasswordValid) {
       setPasswordError("Введите корректный пароль.");
     } else {

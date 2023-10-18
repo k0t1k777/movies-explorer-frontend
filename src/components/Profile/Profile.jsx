@@ -7,13 +7,25 @@ import CurrentUserContext from "../../contexts/contexts";
 export default function Profile({ isLoading, exit, handleChangeProfile }) {
   const currentUser = useContext(CurrentUserContext);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [name, setName] = React.useState(currentUser.name);
-  const [email, setEmail] = React.useState(currentUser.email);
+  const [name, setName] = React.useState(currentUser.name || '');
+  const [email, setEmail] = React.useState(currentUser.email || '');
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
+  // const [isFormValid, setIsFormValid] = useState(false)
+
+  // function checkFormValidity() {
+  //   const form = document.querySelector(".profile__form")
+  //   setIsFormValid(form.checkValidity())
+  // }
+
+  // useEffect(() => {
+  //   checkFormValidity()
+  //   console.log(isFormValid, name, email)
+  // })
 
   useEffect(() => {
     const storedloggedIn = localStorage.getItem("isLoggedIn");
+
     if (!storedloggedIn) {
       return;
     }

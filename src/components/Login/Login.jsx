@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import Logo from "../../../src/images/logo.svg";
 import { Link } from "react-router-dom";
-
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = React.useState("");
@@ -10,25 +9,38 @@ export default function Login({ onLogin }) {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (!isValidEmail(email)) {
-      setEmailError("Введите корректный email-адрес");
+  useEffect(() => {
+    let isEmailValid = isValidEmail(email);
+    let isPasswordValid = isValidPassword(email);
+
+    if (!isEmailValid) {
+      setEmailError("Введите корректный email-адрес.");
     } else {
       setEmailError("");
     }
-    if (password === "") {
-      setPasswordError("Введите пароль");
-    } else if (password.length < 8) {
-      setPasswordError("Пароль должен содержать не менее 8 символов");
-    } else if (!isValidPassword(password)) {
-      setPasswordError(
-        "Пароль должен содержать как минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ"
-      );
+    if (!isPasswordValid) {
+      setPasswordError("Введите корректный пароль.");
     } else {
       setPasswordError("");
-      onLogin(email, password);
     }
+  }, [email, password]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let isEmailValid = isValidEmail(email);
+    let isPasswordValid = isValidPassword(password);
+
+    if (!isEmailValid) {
+      setEmailError("Введите корректный email-адрес.");
+    } else {
+      setEmailError("");
+    }
+    if (!isPasswordValid) {
+      setPasswordError("Введите корректный пароль.");
+    } else {
+      setPasswordError("");
+    }
+    onLogin(email, password);
   }
 
   function isValidEmail(email) {
@@ -82,7 +94,13 @@ export default function Login({ onLogin }) {
             />
             <span className="login__error">{passwordError}</span>
           </label>
-          <button className="login__button" type="submit">
+          <button
+            className={`login__button ${
+              (!isValidEmail(email) || !isValidPassword(password)) &&
+              "login__button_disabled"
+            }`}
+            type={"submit"}
+          >
             Войти
           </button>
           <div className="login__container-enter">

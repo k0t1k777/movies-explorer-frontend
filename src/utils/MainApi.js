@@ -69,7 +69,39 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  createMovie(token, movieInfo) {
+  // createMovie(token, data) {
+  //   // console.log( data )
+  //   if (data && data.image && data.image.url) {
+  //     return fetch(`${this._url}/movies`, {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({
+  //         country: data.country,
+  //         director: data.director,
+  //         duration: data.duration,
+  //         year: data.year,
+  //         description: data.description,
+  //         image: `https://api.nomoreparties.co/${data.image.url}`,
+  //         // image: data.image.url,
+  //         trailerLink: data.trailerLink,
+  //         thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
+  //         // thumbnail: data.image.url,
+  //         movieId: data.id,
+  //         nameRU: data.nameRU,
+  //         nameEN: data.nameEN,
+  //       }),
+  //     }).then(this._checkResponse);
+  //   } else {
+  //     console.error("Ошибка: неверный формат объекта movie");
+  //     return Promise.reject("Ошибка: неверный формат объекта movie");
+  //   }
+  // }
+
+  createMovie(token, data) {
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
@@ -77,7 +109,20 @@ class MainApi {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ movieInfo }),
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: `https://api.nomoreparties.co/${data.image.url}`,
+        trailerLink: data.trailerLink,
+        thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
+        // thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+      }),
     }).then(this._checkResponse);
   }
 
@@ -85,6 +130,7 @@ class MainApi {
     return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },

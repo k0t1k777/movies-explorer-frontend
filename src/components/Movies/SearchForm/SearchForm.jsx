@@ -1,21 +1,46 @@
 import "./SearchForm.css";
+import { useState } from "react";
 import PicSearch from "../../../images/find.svg";
-
-export default function SearchForm() {
 
 // handleSearch ()
 // получишь список найденных фильмов - и сравншиь с likesMovies
 // вернешь список найденных и сохранишь
 
+export default function SearchForm({
+  // firstEntrance,
+  isCheck,
+  getingFilms,
+  savedSearch,
+  savedMovies,
+  filter,
+  setIsCheck,
+}) {
+
+  const [search, setSearch] = useState(savedSearch);
+
+  function handleSearchChange(event) {
+    setSearch(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    getingFilms(search);
+  }
+
+  function handleCheckboxChange() {
+    setIsCheck(!isCheck);
+    filter(search, !isCheck, savedMovies);
+  }
+
   return (
     <section className="findFilms">
-      <form className="findFilms__search" noValidate>
+      <form className="findFilms__search" noValidate onSubmit={handleSubmit}>
         <div className="findFilms__search-container">
           <input
             className="findFilms__input"
             type="text"
             placeholder="Фильм"
-            required
+            onChange={handleSearchChange}
           />
           <input
             className="findFilms__button"
@@ -30,6 +55,9 @@ export default function SearchForm() {
               className="findFilms__checkbox"
               type="checkbox"
               id="checkbox"
+              onChange={handleCheckboxChange}
+              checked={isCheck}
+              // disabled={firstEntrance}
             />
             <span className="findFilms__checkbox-span" />
             <span className="findFilms__checkbox-text">Короткометражки</span>
