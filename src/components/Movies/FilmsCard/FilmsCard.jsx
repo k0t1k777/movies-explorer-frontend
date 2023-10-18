@@ -29,7 +29,7 @@ export default function FilmsCard({
   }
 
   return (
-    <li className="listFilms__container">
+    <div className="listFilms__container">
       <Link to={movieData.trailerLink} className="listFilms__films" target="_blank">
         <img
           className="listFilms__img"
@@ -55,7 +55,7 @@ export default function FilmsCard({
         )}
       </div>
       <p className="listFilms__time">{setTime(movieData.duration)}</p>
-    </li>
+    </div>
   );
 }
 
