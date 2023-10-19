@@ -3,87 +3,52 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import "./Profile.css";
 import CurrentUserContext from "../../contexts/contexts";
+import useValidation from "../../components/hooks/useValidation";
 
-export default function Profile({ isLoading, exit, handleChangeProfile }) {
+export default function Profile({
+  handleChangeProfile,
+  exit,
+  isLoading,
+  messageState: [message, setMessage],
+}) {
   const currentUser = useContext(CurrentUserContext);
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [name, setName] = React.useState(currentUser.name || '');
-  const [email, setEmail] = React.useState(currentUser.email || '');
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  // const [isFormValid, setIsFormValid] = useState(false)
-
-  // function checkFormValidity() {
-  //   const form = document.querySelector(".profile__form")
-  //   setIsFormValid(form.checkValidity())
-  // }
-
-  // useEffect(() => {
-  //   checkFormValidity()
-  //   console.log(isFormValid, name, email)
-  // })
+  const { values, errors, isValid, handleChange, resetForm } = useValidation();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const storedloggedIn = localStorage.getItem("isLoggedIn");
-
     if (!storedloggedIn) {
       return;
     }
     setLoggedIn(true);
   }, [currentUser, loggedIn]);
 
+  //   // сброс сообщения api при повторном возвращении на страницу
   useEffect(() => {
-    let isNameValid = isValidName(name);
-    let isEmailValid = isValidEmail(email);
+    setMessage({});
+  }, [isValid, setMessage]);
 
-    if (!isNameValid) {
-      setNameError("Имя должно содержать от 2 до 30 символов. ");
-    } else {
-      setNameError("");
+  useEffect(() => {
+    if (
+      currentUser.name === values?.name ||
+      currentUser.email === values?.email
+    ) {
+      resetForm();
     }
+  }, [handleChange]);
 
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-  }, [name, email]);
+  function fetchInputChange(event) {
+    setMessage({});
+    handleChange(event);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let isNameValid = isValidName(name);
-    let isEmailValid = isValidEmail(email);
-
-    if (!isNameValid) {
-      setNameError("Имя должно содержать от 2 до 30 символов.");
-    } else {
-      setNameError("");
-    }
-
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-    handleChangeProfile(name, email);
-  }
-
-  function isValidName(name) {
-    let pattern = /^[a-zA-Zа-яА-ЯёЁ]{2,30}$/;
-    return pattern.test(name);
-  }
-
-  function isValidEmail(email) {
-    let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
-  }
-
-  function handleChangeName(event) {
-    setName(event.target.value);
-  }
-
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
+    handleChangeProfile(
+      values.name || currentUser.name,
+      values.email || currentUser.email,
+   );
+    resetForm();
   }
 
   return (
@@ -94,7 +59,10 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
           <h1 className="profile__name">{`Привет, ${
             currentUser ? currentUser.name : "Студент Яндекс практикума"
           }!`}</h1>
-          <form className="profile__form" noValidate onSubmit={handleSubmit}>
+          <form
+            className="profile__form"
+            noValidate
+          >
             <label className="profile__container">
               <span className="profile__span-name">Имя</span>
               <input
@@ -103,9 +71,10 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
                 type="text"
                 minLength="2"
                 maxLength="30"
-                value={name || currentUser.name}
+                value={values.name || currentUser.name}
                 required
-                onChange={handleChangeName}
+                onChange={fetchInputChange}
+                 disabled={isLoading}
               />
             </label>
             <label className="profile__container">
@@ -114,21 +83,29 @@ export default function Profile({ isLoading, exit, handleChangeProfile }) {
                 className="profile__input-email"
                 name="email"
                 type="email"
-                value={email || currentUser.email}
+                value={values.email || currentUser.email}
                 required
-                onChange={handleChangeEmail}
+                onChange={fetchInputChange}
+                disabled={isLoading}
               />
             </label>
-            <span className="profile__error">{nameError + emailError}</span>
+            <span className="profile__error">
+              {!errors && message.isSuccess
+                ? message.text
+                : errors.name || errors.email || message.text}
+            </span>
             <button
+              // className="profile__edit"
+              // disabled={!isValid || isLoading}
               className={`profile__edit ${
-                (!isValidName(name) || !isValidEmail(email)) &&
-                "profile__edit_disabled"
+                !isValid ? "profile__edit_disabled" : ""
               }`}
+              disabled={!isValid}
               type={"submit"}
-              disabled={!isValidName(name) || !isValidEmail(email) || isLoading}
+              onClick={handleSubmit}
+              
             >
-              Редактировать
+              {isLoading ? "Редактировать..." : "Редактировать"}
             </button>
           </form>
           <Link to={"/"} className="profile__exit">

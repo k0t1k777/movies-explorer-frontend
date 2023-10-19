@@ -19,6 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [currentUser, setCurrentUser] = useState({});
+  const [profileMessage, setProfileMessage] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
 
@@ -123,8 +124,39 @@ function App() {
       });
   }
   // Profile
+  // function handleChangeProfile(name, email) {
+  //   const token = getStoredToken();
+  //   MainApi.changeProfile(name, email, token)
+  //   console.log(name, email, token)
+
+  //     .then((data) => {
+  //       const updatedUser = {
+  //         name: data.name,
+  //         email: data.email,
+  //       };
+  //       setCurrentUser(updatedUser);
+  //       setProfileMessage({
+  //         text: `Вы обновили информацию о себе.`,
+  //         isSuccess: true,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       setProfileMessage({
+  //         text: `Ошибка обновления информации о пользователе: ${error}`,
+  //         isSuccess: false,
+  //       });
+  //     });
+  // }
+
   function handleChangeProfile(name, email) {
     const token = getStoredToken();
+    if (!token) {
+      setProfileMessage({
+        text: `Ошибка авторизации. Пожалуйста, авторизуйтесь заново.`,
+        isSuccess: false,
+      });
+      return;
+    }
     MainApi.changeProfile(name, email, token)
       .then((data) => {
         const updatedUser = {
@@ -132,9 +164,17 @@ function App() {
           email: data.email,
         };
         setCurrentUser(updatedUser);
+        // setMessage({});
+        setProfileMessage({
+          text: `Вы обновили информацию о себе.`,
+          isSuccess: true,
+        });
       })
       .catch((error) => {
-        console.log(`Ошибка обновления информации о пользователе: ${error}`);
+        setProfileMessage({
+          text: `Ошибка при обновлении профиля. Пожалуйста, попробуйте еще позже: ${error}`,
+          isSuccess: false,
+        });
       });
   }
 
@@ -145,40 +185,40 @@ function App() {
     navigate("/signup");
   }
 
-    // Фильмы
-    function handleDeleteMovie(deleteMovieId) {
-      const token = getStoredToken();
-      MainApi.deleteMovie(token, deleteMovieId)
-        .then(() => {
-          setSavedMovies(
-            savedMovies.filter((movie) => {
-              return movie._id !== deleteMovieId;
-            })
-          );
-        })
-        .catch((error) => console.error(`Ошибка удаления фильма ${error}`));
-    }
-  
-    function toggleAddMovie(data) {
-      const isLiked = savedMovies.some((movie) => movie.movieId === data.id);
-      if (isLiked) {
-        const clickedMovie = savedMovies.find(
-          (movie) => movie.movieId === data.id
-        );
-        if (clickedMovie) {
-          handleDeleteMovie(clickedMovie._id);
-        }
-      } else {
-        const token = getStoredToken();
-        MainApi.createMovie(token, data)
-          .then((res) => {
-            setSavedMovies([res, ...savedMovies]);
+  // Фильмы
+  function handleDeleteMovie(deleteMovieId) {
+    const token = getStoredToken();
+    MainApi.deleteMovie(token, deleteMovieId)
+      .then(() => {
+        setSavedMovies(
+          savedMovies.filter((movie) => {
+            return movie._id !== deleteMovieId;
           })
-          .catch((error) =>
-            console.error(`Ошибка при добавлении фильма ${error}`)
-          );
+        );
+      })
+      .catch((error) => console.error(`Ошибка удаления фильма ${error}`));
+  }
+
+  function toggleAddMovie(data) {
+    const isLiked = savedMovies.some((movie) => movie.movieId === data.id);
+    if (isLiked) {
+      const clickedMovie = savedMovies.find(
+        (movie) => movie.movieId === data.id
+      );
+      if (clickedMovie) {
+        handleDeleteMovie(clickedMovie._id);
       }
+    } else {
+      const token = getStoredToken();
+      MainApi.createMovie(token, data)
+        .then((res) => {
+          setSavedMovies([res, ...savedMovies]);
+        })
+        .catch((error) =>
+          console.error(`Ошибка при добавлении фильма ${error}`)
+        );
     }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -188,10 +228,24 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<Main loggedIn={loggedIn} />} />
-            <Route path="/signin" element={<Login onLogin={handleLogin} />} />
+            <Route
+              path="/signin"
+              element={
+                <Login
+                  onLogin={handleLogin}
+                  // messageState={[profileMessage, setProfileMessage]}
+                />
+              }
+            />
             <Route
               path="/signup"
-              element={<Register email={email} onRegister={handleRegister} />}
+              element={
+                <Register
+                  email={email}
+                  onRegister={handleRegister}
+                  // messageState={[profileMessage, setProfileMessage]}
+                />
+              }
             />
             <Route
               path="/profile"
@@ -201,6 +255,7 @@ function App() {
                   handleChangeProfile={handleChangeProfile}
                   exit={handleExit}
                   loggedIn={loggedIn}
+                  messageState={[profileMessage, setProfileMessage]}
                 />
               }
             />
