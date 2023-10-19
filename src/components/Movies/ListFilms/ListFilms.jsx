@@ -94,15 +94,15 @@ export default function ListFilms({
           })
         ) : serverError ? (
           <span className="listFilms__serch-error">
-            Во время запроса произошла ошибка. Пожалуйста, попробуйте позже.
+            Произошла ошибка. Пожалуйста, повторите позже.
           </span>
         ) : !firstEntrance ? (
-          <span className="listFilms__serch-error">Ничего не найдено</span>
+          <span className="listFilms__serch-error">404. Ничего не найдено.</span>
         ) : pathname === "/movies" ? (
-          <span className="listFilms__serch-error">Выполните поиск</span>
+          <span className="listFilms__serch-error">Выполните поиск.</span>
         ) : (
           <span className="listFilms__serch-error">
-            Нет сохранённых фильмов
+            Нет сохранённых фильмов.
           </span>
         )}
       </ul>

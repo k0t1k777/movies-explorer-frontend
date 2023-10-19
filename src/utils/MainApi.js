@@ -105,7 +105,7 @@ class MainApi {
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        // Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },

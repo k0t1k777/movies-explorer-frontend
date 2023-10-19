@@ -11,7 +11,6 @@ export default function SearchForm({
   isCheck,
   getingFilms,
   savedSearch,
-  savedMovies,
   filter,
   setIsCheck,
   // moviesData
@@ -30,8 +29,8 @@ export default function SearchForm({
 
   function handleCheckboxChange() {
     setIsCheck(!isCheck);
-    filter(search, !isCheck, savedMovies);
-    console.log(search, !isCheck, savedMovies)
+    filter(search, !isCheck);
+    console.log(search, !isCheck)
   }
 
   return (

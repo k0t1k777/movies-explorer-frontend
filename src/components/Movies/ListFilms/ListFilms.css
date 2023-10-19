@@ -105,11 +105,10 @@
 }
 
 .listFilms__serch-error {
-  display: grid;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
-  grid-column-start: 1;
-  grid-column-end: 4;
   font-size: 18px;
   font-weight: 500;
   line-height: normal;

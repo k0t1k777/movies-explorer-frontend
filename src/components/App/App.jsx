@@ -86,41 +86,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // Фильмы
-  function handleDeleteMovie(deleteMovieId) {
-    const token = getStoredToken();
-    MainApi.deleteMovie(deleteMovieId, token)
-      .then(() => {
-        setSavedMovies(
-          savedMovies.filter((movie) => {
-            return movie._id !== deleteMovieId;
-          })
-        );
-      })
-      .catch((error) => console.error(`Ошибка удаления фильма ${error}`));
-  }
-
-  function toggleAddMovie(data) {
-    const isLiked = savedMovies.some((movie) => movie.movieId === data.id);
-    if (isLiked) {
-      const clickedMovie = savedMovies.find(
-        (movie) => movie.movieId === data.id
-      );
-      if (clickedMovie) {
-        handleDeleteMovie(clickedMovie._id);
-      }
-    } else {
-      const token = getStoredToken();
-      MainApi.createMovie(token, data)
-        .then((res) => {
-          setSavedMovies([res, ...savedMovies]);
-        })
-        .catch((error) =>
-          console.error(`Ошибка при добавлении фильма ${error}`)
-        );
-    }
-  }
-
   // Регистрация
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
@@ -179,6 +144,41 @@ function App() {
     setEmail("");
     navigate("/signup");
   }
+
+    // Фильмы
+    function handleDeleteMovie(deleteMovieId) {
+      const token = getStoredToken();
+      MainApi.deleteMovie(token, deleteMovieId)
+        .then(() => {
+          setSavedMovies(
+            savedMovies.filter((movie) => {
+              return movie._id !== deleteMovieId;
+            })
+          );
+        })
+        .catch((error) => console.error(`Ошибка удаления фильма ${error}`));
+    }
+  
+    function toggleAddMovie(data) {
+      const isLiked = savedMovies.some((movie) => movie.movieId === data.id);
+      if (isLiked) {
+        const clickedMovie = savedMovies.find(
+          (movie) => movie.movieId === data.id
+        );
+        if (clickedMovie) {
+          handleDeleteMovie(clickedMovie._id);
+        }
+      } else {
+        const token = getStoredToken();
+        MainApi.createMovie(token, data)
+          .then((res) => {
+            setSavedMovies([res, ...savedMovies]);
+          })
+          .catch((error) =>
+            console.error(`Ошибка при добавлении фильма ${error}`)
+          );
+      }
+    }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
