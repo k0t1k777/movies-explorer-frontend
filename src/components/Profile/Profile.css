@@ -155,11 +155,11 @@
   cursor: pointer;
   width: 100%;
   height: 45px;
+  border-radius: 3px;
 }
 
 .profile__edit_disabled {
   background: #F8F8F8;
-  border-radius: 3px;
   color: #C2C2C2;
 }
 

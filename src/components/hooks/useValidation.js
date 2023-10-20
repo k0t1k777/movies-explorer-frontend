@@ -1,9 +1,9 @@
 import {useState} from 'react';
 
 export default function useValidate() {
+  const [isValid, setIsValid] = useState(false)
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(false)
 
   const handleChange = (event) => {
     const {name, value} = event.target
@@ -13,19 +13,19 @@ export default function useValidate() {
   };
 
   const resetForm = () => {
+    setIsValid(false);
     setValues({});
     setErrors({});
-    setIsValid(false)
   }
 
   return {
+    isValid,
     values,
     errors,
-    isValid,
-    setValues,
-    setErrors,
     setIsValid,
     handleChange,
-    resetForm
+    setValues,
+    resetForm,
+    setErrors,
   }
 }

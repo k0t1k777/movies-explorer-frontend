@@ -4,16 +4,22 @@ import Header from "../Header/Header";
 import "./Profile.css";
 import CurrentUserContext from "../../contexts/contexts";
 import useValidation from "../../components/hooks/useValidation";
+import { validationPattern } from "../../utils/constans";
 
 export default function Profile({
   handleChangeProfile,
   exit,
-  isLoading,
   messageState: [message, setMessage],
 }) {
-  const currentUser = useContext(CurrentUserContext);
-  const { values, errors, isValid, handleChange, resetForm } = useValidation();
   const [loggedIn, setLoggedIn] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
+  const {
+    handleChange,
+    values = {},
+    isValid,
+    resetForm,
+    errors,
+  } = useValidation();
 
   useEffect(() => {
     const storedloggedIn = localStorage.getItem("isLoggedIn");
@@ -23,21 +29,20 @@ export default function Profile({
     setLoggedIn(true);
   }, [currentUser, loggedIn]);
 
-  //   // сброс сообщения api при повторном возвращении на страницу
-  useEffect(() => {
-    setMessage({});
-  }, [isValid, setMessage]);
-
   useEffect(() => {
     if (
-      currentUser.name === values?.name ||
+      currentUser.name === values?.name &&
       currentUser.email === values?.email
     ) {
       resetForm();
     }
-  }, [handleChange]);
+  }, [handleChange, currentUser, resetForm, values]);
 
-  function fetchInputChange(event) {
+  useEffect(() => {
+    setMessage({});
+  }, [isValid, setMessage]);
+
+  function inputChange(event) {
     setMessage({});
     handleChange(event);
   }
@@ -46,8 +51,8 @@ export default function Profile({
     event.preventDefault();
     handleChangeProfile(
       values.name || currentUser.name,
-      values.email || currentUser.email,
-   );
+      values.email || currentUser.email
+    );
     resetForm();
   }
 
@@ -59,10 +64,7 @@ export default function Profile({
           <h1 className="profile__name">{`Привет, ${
             currentUser ? currentUser.name : "Студент Яндекс практикума"
           }!`}</h1>
-          <form
-            className="profile__form"
-            noValidate
-          >
+          <form className="profile__form" noValidate>
             <label className="profile__container">
               <span className="profile__span-name">Имя</span>
               <input
@@ -72,9 +74,10 @@ export default function Profile({
                 minLength="2"
                 maxLength="30"
                 value={values.name || currentUser.name}
-                required
-                onChange={fetchInputChange}
-                 disabled={isLoading}
+                placeholder="Имя"
+                required={true}
+                onChange={inputChange}
+                pattern={validationPattern.name}
               />
             </label>
             <label className="profile__container">
@@ -84,9 +87,10 @@ export default function Profile({
                 name="email"
                 type="email"
                 value={values.email || currentUser.email}
-                required
-                onChange={fetchInputChange}
-                disabled={isLoading}
+                placeholder="Почта"
+                required={true}
+                onChange={inputChange}
+                pattern={validationPattern.email}
               />
             </label>
             <span className="profile__error">
@@ -95,17 +99,14 @@ export default function Profile({
                 : errors.name || errors.email || message.text}
             </span>
             <button
-              // className="profile__edit"
-              // disabled={!isValid || isLoading}
               className={`profile__edit ${
                 !isValid ? "profile__edit_disabled" : ""
               }`}
               disabled={!isValid}
               type={"submit"}
               onClick={handleSubmit}
-              
             >
-              {isLoading ? "Редактировать..." : "Редактировать"}
+              Редактировать
             </button>
           </form>
           <Link to={"/"} className="profile__exit">

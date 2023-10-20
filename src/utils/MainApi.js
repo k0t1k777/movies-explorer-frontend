@@ -16,7 +16,7 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  register = (name, email, password) => {
+  register = ({ name, email, password }) => {
     return fetch(`${this._url}/signup`, {
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  login = (email, password) => {
+  login = ({ email, password }) => {
     return fetch(`${this._url}/signin`, {
       method: "POST",
       headers: {

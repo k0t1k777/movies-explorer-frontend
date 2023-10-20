@@ -1,89 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import Logo from "../../../src/images/logo.svg";
+import useValidation from "../../components/hooks/useValidation";
+import { validationPattern } from "../../utils/constans";
 
-export default function Register({ onRegister }) {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+export default function Register({
+  handleRegister,
+  isLoading,
+  messageState: [message, setMessage],
+}) {
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  useEffect(() => {
-    let isNameValid = isValidName(name);
-    let isEmailValid = isValidEmail(email);
-    let isPasswordValid = isValidPassword(email);
-
-    if (!isNameValid) {
-      setNameError("Имя должно содержать от 2 до 30 символов. ");
-    } else {
-      setNameError("");
-    }
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-    if (!isPasswordValid) {
-      setPasswordError("Введите корректный пароль.");
-    } else {
-      setPasswordError("");
-    }
-  }, [name, email, password]);
+  function inputChange(event) {
+    setMessage({});
+    handleChange(event);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let isNameValid = isValidName(name);
-    let isEmailValid = isValidEmail(email);
-    let isPasswordValid = isValidPassword(password);
-
-    if (!isNameValid) {
-      setNameError("Имя должно содержать от 2 до 30 символов.");
-    } else {
-      setNameError("");
-    }
-
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-
-    if (!isPasswordValid) {
-      setPasswordError("Введите корректный пароль.");
-    } else {
-      setPasswordError("");
-    }
-    onRegister(name, email, password);
-  }
-
-  function isValidName(name) {
-    let pattern = /^[a-zA-Zа-яА-ЯёЁ]{2,30}$/;
-    return pattern.test(name);
-  }
-
-  function isValidEmail(email) {
-    let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
-  }
-
-  function isValidPassword(password) {
-    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}/;
-    return pattern.test(password);
-  }
-
-  function handleChangeName(event) {
-    setName(event.target.value);
-  }
-
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
-  }
-
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
+    handleRegister({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   }
 
   return (
@@ -97,49 +37,65 @@ export default function Register({ onRegister }) {
           <label className="register__container">
             <span className="register__span-name">Имя</span>
             <input
+              name="name"
               className="register__input-name"
               type="text"
-              placeholder="Виталий"
+              value={values.name || ""}
+              placeholder="Ваше имя"
+              pattern={validationPattern.name}
               minLength="2"
               maxLength="30"
               required={true}
-              onChange={handleChangeName}
+              onChange={inputChange}
             />
-            <span className="register__error">{nameError}</span>
+            <span className="register__error">
+              {errors.name}
+            </span>
           </label>
           <label className="register__container">
             <span className="register__span-name">E-mail</span>
             <input
+              name="email"
               className="register__input-email"
               type="email"
-              placeholder="pochta@yandex.ru"
-              value={email}
+              placeholder="Ваш email"
+              pattern={validationPattern.email}
+              value={values.email || ""}
               required={true}
-              onChange={handleChangeEmail}
+              onChange={inputChange}
             />
-            <span className="register__error">{emailError}</span>
+            <span className="register__error">
+              {errors.email}
+            </span>
           </label>
           <label className="register__container">
             <span className="register__span-name">Пароль</span>
             <input
+              name="password"
               className="register__input-password"
               type="password"
-              placeholder="••••••••••••••"
+              placeholder="Ваш пароль"
               maxLength="30"
-              value={password}
+              value={values.password || ""}
+              pattern={validationPattern.password}
               required={true}
-              onChange={handleChangePassword}
+              onChange={inputChange}
             />
-            <span className="register__error">{passwordError}</span>
+            <span className="register__error">
+              {/* {errors.password || message.text} */}
+              {
+              !errors && message.isSuccess
+                ? message.text
+                : errors.password || message.text
+            }
+            </span>
           </label>
           <button
             className={`register__button ${
-              (!isValidName(name) ||
-                !isValidEmail(email) ||
-                !isValidPassword(password)) &&
-              "register__button_disabled"
+              isValid || isLoading ? "" : "register__button_disabled"
             }`}
             type={"submit"}
+            disabled={!isValid || isLoading}
           >
             Зарегистрироваться
           </button>

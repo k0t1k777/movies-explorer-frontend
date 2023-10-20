@@ -1,64 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Login.css";
 import Logo from "../../../src/images/logo.svg";
 import { Link } from "react-router-dom";
+import useValidation from "../../components/hooks/useValidation";
+import { validationPattern } from "../../utils/constans";
 
-export default function Login({ onLogin }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+export default function Login({
+  handleLogin,
+  isLoading,
+  messageState: [message, setMessage],
+}) {
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  useEffect(() => {
-    let isEmailValid = isValidEmail(email);
-    let isPasswordValid = isValidPassword(email);
-
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-    if (!isPasswordValid) {
-      setPasswordError("Введите корректный пароль.");
-    } else {
-      setPasswordError("");
-    }
-  }, [email, password]);
+  function inputChange(event) {
+    setMessage({});
+    handleChange(event);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let isEmailValid = isValidEmail(email);
-    let isPasswordValid = isValidPassword(password);
-
-    if (!isEmailValid) {
-      setEmailError("Введите корректный email-адрес.");
-    } else {
-      setEmailError("");
-    }
-    if (!isPasswordValid) {
-      setPasswordError("Введите корректный пароль.");
-    } else {
-      setPasswordError("");
-    }
-    onLogin(email, password);
-  }
-
-  function isValidEmail(email) {
-    let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return pattern.test(email);
-  }
-
-  function isValidPassword(password) {
-    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}/;
-    return pattern.test(password);
-  }
-
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
-  }
-
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
+    handleLogin({
+      email: values.email,
+      password: values.password,
+    });
   }
 
   return (
@@ -73,33 +37,43 @@ export default function Login({ onLogin }) {
             <span className="login__span-name">E-mail</span>
             <input
               className="login__input-email"
+              name="email"
               type="email"
-              placeholder="pochta@yandex.ru"
-              value={email}
+              placeholder="Ваш email"
+              value={values.email ? values.email : ""}
               required={true}
-              onChange={handleChangeEmail}
+              onChange={inputChange}
+              pattern={validationPattern.email}
             />
-            <span className="login__error">{emailError}</span>
+            <span className="login__error">{errors.email}</span>
           </label>
           <label>
             <span className="login__span-name">Пароль</span>
             <input
               className="login__input-password"
+              name="password"
               type="password"
-              placeholder="••••••••••••••"
+              placeholder="Ваш пароль"
               maxLength="30"
-              value={password}
+              value={values.password ? values.password : ""}
               required={true}
-              onChange={handleChangePassword}
+              onChange={inputChange}
+              pattern={validationPattern.password}
             />
-            <span className="login__error">{passwordError}</span>
+            <span className="login__error">
+              {
+              !errors && message.isSuccess
+                ? message.text
+                : errors.password || message.text
+            }
+             </span>
           </label>
           <button
             className={`login__button ${
-              (!isValidEmail(email) || !isValidPassword(password)) &&
-              "login__button_disabled"
+              isValid || isLoading ? "" : "login__button_disabled"
             }`}
             type={"submit"}
+            disabled={!isValid || isLoading}
           >
             Войти
           </button>

@@ -17,8 +17,8 @@ import Preloader from "../Preloader/Preloader";
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState("");
   const [currentUser, setCurrentUser] = useState({});
+  const [authMessage, setAuthMessage] = useState({});
   const [profileMessage, setProfileMessage] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -52,9 +52,6 @@ function App() {
       return;
     }
     storeLoggedIn(true);
-    const storedLoggedIn = getStoredLoggedIn();
-    console.log(storedLoggedIn);
-    // вот тут меняется состояние loggenIn на true - и мы запускаем useEffect ниже!
     setLoggedIn(true);
   }, []);
 
@@ -66,15 +63,11 @@ function App() {
       "получили состояние пользователя из памяти и оно",
       storedLoggedIn
     );
-
     if (!storedLoggedIn) {
       console.log("пользователь вышел");
       return;
     }
-
     const token = getStoredToken();
-    // console.log("токен перед запросом пользователя", token);
-
     if (storedLoggedIn) {
       Promise.all([MainApi.getUserToken(token), MainApi.getMovies(token)])
         .then(([infoUser, infoMovies]) => {
@@ -88,66 +81,50 @@ function App() {
   }, [loggedIn]);
 
   // Регистрация
-  function handleRegister(name, email, password) {
-    MainApi.register(name, email, password)
+  function handleRegister({ name, email, password }) {
+    MainApi.register({ name, email, password })
       .then((data) => {
         if (data) {
+          setIsLoading(true);
+          // setAuthMessage({
+          //   text: `Вы успешно зарегестрировались`,
+          //   isSuccess: true,
+          // })   
           navigate("/signin");
         }
       })
       .catch((error) => {
-        console.log(`Ошибка регистрации ${error}`);
-      });
-  }
+        setAuthMessage({
+          text: `Ошибка регистрации ${error}`,
+          isSuccess: false,
+        })        
+      })
+  .finally(() => setIsLoading(false))
+}
 
   // Логин
-  function handleLogin(email, password) {
-    setIsLoading(true);
-    MainApi.login(email, password)
+  function handleLogin({ email, password }) {
+    MainApi.login({ email, password })
       .then((data) => {
         if (data.token) {
-          setEmail(email);
-          console.log("токен есть, запоминаем сотояние пользоветля");
           storeLoggedIn(true);
-          const storedLoggedIn = getStoredLoggedIn();
-          console.log("и оно ", storedLoggedIn);
           setLoggedIn(true);
-          console.log("а еще мы запомнили значение токена");
           storeToken(data.token);
-          setIsLoading(false);
+          setAuthMessage({
+            text: `Вы успешно вошли!`,
+            isSuccess: true,
+          });
           navigate("/movies");
         }
       })
       .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
+        setAuthMessage({
+          text: `Ошибка входа: ${error}`,
+          isSuccess: false,
+        });
       });
   }
-  // Profile
-  // function handleChangeProfile(name, email) {
-  //   const token = getStoredToken();
-  //   MainApi.changeProfile(name, email, token)
-  //   console.log(name, email, token)
-
-  //     .then((data) => {
-  //       const updatedUser = {
-  //         name: data.name,
-  //         email: data.email,
-  //       };
-  //       setCurrentUser(updatedUser);
-  //       setProfileMessage({
-  //         text: `Вы обновили информацию о себе.`,
-  //         isSuccess: true,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       setProfileMessage({
-  //         text: `Ошибка обновления информации о пользователе: ${error}`,
-  //         isSuccess: false,
-  //       });
-  //     });
-  // }
-
+  // Профиль
   function handleChangeProfile(name, email) {
     const token = getStoredToken();
     if (!token) {
@@ -164,7 +141,6 @@ function App() {
           email: data.email,
         };
         setCurrentUser(updatedUser);
-        // setMessage({});
         setProfileMessage({
           text: `Вы обновили информацию о себе.`,
           isSuccess: true,
@@ -172,7 +148,7 @@ function App() {
       })
       .catch((error) => {
         setProfileMessage({
-          text: `Ошибка при обновлении профиля. Пожалуйста, попробуйте еще позже: ${error}`,
+          text: `Ошибка при обновлении профиля: ${error}`,
           isSuccess: false,
         });
       });
@@ -181,7 +157,7 @@ function App() {
   function handleExit() {
     localStorage.clear();
     setLoggedIn(false);
-    setEmail("");
+    // setSavedMovies([])
     navigate("/signup");
   }
 
@@ -232,8 +208,9 @@ function App() {
               path="/signin"
               element={
                 <Login
-                  onLogin={handleLogin}
-                  // messageState={[profileMessage, setProfileMessage]}
+                  isLoading={isLoading}
+                  handleLogin={handleLogin}
+                  messageState={[authMessage, setAuthMessage]}
                 />
               }
             />
@@ -241,9 +218,9 @@ function App() {
               path="/signup"
               element={
                 <Register
-                  email={email}
-                  onRegister={handleRegister}
-                  // messageState={[profileMessage, setProfileMessage]}
+                  isLoading={isLoading}
+                  handleRegister={handleRegister}
+                  messageState={[authMessage, setAuthMessage]}
                 />
               }
             />
