@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 export default function useValidate() {
   const [isValid, setIsValid] = useState(false)
@@ -18,6 +18,13 @@ export default function useValidate() {
     setErrors({});
   }
 
+  const reset = useCallback((data = {}) => {
+    setValues(data)
+    setErrors({})
+    setIsValid({})
+    setIsValid(false)
+  },[])
+
   return {
     isValid,
     values,
@@ -25,6 +32,7 @@ export default function useValidate() {
     setIsValid,
     handleChange,
     setValues,
+    reset,
     resetForm,
     setErrors,
   }

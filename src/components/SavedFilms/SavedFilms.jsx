@@ -13,23 +13,24 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   const [savedSearch, setSavedSearch] = useState("");
   const [isCheck, setIsCheck] = useState(false);
   const [firstEntrance, setFirstEntrance] = useState(true);
+  // const [serverError, setServerError] = useState("");
 
   const filter = useCallback((search, isCheck, movies) => {
-    setSavedSearch(search);
-    // console.log(Array.isArray(movies));
-    setFilteredMovies(
+    // console.log('получили список фильмаов', movies)
+     setFilteredMovies(
       movies.filter((movie) => {
+        // console.log(movies)
         const searchName =
-          movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(search.toLowerCase());
-
-        // если мы ищем короткометражки, то проверяем и имя и продолжительность, иначе только имя
+          movie.data.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+          movie.data.nameEN.toLowerCase().includes(search.toLowerCase());
+          // console.log(movie.data.nameRU, movie.data.nameEN);
         return isCheck
-          ? searchName && movie.duration <= shortFilmDuration
+          ? searchName && movie.data.duration <= shortFilmDuration
           : searchName;
       })
-    );
-  }, []);
+    );  
+  }, [shortFilmDuration]);
+  // }, [shortFilmDuration]);
 
   useEffect(() => {
     if (savedMovies.length === 0) {
@@ -40,16 +41,18 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
     filter(savedSearch, isCheck, savedMovies);
   }, [filter, savedMovies, isCheck, savedSearch]);
 
-  
   function getingFilms(search) {
     setFirstEntrance(false);
-    setSavedSearch(search);
+    // местами поменял ниже
     filter(search, isCheck, savedMovies);
+    setSavedSearch(search);
+    // console.log(savedMovies)
   }
+
   return (
     <>
       <Header loggedIn={loggedIn} name="movies" />
-      <main >
+      <main>
         <SearchForm
           isCheck={isCheck}
           getingFilms={getingFilms}
@@ -64,9 +67,15 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
           name="saved-movies"
           cards={filteredMovies}
           onDeleteMovie={onDeleteMovie}
+          // serverError={serverError}
         />
+        {/* {serverError && (
+          // сделать класс
+          <p className="savedFilms__error">{serverError}</p>
+        )} */}
       </main>
       <Footer />
     </>
   );
 }
+

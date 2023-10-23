@@ -8,13 +8,13 @@
 
 @media screen and (max-width: 780px) {
   .footer {
-    padding: 60px 30px 20px;
+    padding: 79px 30px 20px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .footer {
-    padding: 60px 10px 20px;
+    padding: 79px 10px 20px;
   }
 }
 

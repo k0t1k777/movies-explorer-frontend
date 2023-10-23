@@ -45,7 +45,7 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  changeProfile = (name, email, token) => {
+  changeProfile = ({ name, email, token }) => {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
@@ -69,11 +69,11 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  createMovie(token, data) {
+  createMovie(data, token) {
+    // console.log("createMovie говорит:", data);
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
@@ -94,12 +94,15 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  deleteMovie(token, id) {
-    return fetch(`${this._url}/movies/${id}`, {
+  // deleteMovie({ token, id }) {
+  //   return fetch(`${this._url}/movies/${id}`, {
+  deleteMovie( movieId, token ) {
+    // console.log("api говорит:", token, movieId);
+    return fetch(`${this._url}/movies/${movieId}`, {
       method: "DELETE",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        // Accept: "application/json",
+        // "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkResponse);

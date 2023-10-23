@@ -2,22 +2,20 @@
   margin: 0 auto;
   box-sizing: border-box;
   width: 100%;
-  padding: 70px 70px 10px;
-  flex: 1 0 auto;
+  padding: 70px 70px 0;
   min-height: 598px;
   background-color: #202020;
-  flex: 1;
 }
 
 @media screen and (max-width: 780px) {
   .listFilms {
-    padding: 70px 30px 30px;
+    padding: 70px 30px 0;
   }
 }
 
 @media screen and (max-width: 520px) {
   .listFilms {
-    padding: 40px 10px 26px;
+    padding: 40px 10px 0;
   }
 }
 
@@ -27,19 +25,21 @@
   gap: 37px 24px;
   justify-items: stretch;
   list-style: none;
-  padding: 0;
+  padding: 0 0 10px;
   margin: 0;
 }
 
 @media screen and (max-width: 780px) {
   .listFilms__list {
     gap: 30px;
+    padding: 0 0 30px;
   }
 }
 
 @media screen and (max-width: 520px) {
   .listFilms__list {
     gap: 14px;
+    padding: 0 0 26px;
   }
 }
 
@@ -53,13 +53,7 @@
 
 @media screen and (max-width: 780px) {
   .listFilms__wrap {
-    padding: 50px 30px 80px;
-  }
-}
-
-@media screen and (max-width: 780px) {
-  .listFilms__wrap {
-    padding: 50px 10px 80px;
+    padding: 50px 0 80px;
   }
 }
 
@@ -83,25 +77,6 @@
   opacity: 0.8;
   transition: opacity 0.7s;
   cursor: pointer;
-}
-
-.listFilms__img {
-  width: 100%;
-  height: 203px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-@media screen and (max-width: 780px) {
-  .listFilms__img {
-    height: 190px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .listFilms__img {
-    height: 168px;
-  }
 }
 
 .listFilms__serch-error {

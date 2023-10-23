@@ -1,52 +1,72 @@
+import { useEffect } from "react";
+// import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
-import { useState } from "react";
-import PicSearch from "../../../images/find.svg";
-
-// handleSearch ()
-// получишь список найденных фильмов - и сравншиь с likesMovies
-// вернешь список найденных и сохранишь
+import useValidation from "../../../components/hooks/useValidation";
 
 export default function SearchForm({
-  // firstEntrance,
+  name,
+  firstEntrance,
   isCheck,
   getingFilms,
-  savedSearch,
   filter,
   setIsCheck,
-  // moviesData
+  moviesData
 }) {
+  const { values, handleChange, reset } = useValidation();
 
-  const [search, setSearch] = useState(savedSearch);
-
-  function handleSearchChange(event) {
-    setSearch(event.target.value);
+// Загрузка значения из localStorage при первой загрузке компонента
+useEffect(() => {
+  const savedSearch = localStorage.getItem("searchInputValue");
+  if (savedSearch && name === "movies") {
+    reset({ searchInput: savedSearch });
+  } else {
+    reset({ searchInput: "" });
   }
+}, [reset, name]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    getingFilms(search);
+function changeShort() {
+  if (isCheck) {
+    setIsCheck(false);
+    filter(values.searchInput, false, moviesData);
+  } else {
+    setIsCheck(true);
+    filter(values.searchInput, true, moviesData);
   }
+  // Сохраняем значение поиска в localStorage при изменении чекбокса
+  if (name === "movies") {
+    localStorage.setItem("searchInputValue", values.searchInput || "");
+  }
+}
 
-  function handleCheckboxChange() {
-    setIsCheck(!isCheck);
-    filter(search, !isCheck);
-    console.log(search, !isCheck)
+function onSubmit(evt) {
+  evt.preventDefault();
+  const searchInputValue = evt.target.searchInput.value;
+  getingFilms(evt.target.searchInput.value);
+  if (searchInputValue && name === "movies") {
+    // Сохраняем значение поиска в localStorage
+    localStorage.setItem("searchInputValue", searchInputValue);
   }
+}
 
   return (
     <section className="findFilms">
-      <form className="findFilms__search" noValidate onSubmit={handleSubmit}>
+      <form className="findFilms__search" noValidate onSubmit={onSubmit}>
         <div className="findFilms__search-container">
           <input
             className="findFilms__input"
             type="text"
             placeholder="Фильм"
-            onChange={handleSearchChange}
+            name="searchInput"
+            id="searchInput"
+            value={values.searchInput || ""}
+            required
+            onChange={(evt) => {
+              handleChange(evt);
+            }}
           />
-          <input
+          <button
             className="findFilms__button"
-            type="image"
-            src={PicSearch}
+            type="submit"
             alt="Иконка поиска"
           />
         </div>
@@ -54,11 +74,12 @@ export default function SearchForm({
           <label className="findFilms__checkbox-label">
             <input
               className="findFilms__checkbox"
+              name="checkbox"
               type="checkbox"
               id="checkbox"
-              onChange={handleCheckboxChange}
               checked={isCheck}
-              // disabled={firstEntrance}
+              onChange={() => changeShort()}
+              disabled={firstEntrance}
             />
             <span className="findFilms__checkbox-span" />
             <span className="findFilms__checkbox-text">Короткометражки</span>

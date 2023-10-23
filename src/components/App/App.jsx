@@ -40,7 +40,7 @@ function App() {
   }
 
   function storeToken(value) {
-    console.log(value);
+    // console.log(value);
     localStorage.setItem("jwt", value);
   }
 
@@ -56,25 +56,43 @@ function App() {
   }, []);
 
   // при смене состояния loggedIn проверяем, если оно false - ничего не делаем
-  // а если оно true, то лезем обновлять ниформацию о currecntUser
+  // а если оно true, то обновляем ниформацию о currentUser
   useEffect(() => {
     const storedLoggedIn = getStoredLoggedIn();
-    console.log(
-      "получили состояние пользователя из памяти и оно",
-      storedLoggedIn
-    );
+    // console.log(
+    //   "получили состояние пользователя из памяти и оно",
+    //   storedLoggedIn
+    // );
     if (!storedLoggedIn) {
-      console.log("пользователь вышел");
+      // console.log("пользователь вышел");
       return;
     }
-    const token = getStoredToken();
+        const token = getStoredToken();
     if (storedLoggedIn) {
       Promise.all([MainApi.getUserToken(token), MainApi.getMovies(token)])
         .then(([infoUser, infoMovies]) => {
+          // console.log(infoMovies)
           setCurrentUser(infoUser);
-          if (infoMovies && infoMovies.movies) {
-            setSavedMovies(infoMovies.movies.reverse());
-          }
+          // setSavedMovies(infoMovies);
+          // вот тут ты получаешь список фильмов и статы пользователя
+          // далее с этим списком фильмов работаешь. Прям жележно должно работать. Добивайся этого
+          // if (infoMovies && infoMovies.movies) {
+          //   setSavedMovies(infoMovies.movies.reverse());
+          // }
+
+          // setSavedMovies(infoMovies(savedMovies));
+
+          // if (infoMovies.length !== 0) {
+          //   setSavedMovies(infoMovies)
+          // } else {
+          //   setSavedMovies([]);
+          // }
+
+          // setSavedMovies(infoMovies);
+          // localStorage.setItem('savedMovies', JSON.stringify(infoMovies));
+
+          
+          console.log('зашел и получил', 'ничего', savedMovies)
         })
         .catch((error) => console.error(`Ошибка ${error}`));
     }
@@ -86,10 +104,6 @@ function App() {
       .then((data) => {
         if (data) {
           setIsLoading(true);
-          // setAuthMessage({
-          //   text: `Вы успешно зарегестрировались`,
-          //   isSuccess: true,
-          // })   
           navigate("/signin");
         }
       })
@@ -97,10 +111,10 @@ function App() {
         setAuthMessage({
           text: `Ошибка регистрации ${error}`,
           isSuccess: false,
-        })        
+        });
       })
-  .finally(() => setIsLoading(false))
-}
+      .finally(() => setIsLoading(false));
+  }
 
   // Логин
   function handleLogin({ email, password }) {
@@ -124,6 +138,7 @@ function App() {
         });
       });
   }
+
   // Профиль
   function handleChangeProfile(name, email) {
     const token = getStoredToken();
@@ -134,7 +149,7 @@ function App() {
       });
       return;
     }
-    MainApi.changeProfile(name, email, token)
+    MainApi.changeProfile({ name, email, token })
       .then((data) => {
         const updatedUser = {
           name: data.name,
@@ -162,9 +177,10 @@ function App() {
   }
 
   // Фильмы
-  function handleDeleteMovie(deleteMovieId) {
+  function handleDeleteMovie( deleteMovieId ) {
     const token = getStoredToken();
     MainApi.deleteMovie(token, deleteMovieId)
+    // console.log("app.deleteMovie говорит:", token, deleteMovieId)
       .then(() => {
         setSavedMovies(
           savedMovies.filter((movie) => {
@@ -176,19 +192,28 @@ function App() {
   }
 
   function toggleAddMovie(data) {
-    const isLiked = savedMovies.some((movie) => movie.movieId === data.id);
-    if (isLiked) {
+    // console.log("app.toggleAddMovie говорит:", data)
+    // console.log(data, savedMovies)
+    // фигня с сохраненными фильмами, ты передаешь дальше пустой список
+    // надо 
+    // получить перечень сохранных фильмов. здесь
+    const isMovieLiked  = savedMovies.some((movie) => movie.id  === data.movieId);
+    // console.log("app.toggleAddMovie говорит:", isMovieLiked)
+    if (isMovieLiked ) {
       const clickedMovie = savedMovies.find(
-        (movie) => movie.movieId === data.id
+        (movie) => movie.movieId  === data.id,
       );
+      // console.log("app.isLiked говорит:", clickedMovie)
       if (clickedMovie) {
         handleDeleteMovie(clickedMovie._id);
       }
     } else {
       const token = getStoredToken();
-      MainApi.createMovie(token, data)
+      MainApi.createMovie( data, token )
+            // console.log("app.createMovie говорит:", data)
         .then((res) => {
           setSavedMovies([res, ...savedMovies]);
+          // console.log("app.isLiked говорит:", savedMovies)
         })
         .catch((error) =>
           console.error(`Ошибка при добавлении фильма ${error}`)

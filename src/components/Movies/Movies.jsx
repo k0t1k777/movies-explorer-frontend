@@ -10,36 +10,39 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   const shortFilmDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [isLoading, setIsLoading] = useState(false);
-
   const [allMoviesData, setAllMoviesData] = useState([]);
   const [firstEntrance, setFirstEntrance] = useState(true);
   const [isCheck, setIsCheck] = useState(false);
-
   const [savedSearch, setSavedSearch] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [serverError, setServerError] = useState(false);
 
   const filter = useCallback((search, isCheck, movies) => {
+    // console.log("app.toggleAddMovie говорит:", savedMovies)
+    // console.log(movies)
     setSavedSearch(search);
     localStorage.setItem("movie", JSON.stringify(search));
     localStorage.setItem("shorts", JSON.stringify(isCheck));
     localStorage.setItem("allmovies", JSON.stringify(movies));
+    // console.log("search говорит:", movies)
+    setFilteredMovies(
+      movies.filter((movie) => {
+        const searchName =
+          movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(search.toLowerCase());
+                  // console.log(movie.nameRU, movie.nameEN);
 
-    if (movies) {
-      setFilteredMovies(
-        movies.filter((movie) => {
-          const searchName =
-            movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(search.toLowerCase());
+        // если мы ищем короткометражки, то проверяем и имя и продолжительность,
+        //  иначе только имя
+        return isCheck
+          ? searchName && movie.duration <= shortFilmDuration
+          : searchName;
+      })
+    );
+  }, []);
+// }, [shortFilmDuration]);
 
-          return isCheck
-            ? searchName && movie.duration <= shortFilmDuration
-            : searchName;
-        })
-      );
-    }
-  }, [shortFilmDuration]);
-
+  // getingFilms - запрашиваем с сервера данные и отрисовываем их
   const getingFilms = (search) => {
     if (allMoviesData.length === 0) {
       setIsLoading(true);
@@ -50,9 +53,9 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
           setFirstEntrance(false);
           filter(search, isCheck, res);
         })
-        .catch((err) => {
+        .catch((error) => {
           setServerError(true);
-          console.error(`Ошибка при поиске фильмов ${err}`);
+          console.error(`Ошибка при поиске фильмов ${error}`);
         })
         .finally(() => setIsLoading(false));
     } else {
@@ -61,28 +64,46 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   };
 
   useEffect(() => {
-    if (
-      localStorage.allmovies &&
-      localStorage.shorts &&
-      localStorage.movie
-    ) {
-      const movies = JSON.parse(localStorage.getItem("allmovies"));
-      const search = JSON.parse(localStorage.getItem("movie")) || "";
-      const isCheck = JSON.parse(localStorage.getItem("shorts")) || false;
+    if (localStorage.allmovies && localStorage.shorts && localStorage.movie) {
+      const movies = JSON.parse(localStorage.allmovies) || [];
+      const search = JSON.parse(localStorage.movie || " ");
+      const isCheck = JSON.parse(localStorage.shorts) || false;
       setServerError(false);
       setFirstEntrance(false);
       setSavedSearch(search);
       setIsCheck(isCheck);
       setAllMoviesData(movies);
       filter(search, isCheck, movies);
+      // console.log(movies)
     }
   }, [filter]);
+
+  // useEffect(() => {
+  //   if (
+  //     localStorage.allmovies &&
+  //     localStorage.shorts &&
+  //     localStorage.movie
+  //   ) {
+  //     const movies = JSON.parse(localStorage.getItem("allmovies"));
+  //     const search = JSON.parse(localStorage.getItem("movie")) || "";
+  //     const isCheck = JSON.parse(localStorage.getItem("shorts")) || false;
+  //     // console.log("useEffect говорит:", search, isCheck, movies)
+  //     setServerError(false);
+  //     setFirstEntrance(false);
+  //     setSavedSearch(search);
+  //     setIsCheck(isCheck);
+  //     setAllMoviesData(movies);
+  //     filter(search, isCheck, movies);
+  //     // console.log("useEffect говорит:", search, isCheck, movies)
+  //   }
+  // }, [filter]);
 
   return (
     <>
       <Header loggedIn={loggedIn} name="movies" />
       <section className="movies">
         <SearchForm
+          name={name}
           firstEntrance={firstEntrance}
           moviesData={allMoviesData}
           getingFilms={getingFilms}
@@ -90,7 +111,6 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
           isCheck={isCheck}
           setIsCheck={setIsCheck}
           filter={filter}
-          name={name}
         />
         <ListFilms
           name="movies"
