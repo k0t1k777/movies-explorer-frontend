@@ -21,40 +21,7 @@ export default function ListFilms({
   serverError,
 }) {
   const { pathname } = useLocation();
-  const [visibleCards, setVisibleCards] = useState(0);
-
-  useEffect(() => {
-    const changeCards = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth >= 1280) {
-        setVisibleCards(cardsBigScreen);
-      } else if (screenWidth >= 768) {
-        setVisibleCards(cardsMediumScreen);
-      } else if (screenWidth >= 540) {
-        setVisibleCards(cardsSmallScreen);
-      } else {
-        setVisibleCards(cardsSmallScreen);
-      }
-    };
-    changeCards();
-    window.addEventListener("resize", changeCards);
-    return () => {
-      window.removeEventListener("resize", changeCards);
-    };
-  }, []);
-
-  const handleShowMore = () => {
-    const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
-      setVisibleCards(visibleCards + cardsAdd);
-    } else if (screenWidth >= 780) {
-      setVisibleCards(visibleCards + cardsAdd - 1);
-    } else if (screenWidth >= 540) {
-      setVisibleCards(visibleCards + cardsAdd - 1);
-    } else {
-      setVisibleCards(visibleCards + cardsAdd - 1);
-    }
-  };
+  const [visibleMovies, setVisibleMovies] = useState(0);
 
   // проверяем, есть ли фильм в ранее добавленных в избранное пользователем
   function setLiked(card) {
@@ -67,13 +34,47 @@ export default function ListFilms({
     return liked;
   }
 
+  useEffect(() => {
+    const changeCards = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 1280) {
+        setVisibleMovies(cardsBigScreen);
+      } else if (screenWidth >= 768) {
+        setVisibleMovies(cardsMediumScreen);
+      } else if (screenWidth >= 540) {
+        setVisibleMovies(cardsSmallScreen);
+      } else {
+        setVisibleMovies(cardsSmallScreen);
+      }
+    };
+    changeCards();
+    window.addEventListener("resize", changeCards);
+    return () => {
+      window.removeEventListener("resize", changeCards);
+    };
+  }, []);
+
+  // Добавление новых фильмов
+  const handleShowMore = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 1280) {
+      setVisibleMovies(visibleMovies + cardsAdd);
+    } else if (screenWidth >= 780) {
+      setVisibleMovies(visibleMovies + cardsAdd - 1);
+    } else if (screenWidth >= 540) {
+      setVisibleMovies(visibleMovies + cardsAdd - 1);
+    } else {
+      setVisibleMovies(visibleMovies + cardsAdd - 1);
+    }
+  };
+
   return (
     <section className="listFilms">
       <ul className="listFilms__list">
         {isLoading ? (
           <Preloader />
         ) : name === "movies" && cards.length !== 0 ? (
-          cards.slice(0, visibleCards).map((card) => {
+          cards.slice(0, visibleMovies).map((card) => {
             return (
               <li key={card.id}>
                 <FilmsCard
@@ -111,7 +112,7 @@ export default function ListFilms({
           </span>
         )}
       </ul>
-      {name === "movies" && !firstEntrance && visibleCards < cards.length && (
+      {name === "movies" && !firstEntrance && visibleMovies < cards.length && (
         <div className="listFilms__wrap">
           <button
             className="listFilms__else"
