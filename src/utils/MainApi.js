@@ -103,6 +103,6 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https//bigbasemoviesback.nomoredomainsicu.ru",
+  baseUrl: "https://bigbasemoviesback.nomoredomainsicu.ru",
 });
 export default mainApi;
