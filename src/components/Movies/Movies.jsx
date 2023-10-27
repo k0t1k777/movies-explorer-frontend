@@ -6,11 +6,11 @@ import SearchForm from "./SearchForm/SearchForm";
 import ListFilms from "./ListFilms/ListFilms";
 import Footer from "../Footer/Footer";
 
-export default function Movies({ toggleAddMovie, savedMovies, name }) {
+export default function Movies({ onToggleAddMovie, savedMovies, name }) {
   const shortFilmDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [isLoading, setIsLoading] = useState(false);
-  const [allMoviesData, setAllMoviesData] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
   const [firstEntrance, setFirstEntrance] = useState(true);
   const [isCheck, setIsCheck] = useState(false);
   const [savedSearch, setSavedSearch] = useState("");
@@ -35,12 +35,12 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   }, []);
 
   // получаем фильмы с сервера и отрисовываем их
-  const getingFilms = (search) => {
-    if (allMoviesData.length === 0) {
+  const getFilms = (search) => {
+    if (allMovies.length === 0) {
       setIsLoading(true);
       MoviesApi.getMovies()
         .then((res) => {
-          setAllMoviesData(res);
+          setAllMovies(res);
           setServerError(false);
           setFirstEntrance(false);
           filter(search, isCheck, res);
@@ -51,7 +51,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
         })
         .finally(() => setIsLoading(false));
     } else {
-      filter(search, isCheck, allMoviesData);
+      filter(search, isCheck, allMovies);
     }
   };
 
@@ -64,7 +64,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
       setFirstEntrance(false);
       setSavedSearch(search);
       setIsCheck(isCheck);
-      setAllMoviesData(movies);
+      setAllMovies(movies);
       filter(search, isCheck, movies);
     }
   }, [filter]);
@@ -76,8 +76,8 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
         <SearchForm
           name={name}
           firstEntrance={firstEntrance}
-          moviesData={allMoviesData}
-          getingFilms={getingFilms}
+          moviesData={allMovies}
+          getFilms={getFilms}
           savedSearch={savedSearch}
           isCheck={isCheck}
           setIsCheck={setIsCheck}
@@ -88,7 +88,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
           isLoading={isLoading}
           firstEntrance={firstEntrance}
           savedMovies={savedMovies}
-          toggleAddMovie={toggleAddMovie}
+          onToggleAddMovie={onToggleAddMovie}
           cards={filteredMovies}
           serverError={serverError}
         />

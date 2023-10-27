@@ -11,7 +11,7 @@ import {
 } from "../../../utils/constans";
 
 export default function ListFilms({
-  toggleAddMovie,
+  onToggleAddMovie,
   onDeleteMovie,
   firstEntrance,
   savedMovies,
@@ -79,7 +79,7 @@ export default function ListFilms({
                 <FilmsCard
                   movieData={card}
                   name={name}
-                  toggleAddMovie={toggleAddMovie}
+                  onToggleAddMovie={onToggleAddMovie}
                   isLiked={setLiked(card)}
                 />
               </li>

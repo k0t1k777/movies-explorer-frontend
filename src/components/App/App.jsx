@@ -155,6 +155,7 @@ function App() {
     navigate("/signup");
   }
 
+  // Удаление фильмов
   function handleDeleteMovie(deleteMovieId) {
     const token = getStoredToken();
     MainApi.deleteMovie(deleteMovieId, token)
@@ -168,6 +169,7 @@ function App() {
       .catch((error) => console.error(`Ошибка удаления фильма ${error}`));
   }
 
+  // Добавление фильмов
   function toggleAddMovie(data) {
     const isMovieLiked = savedMovies.some((movie) => movie.movieId === data.id);
     if (isMovieLiked) {
@@ -189,7 +191,7 @@ function App() {
     }
   }
 
-   return (
+  return (
     <CurrentUserContext.Provider value={currentUser}>
       <main className="page">
         {isLoading ? (
@@ -221,10 +223,10 @@ function App() {
               path="/profile"
               element={
                 <ProtectedRoute
+                  loggedIn={loggedIn}
                   component={Profile}
                   handleChangeProfile={handleChangeProfile}
                   exit={handleExit}
-                  loggedIn={loggedIn}
                   messageState={[profileMessage, setProfileMessage]}
                 />
               }
@@ -236,7 +238,7 @@ function App() {
                   name="movies"
                   component={Movies}
                   savedMovies={savedMovies}
-                  toggleAddMovie={toggleAddMovie}
+                  onToggleAddMovie={toggleAddMovie}
                 />
               }
             />

@@ -34,7 +34,7 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
     filter(savedSearch, isCheck, savedMovies);
   }, [filter, savedMovies, isCheck, savedSearch]);
 
-  function getingFilms(search) {
+  function getFilms(search) {
     setFirstEntrance(false);
     filter(search, isCheck, savedMovies);
     setSavedSearch(search);
@@ -46,7 +46,7 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
       <main>
         <SearchForm
           isCheck={isCheck}
-          getingFilms={getingFilms}
+          getFilms={getFilms}
           savedSearch={savedSearch}
           firstEntrance={firstEntrance}
           savedMovies={savedMovies}

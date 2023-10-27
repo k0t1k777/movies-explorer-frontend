@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 export default function FilmsCard({
   name,
   movieData,
-  toggleAddMovie,
+  onToggleAddMovie,
   onDeleteMovie,
   isLiked,
 }) {
   function handleLikeClick() {
-    toggleAddMovie(movieData);
+    onToggleAddMovie(movieData);
   }
 
   function setTime(duration) {

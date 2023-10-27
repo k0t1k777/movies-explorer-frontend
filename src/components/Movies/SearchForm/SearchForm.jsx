@@ -6,7 +6,7 @@ export default function SearchForm({
   name,
   firstEntrance,
   isCheck,
-  getingFilms,
+  getFilms,
   filter,
   setIsCheck,
   moviesData,
@@ -39,7 +39,7 @@ function changeShort() {
 function onSubmit(evt) {
   evt.preventDefault();
   const searchInputValue = evt.target.searchInput.value;
-  getingFilms(evt.target.searchInput.value);
+  getFilms(evt.target.searchInput.value);
   if (searchInputValue && name === "movies") {
     localStorage.setItem("searchInputValue", searchInputValue);
   }
