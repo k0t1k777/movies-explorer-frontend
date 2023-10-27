@@ -11,11 +11,11 @@ import {
 } from "../../../utils/constans";
 
 export default function ListFilms({
+  isLoading,
+  firstEntrance,
   onToggleAddMovie,
   onDeleteMovie,
-  firstEntrance,
   savedMovies,
-  isLoading,
   name,
   cards,
   serverError,
@@ -24,7 +24,7 @@ export default function ListFilms({
   const [visibleCards, setVisibleCards] = useState(0);
 
   useEffect(() => {
-    const updateVisibleCards = () => {
+    const changeCards = () => {
       const screenWidth = window.innerWidth;
       if (screenWidth >= 1280) {
         setVisibleCards(cardsBigScreen);
@@ -36,10 +36,10 @@ export default function ListFilms({
         setVisibleCards(cardsSmallScreen);
       }
     };
-    updateVisibleCards();
-    window.addEventListener("resize", updateVisibleCards);
+    changeCards();
+    window.addEventListener("resize", changeCards);
     return () => {
-      window.removeEventListener("resize", updateVisibleCards);
+      window.removeEventListener("resize", changeCards);
     };
   }, []);
 

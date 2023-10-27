@@ -13,7 +13,7 @@ export default function SearchForm({
 }) {
   const { values, handleChange, reset } = useValidation();
 
-// Загрузка значения из localStorage при первой загрузке компонента
+// Загрузка из localStorage при первой загрузке
 useEffect(() => {
   const savedSearch = localStorage.getItem("searchInputValue");
   if (savedSearch && name === "movies") {
@@ -23,7 +23,7 @@ useEffect(() => {
   }
 }, [reset, name]);
 
-function changeShort() {
+function turnCheckbox() {
   if (isCheck) {
     setIsCheck(false);
     filter(values.searchInput, false, moviesData);
@@ -55,7 +55,7 @@ function onSubmit(evt) {
             name="searchInput"
             id="searchInput"
             value={values.searchInput || ""}
-            required
+            required={true}
             onChange={(evt) => {
               handleChange(evt);
             }}
@@ -74,7 +74,7 @@ function onSubmit(evt) {
               type="checkbox"
               id="checkbox"
               checked={isCheck}
-              onChange={() => changeShort()}
+              onChange={() => turnCheckbox()}
               disabled={firstEntrance}
             />
             <span className="findFilms__checkbox-span" />

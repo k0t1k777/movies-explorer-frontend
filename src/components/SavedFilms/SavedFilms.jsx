@@ -6,7 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import ListFilms from "../Movies/ListFilms/ListFilms";
 
 export default function SavedFilms({ savedMovies, onDeleteMovie }) {
-  const shortFilmDuration = 40;
+  // Длительность фильма
+  const timemDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
   const [savedSearch, setSavedSearch] = useState("");
@@ -14,15 +15,14 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   const [firstEntrance, setFirstEntrance] = useState(true);
 
   const filter = useCallback((search, isCheck, movies) => {
-    const fltrMvs = movies.filter((movie) => {
+    const filterMovies = movies.filter((movie) => {
       const searchName =
-        movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(search.toLowerCase());
+        movie.nameRU.toLowerCase().includes(search.toLowerCase());
       return isCheck
-        ? searchName && movie.duration <= shortFilmDuration
+        ? searchName && movie.duration <= timemDuration
         : searchName;
     });
-    setFilteredMovies(fltrMvs);
+    setFilteredMovies(filterMovies);
   }, []);
 
   useEffect(() => {
@@ -45,14 +45,13 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
       <Header loggedIn={loggedIn} name="movies" />
       <main>
         <SearchForm
+          firstEntrance={firstEntrance}
           isCheck={isCheck}
           getFilms={getFilms}
           savedSearch={savedSearch}
-          firstEntrance={firstEntrance}
-          savedMovies={savedMovies}
-          moviesData={savedMovies}
           filter={filter}
           setIsCheck={setIsCheck}
+          moviesData={savedMovies}
         />
         <ListFilms
           name="saved-movies"
