@@ -78,12 +78,6 @@
   cursor: pointer;
 }
 
-/* @media screen and (max-width: 780px) {
-  .findFilms__button {
-    margin-left: -44px;
-  }
-} */
-
 .findFilms__checkbox-container {
   width: 100%;
   max-width: 174px;

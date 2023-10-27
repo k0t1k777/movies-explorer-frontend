@@ -48,9 +48,7 @@ export default function Register({
               required={true}
               onChange={inputChange}
             />
-            <span className="register__error">
-              {errors.name}
-            </span>
+            <span className="register__error">{errors.name}</span>
           </label>
           <label className="register__container">
             <span className="register__span-name">E-mail</span>
@@ -64,9 +62,7 @@ export default function Register({
               required={true}
               onChange={inputChange}
             />
-            <span className="register__error">
-              {errors.email}
-            </span>
+            <span className="register__error">{errors.email}</span>
           </label>
           <label className="register__container">
             <span className="register__span-name">Пароль</span>
@@ -82,12 +78,9 @@ export default function Register({
               onChange={inputChange}
             />
             <span className="register__error">
-              {/* {errors.password || message.text} */}
-              {
-              !errors && message.isSuccess
+              {!errors && message.isSuccess
                 ? message.text
-                : errors.password || message.text
-            }
+                : errors.password || message.text}
             </span>
           </label>
           <button

@@ -12,7 +12,7 @@ export default function FilmsCard({
     onToggleAddMovie(movieData);
   }
 
-  function setTime(duration) {
+  function convertTime(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
     return `${hours > 0 ? `${hours}ч` : ""} ${
@@ -25,12 +25,12 @@ export default function FilmsCard({
       <Link to={movieData.trailerLink} target="_blank">
         <img
           className="filmsCard__films"
-          alt="Фото фильма"
           src={
             name === "movies"
               ? `https://api.nomoreparties.co${movieData.image.url}`
               : movieData.image
           }
+          alt="Фото фильма"
         />
       </Link>
       <div className="filmsCard__wrapper">
@@ -54,7 +54,7 @@ export default function FilmsCard({
           />
         )}
       </div>
-      <p className="filmsCard__time">{setTime(movieData.duration)}</p>
+      <p className="filmsCard__time">{convertTime(movieData.duration)}</p>
     </div>
   );
 }

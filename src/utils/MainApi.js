@@ -1,7 +1,8 @@
 class MainApi {
   constructor(options) {
     this._url = options.baseUrl;
-    this._checkResponse = (res) => res.ok ? res.json() : Promise.reject(res.json());
+    this._checkResponse = (res) =>
+      res.ok ? res.json() : Promise.reject(res.json());
   }
 
   getUserToken = (token) => {
@@ -102,7 +103,6 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: "BigBaseMoviesBack.nomoredomainsicu.ru",
-  baseUrl: "http://localhost:3000",
+  baseUrl: "BigBaseMoviesBack.nomoredomainsicu.ru",
 });
 export default mainApi;

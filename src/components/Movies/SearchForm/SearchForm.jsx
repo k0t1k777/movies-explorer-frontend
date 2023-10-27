@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./SearchForm.css";
 import useValidation from "../../../components/hooks/useValidation";
 
@@ -11,12 +11,14 @@ export default function SearchForm({
   setIsCheck,
   moviesData,
 }) {
+  const [searchInputValue, setSearchInputValue] = useState("");
   const { values, handleChange, reset } = useValidation();
 
   // Загрузка из localStorage при первой загрузке
   useEffect(() => {
     const savedSearch = localStorage.getItem("searchInputValue");
     if (savedSearch && name === "movies") {
+      setSearchInputValue(savedSearch);
       reset({ searchInput: savedSearch });
     } else {
       reset({ searchInput: "" });
@@ -24,26 +26,21 @@ export default function SearchForm({
   }, [reset, name]);
 
   function turnCheckbox() {
-    if (isCheck) {
-      setIsCheck(false);
-      filter(values.searchInput, false, moviesData);
-    } else {
-      setIsCheck(true);
-      filter(values.searchInput, true, moviesData);
-    }
+    setIsCheck(!isCheck);
+    filter(values.searchInput, !isCheck, moviesData);
     if (name === "movies") {
-      localStorage.setItem("searchInputValue", values.searchInput || "");
+      localStorage.setItem("searchInputValue", values.searchInput);
     }
   }
 
   function onSubmit(evt) {
     evt.preventDefault();
-    const searchInputValue = evt.target.searchInput.value;
-    getFilms(evt.target.searchInput.value);
+    getFilms(searchInputValue);
     if (searchInputValue && name === "movies") {
       localStorage.setItem("searchInputValue", searchInputValue);
     }
   }
+
   return (
     <section className="findFilms">
       <form className="findFilms__search" noValidate onSubmit={onSubmit}>
@@ -54,9 +51,10 @@ export default function SearchForm({
             className="findFilms__input"
             type="text"
             placeholder="Фильм"
-            value={values.searchInput || ""}
+            value={searchInputValue}
             required={true}
             onChange={(evt) => {
+              setSearchInputValue(evt.target.value);
               handleChange(evt);
             }}
           />
@@ -74,7 +72,7 @@ export default function SearchForm({
               className="findFilms__checkbox"
               type="checkbox"
               checked={isCheck}
-              onChange={() => turnCheckbox()}
+              onChange={turnCheckbox}
               disabled={firstEntrance}
             />
             <span className="findFilms__checkbox-span" />
