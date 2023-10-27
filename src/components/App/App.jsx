@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/contexts";
@@ -72,7 +72,7 @@ function App() {
         .then(([infoUser, infoMovies]) => {
           setCurrentUser(infoUser);
           if (infoMovies.length !== 0) {
-            setSavedMovies(Object.values(infoMovies));
+            setSavedMovies(infoMovies);
           } else {
             setSavedMovies([]);
           }
@@ -173,25 +173,37 @@ function App() {
   }
 
   function toggleAddMovie(data) {
+    console.log('saving', data)
+
+    // проверочка на сохранненость фильма
     const isMovieLiked = savedMovies.some((movie) => movie.movieId === data.id);
+
     if (isMovieLiked) {
       const clickedMovie = savedMovies.find(
         (movie) => movie.movieId === data.id
       );
       if (clickedMovie) {
+        console.log('trying to delete')
         handleDeleteMovie(clickedMovie._id);
       }
     } else {
       const token = getStoredToken();
+      console.log('saving')
       MainApi.createMovie(data, token)
         .then((res) => {
-          setSavedMovies([res, ...savedMovies]);
+          setSavedMovies((savedMovies) => [res.data, ...savedMovies]);
+
         })
         .catch((error) =>
           console.error(`Ошибка при добавлении фильма ${error}`)
         );
     }
   }
+
+  useEffect(() => {
+    console.log('redrawing app')
+    console.log('saved movies', savedMovies)
+  }, [savedMovies])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

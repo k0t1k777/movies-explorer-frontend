@@ -16,20 +16,20 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   // const [serverError, setServerError] = useState("");
 
   const filter = useCallback((search, isCheck, movies) => {
-    // console.log('получили список фильмов', movies)
-     setFilteredMovies(
-      movies.filter((movie) => {
-        // console.log(isCheck)
-        const searchName =
-          movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(search.toLowerCase());
-          // console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
+    console.log('получили список фильмов', movies)
+    const fltrMvs = movies.filter((movie) => {
+      console.log(movie, movie.nameRU, movie.nameEN)
+      const searchName =
+        movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+        movie.nameEN.toLowerCase().includes(search.toLowerCase());
+        // console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
 
-        return isCheck
-          ? searchName && movie.duration <= shortFilmDuration
-          : searchName;
-      })
-    );  
+      return isCheck
+        ? searchName && movie.duration <= shortFilmDuration
+        : searchName;
+    })
+    console.log(fltrMvs)
+    setFilteredMovies(fltrMvs);  
   }, []);
   // }, [shortFilmDuration]);
 
@@ -40,7 +40,7 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
       setFirstEntrance(false);
     }
     filter(savedSearch, isCheck, savedMovies);
-  }, [filter, savedMovies, isCheck, savedSearch]);
+  }, [savedMovies, isCheck, savedSearch]);
 
   function getingFilms(search) {
     setFirstEntrance(false);

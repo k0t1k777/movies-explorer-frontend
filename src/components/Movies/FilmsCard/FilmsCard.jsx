@@ -1,44 +1,19 @@
 import "../FilmsCard/FilmsCard.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function FilmsCard({
   name,
   movieData,
-  savedMovies,
+  // savedMovies,
   toggleAddMovie,
   onDeleteMovie,
+  isLiked
 }) {
-
-  const [click, setClick] = useState(false);
-
-  useEffect(() => {
-    if (name === "movies") {
-      setClick(savedMovies.some((element) => movieData.id === element.movieId));
-    }
-      //  console.log(
-      //   "movie data check",
-      //   // movieData,
-      //   savedMovies,
-      //   // savedMovies.some((element) => movieData.id === element.movieId)
-      // );
-  }, [savedMovies, movieData.id, setClick, name]);
-
-  function onClick() {
-    if (savedMovies.some((element) => movieData.id === element.movieId)) {
-      setClick(true);
-      toggleAddMovie(movieData);
-    } else {
-      setClick(false);
-      toggleAddMovie(movieData);
-    }
+  
+  function handleLikeClick(event) {
+    toggleAddMovie(movieData)
   }
-
-  // function onClick() {
-  //   const isSaved = savedMovies.some((element) => movieData.id === element.movieId);
-  //   setClick(!isSaved);
-  //   toggleAddMovie(movieData);
-  // }
 
   function setTime(duration) {
     const hours = Math.floor(duration / 60);
@@ -69,9 +44,9 @@ export default function FilmsCard({
         {name === "movies" && (
           <button
             key={movieData.id}
-            className={`filmsCard__save ${click ? "filmsCard__save-red" : ""}`}
+            className={`filmsCard__save ${isLiked ? "filmsCard__save-red" : ""}`}
             type="button"
-            onClick={onClick}
+            onClick={handleLikeClick}
             // savedMovies={savedMovies}
           />
         )}

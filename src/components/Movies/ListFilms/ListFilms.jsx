@@ -11,14 +11,14 @@ import {
 } from "../../../utils/constans";
 
 export default function ListFilms({
-  toggleAddMovie,
-  onDeleteMovie,
-  firstEntrance,
-  savedMovies,
-  isLoading,
-  name,
-  cards,
-  serverError,
+  toggleAddMovie, // onLikeClick
+  onDeleteMovie, // 
+  firstEntrance, // что-то делает с прервым поиском
+  savedMovies, // список сохраненных
+  isLoading, 
+  name, // опредение компонента по названию
+  cards, // список фильмов из формы поиска
+  serverError, // оищбка
 }) {
   const { pathname } = useLocation();
   const [visibleCards, setVisibleCards] = useState(0);
@@ -56,20 +56,38 @@ export default function ListFilms({
     }
   };
 
+  // проверяем, есть ли фильм в ранее добавленных в избранное пользователем
+  function setLiked(card) {
+    // console.log('trying to draw', card)
+    if (name === 'saved-movies') {
+      return true
+    }
+    const liked = savedMovies.some(savedMovie => savedMovie.movieId === card.id)
+    // console.log('liked Status', card.nameRU, liked)
+    return liked
+  }
+
+  useEffect(() => {
+    console.log('redrawing cardList on change')
+  }, [savedMovies])
+
+
   return (
     <section className="listFilms">
       <ul className="listFilms__list">
         {isLoading ? (
           <Preloader />
         ) : name === "movies" && cards.length !== 0 ? (
-          cards.slice(0, visibleCards).map((movieData) => {
+          cards.slice(0, visibleCards).map((card) => {
             return (
-              <li key={movieData.id}>
+              <li key={card.id}>
                 <FilmsCard
-                  movieData={movieData}
+                  movieData={card}
                   name={name}
                   savedMovies={savedMovies}
                   toggleAddMovie={toggleAddMovie}
+                  isLiked={setLiked(card)}
+                  // isPreviouslySaved={setPreviouslySavedState(movie)}
                 />
               </li>
             );
