@@ -7,10 +7,10 @@ import Techs from "./Tech/Techs";
 import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer.jsx";
 
-export default function Main() {
+export default function Main({ loggedIn }) {
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn}/>
       <main className="container">
         <Promo />
         <NavTab />

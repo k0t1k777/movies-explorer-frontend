@@ -1,42 +1,63 @@
 import "./SavedFilms.css";
-import Movies from "../../../src/images/test.png";
-import Movies2 from "../../../src/images/test2.png";
 import Header from "../Header/Header";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
+import { useCallback, useEffect, useState } from "react";
+import ListFilms from "../Movies/ListFilms/ListFilms";
 
-export default function SavedFilms() {
+export default function SavedFilms({ savedMovies, onDeleteMovie }) {
+  // Длительность фильма
+  const timemDuration = 40;
+  const loggedIn = localStorage.getItem("isLoggedIn");
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [savedSearch, setSavedSearch] = useState("");
+  const [isCheck, setIsCheck] = useState(false);
+  const [firstEntrance, setFirstEntrance] = useState(true);
+
+  const filter = useCallback((search, isCheck, movies) => {
+    const filterMovies = movies.filter((movie) => {
+      const searchName =
+        movie.nameRU.toLowerCase().includes(search.toLowerCase());
+      return isCheck
+        ? searchName && movie.duration <= timemDuration
+        : searchName;
+    });
+    setFilteredMovies(filterMovies);
+  }, []);
+
+  useEffect(() => {
+    if (savedMovies.length === 0) {
+      setFirstEntrance(true);
+    } else {
+      setFirstEntrance(false);
+    }
+    filter(savedSearch, isCheck, savedMovies);
+  }, [filter, savedMovies, isCheck, savedSearch]);
+
+  function getFilms(search) {
+    setFirstEntrance(false);
+    filter(search, isCheck, savedMovies);
+    setSavedSearch(search);
+  }
+
   return (
     <>
-      <Header />
-      <SearchForm />
-      <main className="listOfFilms">
-        <ul className="listOfFilms__list">
-          <li className="listOfFilms__container">
-            <img src={Movies} className="listOfFilms__films" alt="Фильм" />
-            <div className="listOfFilms__wrapper">
-              <h2 className="listOfFilms__title">33 слова о дизайне</h2>
-              <button className="listOfFilms__save listOfFilms__save_pic_x" type="button" />
-            </div>
-            <p className="listOfFilms__time">1ч 47м</p>
-          </li>
-          <li className="listOfFilms__container">
-            <img src={Movies2} className="listOfFilms__films" alt="Фильм" />
-            <div className="listOfFilms__wrapper">
-              <h2 className="listOfFilms__title">33 слова о дизайне</h2>
-              <button className="listOfFilms__save listOfFilms__save_pic_x" type="button" />
-            </div>
-            <p className="listOfFilms__time">1ч 47м</p>
-          </li>
-          <li className="listOfFilms__container">
-            <img src={Movies} className="listOfFilms__films" alt="Фильм" />
-            <div className="listOfFilms__wrapper">
-              <h2 className="listOfFilms__title">33 слова о дизайне</h2>
-              <button className="listOfFilms__save listOfFilms__save_pic_x" type="button" />
-            </div>
-            <p className="listOfFilms__time">1ч 47м</p>
-          </li>
-        </ul>
+      <Header loggedIn={loggedIn} name="movies" />
+      <main>
+        <SearchForm
+          firstEntrance={firstEntrance}
+          isCheck={isCheck}
+          getFilms={getFilms}
+          savedSearch={savedSearch}
+          filter={filter}
+          setIsCheck={setIsCheck}
+          moviesData={savedMovies}
+        />
+        <ListFilms
+          name="saved-movies"
+          cards={filteredMovies}
+          onDeleteMovie={onDeleteMovie}
+        />
       </main>
       <Footer />
     </>
