@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/contexts";
@@ -40,7 +40,6 @@ function App() {
   }
 
   function storeToken(value) {
-    // console.log(value);
     localStorage.setItem("jwt", value);
   }
 
@@ -59,10 +58,6 @@ function App() {
   // а если оно true, то обновляем ниформацию о currentUser
   useEffect(() => {
     const storedLoggedIn = getStoredLoggedIn();
-    // console.log(
-    //   "получили состояние пользователя из памяти и оно",
-    //   storedLoggedIn
-    // );
     if (!storedLoggedIn) {
       return;
     }
@@ -72,7 +67,7 @@ function App() {
         .then(([infoUser, infoMovies]) => {
           setCurrentUser(infoUser);
           if (infoMovies.length !== 0) {
-            setSavedMovies(infoMovies);
+            setSavedMovies(infoMovies.reverse());
           } else {
             setSavedMovies([]);
           }
@@ -152,10 +147,11 @@ function App() {
       });
   }
 
+  // Выход
   function handleExit() {
     localStorage.clear();
     setLoggedIn(false);
-    // setSavedMovies([])
+    setSavedMovies([]);
     navigate("/signup");
   }
 
@@ -173,26 +169,19 @@ function App() {
   }
 
   function toggleAddMovie(data) {
-    console.log('saving', data)
-
-    // проверочка на сохранненость фильма
     const isMovieLiked = savedMovies.some((movie) => movie.movieId === data.id);
-
     if (isMovieLiked) {
       const clickedMovie = savedMovies.find(
         (movie) => movie.movieId === data.id
       );
       if (clickedMovie) {
-        console.log('trying to delete')
         handleDeleteMovie(clickedMovie._id);
       }
     } else {
       const token = getStoredToken();
-      console.log('saving')
       MainApi.createMovie(data, token)
         .then((res) => {
           setSavedMovies((savedMovies) => [res.data, ...savedMovies]);
-
         })
         .catch((error) =>
           console.error(`Ошибка при добавлении фильма ${error}`)
@@ -200,12 +189,7 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    console.log('redrawing app')
-    console.log('saved movies', savedMovies)
-  }, [savedMovies])
-
-  return (
+   return (
     <CurrentUserContext.Provider value={currentUser}>
       <main className="page">
         {isLoading ? (

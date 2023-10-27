@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 import useValidation from "../../../components/hooks/useValidation";
 
@@ -11,7 +10,6 @@ export default function SearchForm({
   filter,
   setIsCheck,
   moviesData,
-  // savedMovie
 }) {
   const { values, handleChange, reset } = useValidation();
 
@@ -33,7 +31,6 @@ function changeShort() {
     setIsCheck(true);
     filter(values.searchInput, true, moviesData);
   }
-  // Сохраняем значение поиска в localStorage при изменении чекбокса
   if (name === "movies") {
     localStorage.setItem("searchInputValue", values.searchInput || "");
   }
@@ -44,7 +41,6 @@ function onSubmit(evt) {
   const searchInputValue = evt.target.searchInput.value;
   getingFilms(evt.target.searchInput.value);
   if (searchInputValue && name === "movies") {
-    // Сохраняем значение поиска в localStorage
     localStorage.setItem("searchInputValue", searchInputValue);
   }
 }
@@ -63,7 +59,6 @@ function onSubmit(evt) {
             onChange={(evt) => {
               handleChange(evt);
             }}
-            // disabled={savedMovie ? (savedMovie.length === 0 && true) : false}
           />
           <button
             className="findFilms__button"

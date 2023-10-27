@@ -18,21 +18,15 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   const [serverError, setServerError] = useState(false);
 
   const filter = useCallback((search, isCheck, movies) => {
-    // console.log("filter говорит:", savedMovies)
-    // console.log(movies)
     setSavedSearch(search);
     localStorage.setItem("movie", JSON.stringify(search));
     localStorage.setItem("shorts", JSON.stringify(isCheck));
     localStorage.setItem("allmovies", JSON.stringify(movies));
-    // console.log("search говорит:", movies)
     setFilteredMovies(
       movies.filter((movie) => {
         const searchName =
           movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(search.toLowerCase());
-        // console.log(movie.nameRU, movie.nameEN);
-        // если мы ищем короткометражки, то проверяем и имя и продолжительность,
-        //  иначе только имя
         return isCheck
           ? searchName && movie.duration <= shortFilmDuration
           : searchName;
@@ -40,7 +34,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
     );
   }, []);
 
-  // getingFilms - запрашиваем с сервера данные и отрисовываем их
+  // получаем фильмы с сервера и отрисовываем их
   const getingFilms = (search) => {
     if (allMoviesData.length === 0) {
       setIsLoading(true);

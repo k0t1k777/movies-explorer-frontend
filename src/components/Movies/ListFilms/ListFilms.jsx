@@ -11,14 +11,14 @@ import {
 } from "../../../utils/constans";
 
 export default function ListFilms({
-  toggleAddMovie, // onLikeClick
-  onDeleteMovie, // 
-  firstEntrance, // что-то делает с прервым поиском
-  savedMovies, // список сохраненных
-  isLoading, 
-  name, // опредение компонента по названию
-  cards, // список фильмов из формы поиска
-  serverError, // оищбка
+  toggleAddMovie,
+  onDeleteMovie,
+  firstEntrance,
+  savedMovies,
+  isLoading,
+  name,
+  cards,
+  serverError,
 }) {
   const { pathname } = useLocation();
   const [visibleCards, setVisibleCards] = useState(0);
@@ -58,19 +58,14 @@ export default function ListFilms({
 
   // проверяем, есть ли фильм в ранее добавленных в избранное пользователем
   function setLiked(card) {
-    // console.log('trying to draw', card)
-    if (name === 'saved-movies') {
-      return true
+    if (name === "saved-movies") {
+      return true;
     }
-    const liked = savedMovies.some(savedMovie => savedMovie.movieId === card.id)
-    // console.log('liked Status', card.nameRU, liked)
-    return liked
+    const liked = savedMovies.some(
+      (savedMovie) => savedMovie.movieId === card.id
+    );
+    return liked;
   }
-
-  useEffect(() => {
-    console.log('redrawing cardList on change')
-  }, [savedMovies])
-
 
   return (
     <section className="listFilms">
@@ -84,10 +79,8 @@ export default function ListFilms({
                 <FilmsCard
                   movieData={card}
                   name={name}
-                  savedMovies={savedMovies}
                   toggleAddMovie={toggleAddMovie}
                   isLiked={setLiked(card)}
-                  // isPreviouslySaved={setPreviouslySavedState(movie)}
                 />
               </li>
             );
@@ -99,14 +92,12 @@ export default function ListFilms({
                 <FilmsCard
                   movieData={movieData}
                   name={name}
-                  savedMovies={savedMovies}
                   onDeleteMovie={onDeleteMovie}
                 />
               </li>
             );
           })
-        ) : // ошибки доработать
-        serverError ? (
+        ) : serverError ? (
           <span className="listFilms__serch-error">
             Произошла ошибка. Пожалуйста, повторите позже.
           </span>

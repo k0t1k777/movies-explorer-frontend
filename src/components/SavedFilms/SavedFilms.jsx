@@ -9,29 +9,21 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   const shortFilmDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [filteredMovies, setFilteredMovies] = useState(savedMovies);
-  // стейт запроса поиска - какой фильм ищем и его длину
   const [savedSearch, setSavedSearch] = useState("");
   const [isCheck, setIsCheck] = useState(false);
   const [firstEntrance, setFirstEntrance] = useState(true);
-  // const [serverError, setServerError] = useState("");
 
   const filter = useCallback((search, isCheck, movies) => {
-    console.log('получили список фильмов', movies)
     const fltrMvs = movies.filter((movie) => {
-      console.log(movie, movie.nameRU, movie.nameEN)
       const searchName =
         movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
         movie.nameEN.toLowerCase().includes(search.toLowerCase());
-        // console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
-
       return isCheck
         ? searchName && movie.duration <= shortFilmDuration
         : searchName;
-    })
-    console.log(fltrMvs)
-    setFilteredMovies(fltrMvs);  
+    });
+    setFilteredMovies(fltrMvs);
   }, []);
-  // }, [shortFilmDuration]);
 
   useEffect(() => {
     if (savedMovies.length === 0) {
@@ -40,7 +32,7 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
       setFirstEntrance(false);
     }
     filter(savedSearch, isCheck, savedMovies);
-  }, [savedMovies, isCheck, savedSearch]);
+  }, [filter, savedMovies, isCheck, savedSearch]);
 
   function getingFilms(search) {
     setFirstEntrance(false);
@@ -66,15 +58,9 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
           name="saved-movies"
           cards={filteredMovies}
           onDeleteMovie={onDeleteMovie}
-          // serverError={serverError}
         />
-        {/* {serverError && (
-          // сделать класс
-          <p className="savedFilms__error">{serverError}</p>
-        )} */}
       </main>
       <Footer />
     </>
   );
 }
-

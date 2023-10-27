@@ -1,18 +1,15 @@
 import "../FilmsCard/FilmsCard.css";
-// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function FilmsCard({
   name,
   movieData,
-  // savedMovies,
   toggleAddMovie,
   onDeleteMovie,
-  isLiked
+  isLiked,
 }) {
-  
-  function handleLikeClick(event) {
-    toggleAddMovie(movieData)
+  function handleLikeClick() {
+    toggleAddMovie(movieData);
   }
 
   function setTime(duration) {
@@ -25,10 +22,7 @@ export default function FilmsCard({
 
   return (
     <div className="filmsCard__container">
-      <Link
-        to={movieData.trailerLink}
-        target="_blank"
-      >
+      <Link to={movieData.trailerLink} target="_blank">
         <img
           className="filmsCard__films"
           alt="Фото фильма"
@@ -44,10 +38,11 @@ export default function FilmsCard({
         {name === "movies" && (
           <button
             key={movieData.id}
-            className={`filmsCard__save ${isLiked ? "filmsCard__save-red" : ""}`}
+            className={`filmsCard__save ${
+              isLiked ? "filmsCard__save-red" : ""
+            }`}
             type="button"
             onClick={handleLikeClick}
-            // savedMovies={savedMovies}
           />
         )}
         {name === "saved-movies" && (
