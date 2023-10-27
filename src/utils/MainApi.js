@@ -1,8 +1,7 @@
 class MainApi {
   constructor(options) {
     this._url = options.baseUrl;
-    this._checkResponse = (res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    this._checkResponse = (res) => res.ok ? res.json() : Promise.reject(res.json());
   }
 
   getUserToken = (token) => {
@@ -70,7 +69,6 @@ class MainApi {
   }
 
   createMovie(data, token) {
-    // console.log("createMovie говорит:", data);
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: {
@@ -86,7 +84,6 @@ class MainApi {
         image: `https://api.nomoreparties.co/${data.image.url}`,
         trailerLink: data.trailerLink,
         thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
-        // thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
         movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
@@ -94,15 +91,10 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  // deleteMovie({ token, id }) {
-  //   return fetch(`${this._url}/movies/${id}`, {
-  deleteMovie( movieId, token ) {
-    // console.log("api говорит:", token, movieId);
+  deleteMovie(movieId, token) {
     return fetch(`${this._url}/movies/${movieId}`, {
       method: "DELETE",
       headers: {
-        // Accept: "application/json",
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }).then(this._checkResponse);

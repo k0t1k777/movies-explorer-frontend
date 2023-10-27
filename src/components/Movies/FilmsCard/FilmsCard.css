@@ -21,8 +21,7 @@
 
 .filmsCard__save {
   background: url("../../../images/save.svg") no-repeat center/ 30px 30px;
-  color:#EE3465;
-    border: 0;
+  border: 0;
   padding-top: 9px;
   padding-right: 16px;
   margin-top: -5px;
@@ -32,13 +31,6 @@
 
 .filmsCard__save-red {
   background: url("../../../images/save2.svg") no-repeat center/ 30px 30px;
-  color:#EE3465;
-    border: 0;
-  padding-top: 9px;
-  padding-right: 16px;
-  margin-top: -5px;
-  margin-right: 20px;
-  cursor: pointer;
 }
 
 .filmsCard__save:hover {
@@ -56,12 +48,7 @@
 
 .filmsCard__save_pic_x {
   background: url("../../../images/x.svg") no-repeat center/ 30px 30px;
-  padding-right: 16px;
-  margin-top: -5px;
-  margin-right: 20px;
   opacity: 0;
-  transition: opacity 0.3s linear;
-  cursor: pointer;
 }
 
 .filmsCard__container:hover .filmsCard__save_pic_x {

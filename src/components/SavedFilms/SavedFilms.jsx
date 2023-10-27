@@ -16,20 +16,21 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
   // const [serverError, setServerError] = useState("");
 
   const filter = useCallback((search, isCheck, movies) => {
-    // console.log('получили список фильмаов', movies)
+    // console.log('получили список фильмов', movies)
      setFilteredMovies(
       movies.filter((movie) => {
-        // console.log(movies)
+        // console.log(isCheck)
         const searchName =
-          movie.data.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-          movie.data.nameEN.toLowerCase().includes(search.toLowerCase());
-          // console.log(movie.data.nameRU, movie.data.nameEN);
+          movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(search.toLowerCase());
+          console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
+
         return isCheck
-          ? searchName && movie.data.duration <= shortFilmDuration
+          ? searchName && movie.duration <= shortFilmDuration
           : searchName;
       })
     );  
-  }, [shortFilmDuration]);
+  }, []);
   // }, [shortFilmDuration]);
 
   useEffect(() => {
@@ -43,10 +44,8 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
 
   function getingFilms(search) {
     setFirstEntrance(false);
-    // местами поменял ниже
     filter(search, isCheck, savedMovies);
     setSavedSearch(search);
-    // console.log(savedMovies)
   }
 
   return (

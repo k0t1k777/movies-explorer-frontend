@@ -14,16 +14,15 @@ export default function FilmsCard({
 
   useEffect(() => {
     if (name === "movies") {
-      console.log(
-        "movie data check",
-        // movieData,
-        // savedMovies,
-        // savedMovies.some((element) => movieData.id === element.movieId)
-      );
+      // console.log(
+      //   "movie data check",
+      //   // movieData,
+      //   // savedMovies,
+      //   savedMovies.some((element) => movieData.id === element.movieId)
+      // );
       setClick(savedMovies.some((element) => movieData.id === element.movieId));
     }
-    // console.log(savedMovies)
-  }, [savedMovies, movieData.id, name]);
+  }, [savedMovies, movieData.id, setClick, name]);
 
   function onClick() {
     if (savedMovies.some((element) => movieData.id === element.movieId)) {
@@ -34,6 +33,12 @@ export default function FilmsCard({
       toggleAddMovie(movieData);
     }
   }
+
+  // function onClick() {
+  //   const isSaved = savedMovies.some((element) => movieData.id === element.movieId);
+  //   setClick(!isSaved);
+  //   toggleAddMovie(movieData);
+  // }
 
   function setTime(duration) {
     const hours = Math.floor(duration / 60);
@@ -47,7 +52,6 @@ export default function FilmsCard({
     <div className="filmsCard__container">
       <Link
         to={movieData.trailerLink}
-        // className="filmsCard__films"
         target="_blank"
       >
         <img
@@ -68,14 +72,13 @@ export default function FilmsCard({
             className={`filmsCard__save ${click ? "filmsCard__save-red" : ""}`}
             type="button"
             onClick={onClick}
-            savedMovies={savedMovies}
-            // onClick={() => onClick(movieData._id)}
+            // savedMovies={savedMovies}
           />
         )}
-        {name === "savedMovies" && (
+        {name === "saved-movies" && (
           <button
             key={movieData.id}
-            className="filmsCard__save_pic_x"
+            className="filmsCard__save filmsCard__save_pic_x"
             type="button"
             onClick={() => onDeleteMovie(movieData._id)}
           />

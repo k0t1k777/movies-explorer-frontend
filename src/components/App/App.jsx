@@ -64,35 +64,18 @@ function App() {
     //   storedLoggedIn
     // );
     if (!storedLoggedIn) {
-      // console.log("пользователь вышел");
       return;
     }
-        const token = getStoredToken();
+    const token = getStoredToken();
     if (storedLoggedIn) {
       Promise.all([MainApi.getUserToken(token), MainApi.getMovies(token)])
         .then(([infoUser, infoMovies]) => {
-          // console.log(infoMovies)
           setCurrentUser(infoUser);
-          // setSavedMovies(infoMovies);
-          // вот тут ты получаешь список фильмов и статы пользователя
-          // далее с этим списком фильмов работаешь. Прям жележно должно работать. Добивайся этого
-          // if (infoMovies && infoMovies.movies) {
-          //   setSavedMovies(infoMovies.movies.reverse());
-          // }
-
-          // setSavedMovies(infoMovies(savedMovies));
-
-          // if (infoMovies.length !== 0) {
-          //   setSavedMovies(infoMovies)
-          // } else {
-          //   setSavedMovies([]);
-          // }
-
-          // setSavedMovies(infoMovies);
-          // localStorage.setItem('savedMovies', JSON.stringify(infoMovies));
-
-          
-          console.log('зашел и получил', 'ничего', savedMovies)
+          if (infoMovies.length !== 0) {
+            setSavedMovies(Object.values(infoMovies));
+          } else {
+            setSavedMovies([]);
+          }
         })
         .catch((error) => console.error(`Ошибка ${error}`));
     }
@@ -176,11 +159,9 @@ function App() {
     navigate("/signup");
   }
 
-  // Фильмы
-  function handleDeleteMovie( deleteMovieId ) {
+  function handleDeleteMovie(deleteMovieId) {
     const token = getStoredToken();
-    MainApi.deleteMovie(token, deleteMovieId)
-    // console.log("app.deleteMovie говорит:", token, deleteMovieId)
+    MainApi.deleteMovie(deleteMovieId, token)
       .then(() => {
         setSavedMovies(
           savedMovies.filter((movie) => {
@@ -192,28 +173,19 @@ function App() {
   }
 
   function toggleAddMovie(data) {
-    // console.log("app.toggleAddMovie говорит:", data)
-    // console.log(data, savedMovies)
-    // фигня с сохраненными фильмами, ты передаешь дальше пустой список
-    // надо 
-    // получить перечень сохранных фильмов. здесь
-    const isMovieLiked  = savedMovies.some((movie) => movie.id  === data.movieId);
-    // console.log("app.toggleAddMovie говорит:", isMovieLiked)
-    if (isMovieLiked ) {
+    const isMovieLiked = savedMovies.some((movie) => movie.movieId === data.id);
+    if (isMovieLiked) {
       const clickedMovie = savedMovies.find(
-        (movie) => movie.movieId  === data.id,
+        (movie) => movie.movieId === data.id
       );
-      // console.log("app.isLiked говорит:", clickedMovie)
       if (clickedMovie) {
         handleDeleteMovie(clickedMovie._id);
       }
     } else {
       const token = getStoredToken();
-      MainApi.createMovie( data, token )
-            // console.log("app.createMovie говорит:", data)
+      MainApi.createMovie(data, token)
         .then((res) => {
           setSavedMovies([res, ...savedMovies]);
-          // console.log("app.isLiked говорит:", savedMovies)
         })
         .catch((error) =>
           console.error(`Ошибка при добавлении фильма ${error}`)
@@ -276,6 +248,7 @@ function App() {
               path="/saved-movies"
               element={
                 <ProtectedRoute
+                  name="saved-movies"
                   component={SavedFilms}
                   loggedIn={loggedIn}
                   savedMovies={savedMovies}

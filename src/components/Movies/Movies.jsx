@@ -18,7 +18,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
   const [serverError, setServerError] = useState(false);
 
   const filter = useCallback((search, isCheck, movies) => {
-    // console.log("app.toggleAddMovie говорит:", savedMovies)
+    // console.log("filter говорит:", savedMovies)
     // console.log(movies)
     setSavedSearch(search);
     localStorage.setItem("movie", JSON.stringify(search));
@@ -30,8 +30,7 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
         const searchName =
           movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(search.toLowerCase());
-                  // console.log(movie.nameRU, movie.nameEN);
-
+        // console.log(movie.nameRU, movie.nameEN);
         // если мы ищем короткометражки, то проверяем и имя и продолжительность,
         //  иначе только имя
         return isCheck
@@ -40,7 +39,6 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
       })
     );
   }, []);
-// }, [shortFilmDuration]);
 
   // getingFilms - запрашиваем с сервера данные и отрисовываем их
   const getingFilms = (search) => {
@@ -74,29 +72,8 @@ export default function Movies({ toggleAddMovie, savedMovies, name }) {
       setIsCheck(isCheck);
       setAllMoviesData(movies);
       filter(search, isCheck, movies);
-      // console.log(movies)
     }
   }, [filter]);
-
-  // useEffect(() => {
-  //   if (
-  //     localStorage.allmovies &&
-  //     localStorage.shorts &&
-  //     localStorage.movie
-  //   ) {
-  //     const movies = JSON.parse(localStorage.getItem("allmovies"));
-  //     const search = JSON.parse(localStorage.getItem("movie")) || "";
-  //     const isCheck = JSON.parse(localStorage.getItem("shorts")) || false;
-  //     // console.log("useEffect говорит:", search, isCheck, movies)
-  //     setServerError(false);
-  //     setFirstEntrance(false);
-  //     setSavedSearch(search);
-  //     setIsCheck(isCheck);
-  //     setAllMoviesData(movies);
-  //     filter(search, isCheck, movies);
-  //     // console.log("useEffect говорит:", search, isCheck, movies)
-  //   }
-  // }, [filter]);
 
   return (
     <>

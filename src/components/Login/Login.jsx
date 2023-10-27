@@ -72,7 +72,7 @@ export default function Login({
             className={`login__button ${
               isValid || isLoading ? "" : "login__button_disabled"
             }`}
-            type={"submit"}
+            type="submit"
             disabled={!isValid || isLoading}
           >
             Войти

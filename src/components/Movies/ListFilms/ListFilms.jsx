@@ -28,7 +28,7 @@ export default function ListFilms({
       const screenWidth = window.innerWidth;
       if (screenWidth >= 1280) {
         setVisibleCards(cardsBigScreen);
-      } else if (screenWidth >= 780) {
+      } else if (screenWidth >= 768) {
         setVisibleCards(cardsMediumScreen);
       } else if (screenWidth >= 540) {
         setVisibleCards(cardsSmallScreen);
@@ -87,21 +87,19 @@ export default function ListFilms({
               </li>
             );
           })
-          // ошибки доработать
-        ) : serverError ? (
+        ) : // ошибки доработать
+        serverError ? (
           <span className="listFilms__serch-error">
             Произошла ошибка. Пожалуйста, повторите позже.
           </span>
         ) : !firstEntrance ? (
           <span className="listFilms__serch-error">
-            404. Ничего не найдено.
+            Ничего не на найдено.
           </span>
         ) : pathname === "/movies" ? (
           <span className="listFilms__serch-error">Выполните поиск.</span>
         ) : (
-          <span className="listFilms__serch-error">
-            Нет сохранённых фильмов.
-          </span>
+          <span className="listFilms__serch-error">Ничего не на найдено.</span>
         )}
       </ul>
       {name === "movies" && !firstEntrance && visibleCards < cards.length && (

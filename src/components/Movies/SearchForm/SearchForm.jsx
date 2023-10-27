@@ -10,7 +10,8 @@ export default function SearchForm({
   getingFilms,
   filter,
   setIsCheck,
-  moviesData
+  moviesData,
+  // savedMovie
 }) {
   const { values, handleChange, reset } = useValidation();
 
@@ -47,7 +48,6 @@ function onSubmit(evt) {
     localStorage.setItem("searchInputValue", searchInputValue);
   }
 }
-
   return (
     <section className="findFilms">
       <form className="findFilms__search" noValidate onSubmit={onSubmit}>
@@ -63,6 +63,7 @@ function onSubmit(evt) {
             onChange={(evt) => {
               handleChange(evt);
             }}
+            // disabled={savedMovie ? (savedMovie.length === 0 && true) : false}
           />
           <button
             className="findFilms__button"
