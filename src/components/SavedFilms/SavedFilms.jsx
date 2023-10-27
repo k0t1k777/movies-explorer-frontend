@@ -23,7 +23,7 @@ export default function SavedFilms({ savedMovies, onDeleteMovie }) {
         const searchName =
           movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(search.toLowerCase());
-          console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
+          // console.log("filter из savedMovies", movie.nameRU.toLowerCase().includes(search.toLowerCase()));
 
         return isCheck
           ? searchName && movie.duration <= shortFilmDuration

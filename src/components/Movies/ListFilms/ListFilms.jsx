@@ -77,7 +77,7 @@ export default function ListFilms({
         ) : name === "saved-movies" && cards.length !== 0 ? (
           cards.map((movieData) => {
             return (
-              <li key={movieData.id}>
+              <li key={movieData._id}>
                 <FilmsCard
                   movieData={movieData}
                   name={name}
@@ -92,14 +92,14 @@ export default function ListFilms({
           <span className="listFilms__serch-error">
             Произошла ошибка. Пожалуйста, повторите позже.
           </span>
-        ) : !firstEntrance ? (
-          <span className="listFilms__serch-error">
-            Ничего не на найдено.
-          </span>
+        ) : !firstEntrance && pathname === "/movies" ? (
+          <span className="listFilms__serch-error">Ничего не найдено.</span>
         ) : pathname === "/movies" ? (
           <span className="listFilms__serch-error">Выполните поиск.</span>
         ) : (
-          <span className="listFilms__serch-error">Ничего не на найдено.</span>
+          <span className="listFilms__serch-error">
+            Нет сохраненных фильмов.
+          </span>
         )}
       </ul>
       {name === "movies" && !firstEntrance && visibleCards < cards.length && (

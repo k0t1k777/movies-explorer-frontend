@@ -14,14 +14,14 @@ export default function FilmsCard({
 
   useEffect(() => {
     if (name === "movies") {
-      // console.log(
-      //   "movie data check",
-      //   // movieData,
-      //   // savedMovies,
-      //   savedMovies.some((element) => movieData.id === element.movieId)
-      // );
       setClick(savedMovies.some((element) => movieData.id === element.movieId));
     }
+      //  console.log(
+      //   "movie data check",
+      //   // movieData,
+      //   savedMovies,
+      //   // savedMovies.some((element) => movieData.id === element.movieId)
+      // );
   }, [savedMovies, movieData.id, setClick, name]);
 
   function onClick() {
