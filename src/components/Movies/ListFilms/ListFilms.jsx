@@ -8,6 +8,9 @@ import {
   CARDS_BIG_SCREEN,
   CARDS_MEDIUM_SCREEN,
   CARDS_SMALL_SCREEN,
+  DESCTOP_SCREEN,
+  TABLET_SCREEN,
+  MOBILE_SCREEN,
 } from "../../../utils/constans";
 
 export default function ListFilms({
@@ -37,13 +40,16 @@ export default function ListFilms({
   useEffect(() => {
     const changeCards = () => {
       const screenWidth = window.innerWidth;
-      if (screenWidth >= 1052) {
+      if (screenWidth >= DESCTOP_SCREEN) {
         setVisibleMovies(CARDS_BIG_SCREEN);
-      } else if (screenWidth >= 666) {
+      } 
+      else if (screenWidth >= TABLET_SCREEN) {
         setVisibleMovies(CARDS_MEDIUM_SCREEN);
-      } else if (screenWidth >= 666) {
+      }
+       else if (screenWidth >= MOBILE_SCREEN) {
         setVisibleMovies(CARDS_SMALL_SCREEN);
-      } else {
+      } 
+      else {
         setVisibleMovies(CARDS_SMALL_SCREEN);
       }
     };
@@ -57,13 +63,14 @@ export default function ListFilms({
   // Добавление новых фильмов
   const handleShowMore = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 1052) {
+    if (screenWidth >= DESCTOP_SCREEN) {
       setVisibleMovies(visibleMovies + CARDS_ADD);
-    } else if (screenWidth >= 780) {
+    } else if (screenWidth >= TABLET_SCREEN) {
       setVisibleMovies(visibleMovies + CARDS_ADD - 1);
-    } else if (screenWidth >= 540) {
+    } else if (screenWidth >= MOBILE_SCREEN) {
       setVisibleMovies(visibleMovies + CARDS_ADD - 1);
-    } else {
+    } 
+    else {
       setVisibleMovies(visibleMovies + CARDS_ADD - 1);
     }
   };
