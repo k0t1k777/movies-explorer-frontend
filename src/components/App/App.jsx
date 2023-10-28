@@ -80,12 +80,15 @@ function App() {
   function handleRegister({ name, email, password }) {
     MainApi.register({ name, email, password })
       .then((data) => {
+        setLoggedIn(false)
         if (data) {
           setIsLoading(true);
-          navigate("/signin");
+          setLoggedIn(true)
+          navigate("/movies");
         }
       })
       .catch((error) => {
+        setLoggedIn(false)
         setAuthMessage({
           text: `Ошибка регистрации ${error}`,
           isSuccess: false,

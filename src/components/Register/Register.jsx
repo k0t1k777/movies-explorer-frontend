@@ -74,7 +74,6 @@ export default function Register({
               minLength="6"
               maxLength="30"
               value={values.password || ""}
-              // pattern={validationPattern.password}
               required={true}
               onChange={inputChange}
             />
