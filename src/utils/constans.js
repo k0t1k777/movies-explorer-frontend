@@ -1,8 +1,3 @@
-export const validationPattern = {
-  // name: "^[a-zA-Zа-яА-ЯёЁ]{2,30}$",
-  email: "^[^@]+@[^@]+.[a-zA-Z]{2,5}$",
-}
-
 export const cardsAdd = 3;
 export const cardsBigScreen = 12;
 export const cardsMediumScreen = 8;

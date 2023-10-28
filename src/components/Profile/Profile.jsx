@@ -4,7 +4,6 @@ import Header from "../Header/Header";
 import "./Profile.css";
 import CurrentUserContext from "../../contexts/contexts";
 import useValidation from "../../components/hooks/useValidation";
-import { validationPattern } from "../../utils/constans";
 
 export default function Profile({
   handleChangeProfile,
@@ -37,6 +36,13 @@ export default function Profile({
       resetForm();
     }
   }, [handleChange, currentUser, resetForm, values]);
+
+   // дисэблим кнопку если инпут ==== currentUser
+   useEffect(() => {
+    if (currentUser.name === values?.name || currentUser.email === values?.email) {
+      resetForm()
+    }
+  }, [handleChange, currentUser.email, currentUser.name, resetForm, values?.email, values?.name]);
 
   useEffect(() => {
     setMessage({});
@@ -77,7 +83,6 @@ export default function Profile({
                 placeholder="Имя"
                 required={true}
                 onChange={inputChange}
-                // pattern={validationPattern.name}
               />
             </label>
             <label className="profile__container">
@@ -89,9 +94,9 @@ export default function Profile({
                 value={values.email || currentUser.email}
                 placeholder="Почта"
                 required={true}
+                pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$"
                 onChange={inputChange}
-                pattern={validationPattern.email}
-              />
+                />
             </label>
             <span className="profile__error">
               {!errors && message.isSuccess
