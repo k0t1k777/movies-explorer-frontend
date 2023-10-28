@@ -58,7 +58,7 @@ export default function Login({
               value={values.password ? values.password : ""}
               required={true}
               onChange={inputChange}
-              pattern={validationPattern.password}
+              // pattern={validationPattern.password}
             />
             <span className="login__error">
               {

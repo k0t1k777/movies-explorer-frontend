@@ -71,9 +71,10 @@ export default function Register({
               className="register__input-password"
               type="password"
               placeholder="Ваш пароль"
+              minLength="2"
               maxLength="30"
               value={values.password || ""}
-              pattern={validationPattern.password}
+              // pattern={validationPattern.password}
               required={true}
               onChange={inputChange}
             />
