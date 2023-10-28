@@ -54,6 +54,7 @@ export default function Login({
               name="password"
               type="password"
               placeholder="Ваш пароль"
+              minLength="6"
               maxLength="30"
               value={values.password ? values.password : ""}
               required={true}
