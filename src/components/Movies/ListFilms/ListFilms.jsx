@@ -4,10 +4,10 @@ import Preloader from "../../Preloader/Preloader";
 import FilmsCard from "../FilmsCard/FilmsCard";
 import { useLocation } from "react-router-dom";
 import {
-  cardsAdd,
-  cardsBigScreen,
-  cardsMediumScreen,
-  cardsSmallScreen,
+  CARDS_ADD,
+  CARDS_BIG_SCREEN,
+  CARDS_MEDIUM_SCREEN,
+  CARDS_SMALL_SCREEN,
 } from "../../../utils/constans";
 
 export default function ListFilms({
@@ -37,14 +37,14 @@ export default function ListFilms({
   useEffect(() => {
     const changeCards = () => {
       const screenWidth = window.innerWidth;
-      if (screenWidth >= 1280) {
-        setVisibleMovies(cardsBigScreen);
-      } else if (screenWidth >= 768) {
-        setVisibleMovies(cardsMediumScreen);
-      } else if (screenWidth >= 540) {
-        setVisibleMovies(cardsSmallScreen);
+      if (screenWidth >= 1052) {
+        setVisibleMovies(CARDS_BIG_SCREEN);
+      } else if (screenWidth >= 666) {
+        setVisibleMovies(CARDS_MEDIUM_SCREEN);
+      } else if (screenWidth >= 666) {
+        setVisibleMovies(CARDS_SMALL_SCREEN);
       } else {
-        setVisibleMovies(cardsSmallScreen);
+        setVisibleMovies(CARDS_SMALL_SCREEN);
       }
     };
     changeCards();
@@ -57,14 +57,14 @@ export default function ListFilms({
   // Добавление новых фильмов
   const handleShowMore = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
-      setVisibleMovies(visibleMovies + cardsAdd);
+    if (screenWidth >= 1052) {
+      setVisibleMovies(visibleMovies + CARDS_ADD);
     } else if (screenWidth >= 780) {
-      setVisibleMovies(visibleMovies + cardsAdd - 1);
+      setVisibleMovies(visibleMovies + CARDS_ADD - 1);
     } else if (screenWidth >= 540) {
-      setVisibleMovies(visibleMovies + cardsAdd - 1);
+      setVisibleMovies(visibleMovies + CARDS_ADD - 1);
     } else {
-      setVisibleMovies(visibleMovies + cardsAdd - 1);
+      setVisibleMovies(visibleMovies + CARDS_ADD - 1);
     }
   };
 

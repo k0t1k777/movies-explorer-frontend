@@ -5,9 +5,9 @@ import Header from "../Header/Header";
 import SearchForm from "./SearchForm/SearchForm";
 import ListFilms from "./ListFilms/ListFilms";
 import Footer from "../Footer/Footer";
+import { SHORT_FILM_DURATION } from "../../utils/constans";
 
 export default function Movies({ onToggleAddMovie, savedMovies, name }) {
-  const shortFilmDuration = 40;
   const loggedIn = localStorage.getItem("isLoggedIn");
   const [isLoading, setIsLoading] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
@@ -28,7 +28,7 @@ export default function Movies({ onToggleAddMovie, savedMovies, name }) {
           movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(search.toLowerCase());
         return isCheck
-          ? searchName && movie.duration <= shortFilmDuration
+          ? searchName && movie.duration <= SHORT_FILM_DURATION
           : searchName;
       })
     );
