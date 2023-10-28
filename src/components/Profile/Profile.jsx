@@ -77,7 +77,7 @@ export default function Profile({
                 placeholder="Имя"
                 required={true}
                 onChange={inputChange}
-                pattern={validationPattern.name}
+                // pattern={validationPattern.name}
               />
             </label>
             <label className="profile__container">

@@ -42,7 +42,7 @@ export default function Register({
               type="text"
               value={values.name || ""}
               placeholder="Ваше имя"
-              pattern={validationPattern.name}
+              // pattern={validationPattern.name}
               minLength="2"
               maxLength="30"
               required={true}
