@@ -66,12 +66,14 @@ function App() {
       Promise.all([MainApi.getUserToken(token), MainApi.getMovies(token)])
         .then(([infoUser, infoMovies]) => {
           setCurrentUser(infoUser);
+          // setLoggedIn(true)
           if (infoMovies.length !== 0) {
             setSavedMovies(infoMovies.reverse());
           } else {
             setSavedMovies([]);
           }
         })
+        // setLoggedIn(false)
         .catch((error) => console.error(`Ошибка ${error}`));
     }
   }, [loggedIn]);
@@ -80,15 +82,14 @@ function App() {
   function handleRegister({ name, email, password }) {
     MainApi.register({ name, email, password })
       .then((data) => {
-        setLoggedIn(false)
         if (data) {
+          // setLoggedIn(false)
           setIsLoading(true);
-          setLoggedIn(true)
           navigate("/movies");
         }
       })
       .catch((error) => {
-        setLoggedIn(false)
+        // setLoggedIn(false)
         setAuthMessage({
           text: `Ошибка регистрации ${error}`,
           isSuccess: false,
