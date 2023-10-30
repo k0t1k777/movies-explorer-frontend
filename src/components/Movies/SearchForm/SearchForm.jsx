@@ -18,7 +18,7 @@ export default function SearchForm({
   useEffect(() => {
     const savedSearch = localStorage.getItem("searchInputValue");
     if (savedSearch && name === "movies") {
-      setSearchInputValue(savedSearch);
+      // setSearchInputValue(savedSearch);
       reset({ searchInput: savedSearch });
     } else {
       reset({ searchInput: "" });
@@ -29,7 +29,7 @@ export default function SearchForm({
     setIsCheck(!isCheck);
     filter(values.searchInput, !isCheck, moviesData);
     if (name === "movies") {
-      localStorage.setItem("searchInputValue", values.searchInput);
+      localStorage.setItem("searchInputValue", values.searchInput || "");
     }
   }
 
@@ -51,7 +51,7 @@ export default function SearchForm({
             className="findFilms__input"
             type="text"
             placeholder="Фильм"
-            value={searchInputValue}
+            value={searchInputValue || ""}
             required={true}
             onChange={(evt) => {
               setSearchInputValue(evt.target.value);

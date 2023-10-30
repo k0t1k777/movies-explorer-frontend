@@ -58,7 +58,7 @@ export default function ListFilms({
     return () => {
       window.removeEventListener("resize", changeCards);
     };
-  }, []);
+  }, [cards]);
 
   // Добавление новых фильмов
   const handleShowMore = () => {
