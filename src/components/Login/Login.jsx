@@ -3,7 +3,6 @@ import "./Login.css";
 import Logo from "../../../src/images/logo.svg";
 import { Link } from "react-router-dom";
 import useValidation from "../../components/hooks/useValidation";
-import { validationPattern } from "../../utils/constans";
 
 export default function Login({
   handleLogin,
@@ -43,7 +42,7 @@ export default function Login({
               value={values.email ? values.email : ""}
               required={true}
               onChange={inputChange}
-              pattern={validationPattern.email}
+              pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$"
             />
             <span className="login__error">{errors.email}</span>
           </label>
@@ -54,11 +53,11 @@ export default function Login({
               name="password"
               type="password"
               placeholder="Ваш пароль"
+              minLength="6"
               maxLength="30"
               value={values.password ? values.password : ""}
               required={true}
               onChange={inputChange}
-              pattern={validationPattern.password}
             />
             <span className="login__error">
               {

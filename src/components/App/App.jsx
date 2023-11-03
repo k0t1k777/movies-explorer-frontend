@@ -73,6 +73,9 @@ function App() {
           }
         })
         .catch((error) => console.error(`Ошибка ${error}`));
+    } else {
+      setLoggedIn(false);
+      localStorage.clear();
     }
   }, [loggedIn]);
 
@@ -81,8 +84,7 @@ function App() {
     MainApi.register({ name, email, password })
       .then((data) => {
         if (data) {
-          setIsLoading(true);
-          navigate("/signin");
+          handleLogin({ email, password });
         }
       })
       .catch((error) => {
@@ -147,14 +149,6 @@ function App() {
       });
   }
 
-  // Выход
-  function handleExit() {
-    localStorage.clear();
-    setLoggedIn(false);
-    setSavedMovies([]);
-    navigate("/signup");
-  }
-
   // Удаление фильмов
   function handleDeleteMovie(deleteMovieId) {
     const token = getStoredToken();
@@ -189,6 +183,15 @@ function App() {
           console.error(`Ошибка при добавлении фильма ${error}`)
         );
     }
+  }
+
+  // Выход
+  function handleExit() {
+    localStorage.clear();
+    setLoggedIn(false);
+    setCurrentUser({});
+    setSavedMovies([]);
+    navigate("/signup");
   }
 
   return (

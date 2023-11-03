@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Register.css";
 import Logo from "../../../src/images/logo.svg";
 import useValidation from "../../components/hooks/useValidation";
-import { validationPattern } from "../../utils/constans";
 
 export default function Register({
   handleRegister,
@@ -42,7 +41,6 @@ export default function Register({
               type="text"
               value={values.name || ""}
               placeholder="Ваше имя"
-              pattern={validationPattern.name}
               minLength="2"
               maxLength="30"
               required={true}
@@ -57,7 +55,7 @@ export default function Register({
               className="register__input-email"
               type="email"
               placeholder="Ваш email"
-              pattern={validationPattern.email}
+              pattern="^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$"
               value={values.email || ""}
               required={true}
               onChange={inputChange}
@@ -71,9 +69,9 @@ export default function Register({
               className="register__input-password"
               type="password"
               placeholder="Ваш пароль"
+              minLength="6"
               maxLength="30"
               value={values.password || ""}
-              pattern={validationPattern.password}
               required={true}
               onChange={inputChange}
             />

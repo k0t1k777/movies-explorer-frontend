@@ -1,11 +1,12 @@
-export const validationPattern = {
-  name: "^[a-zA-Zа-яА-ЯёЁ]{2,30}$",
-  email: "^[^@]+@[^@]+.[a-zA-Z]{2,5}$",
-  password: "(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.n])(?=.*[A-Z])(?=.*[a-z]).*",
-}
-
-export const cardsAdd = 3;
-export const cardsBigScreen = 12;
-export const cardsMediumScreen = 8;
-export const cardsSmallScreen = 5;
+// Длительность короткометражки
+export const SHORT_FILM_DURATION = 40;
+// Количество фильмов
+export const CARDS_ADD = 3;
+export const CARDS_BIG_SCREEN = 12;
+export const CARDS_MEDIUM_SCREEN = 8;
+export const CARDS_SMALL_SCREEN = 5;
+// Разрешение экрана
+export const DESCTOP_SCREEN = 1052;
+export const TABLET_SCREEN = 666;
+export const MOBILE_SCREEN = 540;
 
