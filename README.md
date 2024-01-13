@@ -20,15 +20,12 @@ https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
 ### Инструкции по установке и запуску
-Клонируйте репозиторий: `git clone git@github.com:k0t1k777/movies-explorer-frontend.git`
-Перейдите в директорию проекта: `cd movies-explorer-frontend`
-Установите зависимости: `npm install`
+Клонируйте репозиторий: `git clone git@github.com:k0t1k777/movies-explorer-frontend.git`  
+Перейдите в директорию проекта: `cd movies-explorer-frontend`  
+Установите зависимости: `npm install`  
 Запустите проект: `npm start`
 
 ### Планы по улучшению
-
-Оптимизация лишних ререндеров
-
-Рефакторинг и "разгрузка" компонента App
-
+Оптимизация лишних ререндеров  
+Рефакторинг и "разгрузка" компонента App  
 Кроссбраузерность
