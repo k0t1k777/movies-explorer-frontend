@@ -19,6 +19,7 @@ export default function App() {
     Api.getEvents()
       .then((data) => {
         setEvents(data.results);
+        console.log('data.results: ', data.results);
       })
       .catch((error) => {
         console.error(error);
