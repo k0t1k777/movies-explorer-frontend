@@ -1,0 +1,34 @@
+.svg {
+  width: 24px;
+  height: 24px;
+  &-slider {
+    width: 15px;
+    height: 20px;
+  }
+&-close{
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+  stroke-width: 2;
+}
+  &-social_link {
+    width: 28px;
+    height: 28px;
+    &:hover{
+      opacity: .7;
+    }
+  }
+
+  &-like {
+    width: 18px;
+    height: 17px;
+  }
+
+  &-login {
+    width: 40px;
+    height: 40px;
+    border: #000 2px solid;
+    border-radius: 50%;
+    padding: 6px;
+  }
+}

@@ -1,0 +1,19 @@
+.forms {
+  a {
+    color: $black;
+    @include use-font(18px, 24px,400);
+    text-decoration: none;
+    text-align: center;
+  }
+  &__info {
+    @include text-info;
+    padding-bottom: 20px;
+    span{
+      font-weight: 600;
+    }
+  }
+  &__timer-text{
+    @include mp-null;
+    @include use-font(18px,24px)
+  }
+}

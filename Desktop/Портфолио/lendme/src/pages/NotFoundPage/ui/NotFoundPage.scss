@@ -1,0 +1,34 @@
+.not-found {
+  max-width: $max-width;
+  width: 100%;
+  background-color: $blue-light;
+  margin: 64px auto 95px;
+  &__inner {
+    @include flex-row-center;
+    max-width: $max-width-min;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
+    max-width: 421px;
+  }
+  &__header {
+    @include mp-null;
+    @include use-font(140px, 80px);
+    padding-bottom: 64px;
+  }
+  &__description {
+    @include mp-null;
+    @include use-font(30px, 36px);
+    padding-bottom: 32px;
+  }
+  &__img {
+    display: block;
+    max-width: 715px;
+    padding-top: 45px;
+  }
+}

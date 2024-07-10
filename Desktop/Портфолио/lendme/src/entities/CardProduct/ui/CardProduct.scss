@@ -1,0 +1,31 @@
+.cardProduct {
+  position: relative;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  p {
+    @include mp-null;
+  }
+  &__description {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding: 0 16px 24px;
+  }
+  &__text-box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
+  &__category {
+    color: $gray-high;
+    @include use-font(18px, 24px);
+  }
+  &__price {
+    @include use-font(20px, 24px, 400);
+  }
+  &__date {
+    @include use-font(14px, 16px, 400);
+  }
+}

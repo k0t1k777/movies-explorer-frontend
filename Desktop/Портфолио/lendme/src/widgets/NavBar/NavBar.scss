@@ -1,0 +1,7 @@
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(4,100px);
+  align-items: baseline;
+  column-gap: 16px;
+  // flex-grow: 1;
+}

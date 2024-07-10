@@ -1,0 +1,55 @@
+.input {
+  position: relative;
+  background: $main-white;
+  border-radius: $border-radius-s;
+  border: 1px $main-coral solid;
+  z-index: 0;
+
+    &_error {
+    color: $alert-red;
+    &:focus {
+      border: 1px $alert-red solid;
+    }
+  }
+  &__text {
+    @include text-info;
+    align-self: self-start;
+    padding-top: 10px;
+    // padding-bottom: 24px;
+
+    &_error {
+      color: $alert-red;
+    }
+  }
+  &__search {
+    width: 100%;
+    position: relative;
+    padding: 12px 0 12px 42px;
+    background-image: url('./icons/search-icon.svg');
+    background-repeat: no-repeat;
+    background-position: 24px 12px;
+    background-size: 15px;
+  }
+  // убирает дефолтный показ иконки пароля в Microsoft Edge
+  &::-ms-reveal {
+    display: none;
+  }
+
+  &__form {
+    padding: 16px 8px;
+    border-radius: $border-radius-s;
+    border: 1px $form-white solid;
+    &_error {
+      color: $alert-red;
+    }
+  }
+  &__label {
+    @include use-font(14px, 16px, 400);
+    padding-left: 2px;
+    color: $black;
+    transform: translateY(-10px);
+    &_error {
+      color: $alert-red;
+    }
+  }
+}

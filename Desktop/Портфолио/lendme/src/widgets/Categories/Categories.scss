@@ -1,0 +1,17 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $padding-lr;
+  
+  &__title {
+    @include suptitle-page;
+  }
+  &__inner {
+    @include flex-row-center;
+    justify-content: center;
+  }
+  &__items {
+    max-width: 100%;
+    @include mp-null;
+  }
+}

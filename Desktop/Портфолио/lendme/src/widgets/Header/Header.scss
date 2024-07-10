@@ -1,0 +1,29 @@
+.header {
+  @include flex-column-center;
+
+  &__main {
+    @include main-container;
+    display: flex;
+    align-items: center;
+    padding: 16px $padding-lr 24px;
+    justify-content: space-between;
+
+    &_box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 109px;
+      align-items: center;
+    }
+  }
+
+  &__login {
+    display: flex;
+    column-gap: 38px;
+    justify-content: end;
+  }
+
+  &_logo {
+    @include use-font(24px, 24px, 600);
+    @include mp-null;
+  }
+}

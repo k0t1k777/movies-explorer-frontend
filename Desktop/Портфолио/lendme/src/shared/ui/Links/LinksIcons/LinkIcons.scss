@@ -1,0 +1,43 @@
+.linkIcon {
+  @include flex-column-center;
+  @include use-font(14px, 16px, 400);
+  text-align: center;
+  column-gap: 4px;
+  cursor: pointer;
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.linkIconLogin {
+  display: flex;
+  align-items: center;
+  @include use-font(14px, 16px, 400);
+  text-align: center;
+  column-gap: 8px;
+  
+  cursor: pointer;
+  img {
+    width: 25.67px;
+    height: 33px;
+  }
+}
+
+.linkIconCategories {
+  display: flex;
+  align-items: center;
+  @include use-font(14px, 16px, 400);
+  text-align: center;
+  column-gap: 8px;
+  cursor: pointer;
+}
+
+.linkIconCity{
+  @include use-font(14px, 16px, 400);
+  @include flex-row-center;
+  img{
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -1,0 +1,20 @@
+.categories-bar {
+  @include flex-row-center;
+  max-width: $max-width-min;
+  width: 100%;
+  margin: 0 auto;
+  column-gap: $cl-gap-l;
+
+  &__inner {
+    @include flex-row-center;
+    width: 80%;
+    column-gap: 20px;
+  }
+  &__input-box {
+    @include flex-column-center;
+    max-width: 1167px;
+    width: 100%;
+    position: relative;
+    height: 44px;
+  }
+}

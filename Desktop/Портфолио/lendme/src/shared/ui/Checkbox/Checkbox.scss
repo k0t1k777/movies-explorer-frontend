@@ -1,0 +1,35 @@
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  height: 24px;
+
+  .checkbox-input {
+    display: none; // Скрывает оригинальный чекбокс
+  }
+
+  .checkbox-input + .checkbox-label {
+    position: relative;
+    padding: 2px 30px;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #ccc;
+      border-radius: $border-radius;
+      background-color: #fff;
+    }
+  }
+
+  .checkbox-input:checked + .checkbox-label::before {
+    background: url('./icons/checked.svg') $gray no-repeat center;
+  }
+
+  .checkbox-label {
+    @include use-font(14px, 16px, 400);
+  }
+}

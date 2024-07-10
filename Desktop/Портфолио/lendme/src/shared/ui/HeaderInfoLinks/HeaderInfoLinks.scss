@@ -1,0 +1,15 @@
+.header__info {
+  width: 100%;
+  display: flex;
+  gap: 32px;
+  background-color: $gray;
+  @include mp-null;
+  box-sizing: border-box;
+  padding: 10px $padding-lr 6px;
+ 
+  &_link {
+    @include use-font(14px, 114%, 400);
+    cursor: pointer;
+    @include mp-null-list;
+  }
+}

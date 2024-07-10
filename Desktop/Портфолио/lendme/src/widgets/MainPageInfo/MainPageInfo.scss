@@ -1,0 +1,30 @@
+.mainPage {
+  width: 100%;
+  min-height: 665px;
+  @include flex-row-center;
+  justify-content: center;
+  column-gap: 126px;
+  background-color: $blue-light;
+  
+  &__box {
+    max-width: 596px;
+    width: 40%;
+    @include flex-column-center;
+    row-gap: 32px;
+  }
+  &__title {
+    @include use-font(80px, 80px);
+    @include mp-null;
+  }
+  &__subtitle {
+    @include use-font(30px, 36px);
+    @include mp-null;
+    span {
+      color: $main-coral;
+    }
+  }
+  img {
+    max-width: 751px;
+    object-fit: cover;
+  }
+}

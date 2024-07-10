@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  background-color: $main-white;
+}
+
+#root {
+  // max-width: 1920px;
+  margin: auto;
+  min-height: 100vh;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}

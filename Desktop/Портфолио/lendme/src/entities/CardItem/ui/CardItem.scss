@@ -1,0 +1,31 @@
+.cardItem {
+  width: 100%;
+  @include mp-null-list;
+  &__img {
+    width: 100%;
+    border-radius: $border-radius-m;
+    margin-bottom: 16px;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__text {
+    @include use-font();
+    @include mp-null;
+  }
+
+  &__categories {
+    max-width: 295px;
+    img {
+      height: 200px;
+      background-color: $gray;
+    }
+  }
+  &__product {
+    img {
+      height: 245px;
+    }
+    p {
+      padding: 0 16px;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+//  -------------- BASIC -----------------
+@mixin mp-null {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin mp-null-list {
+  @include mp-null;
+  list-style-type: none;
+}
+
+@mixin link-null {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// FONTS
+// значения по умолчанию не менять!
+// там где используются данные параметры , просто надо вызвать миксин
+@mixin use-font(
+  $font-size: 24px,
+  $line-height: 28px,
+  $font-weight: 500,
+  $font-style: normal,
+  $font-family: $font-family
+) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  font-style: $font-style;
+  font-family: $font-family;
+}
+
+// для информации под импутами, текст с маленьким шрифтом.
+@mixin text-info {
+  @include use-font(12px, 14px, 400);
+  @include mp-null();
+  display: block;
+  min-height: 40px;
+  border: 0;
+}
+// заголовки второго уровня для блоков
+@mixin suptitle-page($font-size: 40px, $line-height: 48px) {
+  @include mp-null;
+  @include use-font($font-size, $line-height);
+  padding-bottom: 32px;
+  color: $black;
+  text-align: left;
+}
+
+// BLOCKS
+@mixin main-container {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@mixin flex-column-center {
+  @include flex-row-center;
+  flex-direction: column;
+}
+
+@mixin flex-row-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-column-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: $row-gap-l;
+}

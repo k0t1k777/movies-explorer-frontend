@@ -1,0 +1,22 @@
+.swiper-subtitle {
+  position: relative;
+  width: calc(
+    100% + 80px
+  );
+  margin-left: -40px;
+  display: flex;
+}
+
+.subtitle-item {
+  @include use-font;
+  @include mp-null;
+  cursor: pointer;
+  flex: 1;
+  border-bottom: 1px solid $gray-btn-text;
+  padding: 32px 0;
+}
+
+.subtitle-item.active {
+  color: $main-coral;
+  border-bottom: 3px solid $main-coral;
+}

@@ -1,0 +1,16 @@
+.cart {
+  width: 100%;
+  padding: 0 $padding-lr;
+  &__title {
+    @include suptitle-page;
+  }
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 425px));
+    grid-template-rows: auto;
+    gap: 20px;
+    text-align: left;
+    justify-content: center;
+    @include mp-null;
+  }
+}

@@ -1,0 +1,46 @@
+.social-links {
+  @include flex-column-container;
+  @include use-font(14px, 16px, 400);
+  padding-bottom: 40px;
+  
+  &__list {
+    @include flex-row-center;
+    justify-content: center;
+    gap: $row-gap-l;
+  }
+
+  &__link {
+    @include link-null;
+    &-rules {
+      color: $blue-link;
+    }
+  }
+  &__header {
+    @include mp-null;
+    position: relative;
+    text-align: center;
+
+    // две линии по правому и левому краю
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      height: 2px;
+      width: 47px;
+      background-color: $gray-btn-text;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+  &__info {
+    @include mp-null;
+  }
+}
